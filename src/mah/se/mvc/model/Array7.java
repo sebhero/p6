@@ -28,7 +28,13 @@ public class Array7 {
 		}
 	}
 
-	/**
+    public Array7(int number) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = number;
+        }
+    }
+
+    /**
 	 * S�tt ett v�rde i en specifik position
 	 * 
 	 * @param pos:
@@ -50,4 +56,8 @@ public class Array7 {
 	public int getElement(int pos) {
 		return array[pos];
 	}
+
+    public int[] getAll() {
+        return array;
+    }
 }
