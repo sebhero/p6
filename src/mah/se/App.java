@@ -1,7 +1,6 @@
 package mah.se;
 
 import mah.se.Color.Color;
-import mah.se.Color.ColorDisplayDemo;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
@@ -10,6 +9,11 @@ import javax.swing.*;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
+ */
+
+/**
+ * Start the app.
+ * Creates the model and controller and view
  */
 public class App {
 

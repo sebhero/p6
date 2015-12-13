@@ -18,6 +18,7 @@ public class ViewWindows extends JPanel {
     private JTextPane display;
     private JButton btnShiftR = new JButton("Shifta Right");
     private JButton btnRandom = new JButton("Slumpa tal");
+    private JButton btnRandomSame = new JButton("Slumpa samma tal");
     private JButton btnVisa0 = new JButton("visa Nr 1-7");
 
     public ViewWindows(int background, int grid) {
@@ -30,6 +31,7 @@ public class ViewWindows extends JPanel {
         add(buttonPanel(), BorderLayout.SOUTH);
         btnShiftR.addActionListener(bl);
         btnRandom.addActionListener(bl);
+        btnRandomSame.addActionListener(bl);
         btnVisa0.addActionListener(bl);
     }
 
@@ -37,36 +39,36 @@ public class ViewWindows extends JPanel {
         JPanel panel = new JPanel(new GridLayout(1,3));
         panel.add(btnShiftR);
         panel.add(btnRandom);
+        panel.add(btnRandomSame);
         panel.add(btnVisa0);
         return panel;
     }
 
+    /**
+     * Set the controller to the view
+     * @param ctrl
+     */
     public void setCtrl(Controller ctrl) {
         this.ctrl = ctrl;
     }
 
-    public void ativateBtnTimer() {
-        btnVisa0.setEnabled(true);
-    }
 
-    public void disableBtnTimer() {
-        btnVisa0.setEnabled(false);
-    }
-
-    public void updateDisplay(int[][] colors) {
-//        display.setDisplay(colors);
-//        display.updateDisplay();
-    }
-
-    public void updateView(int[][] model) {
+    /**
+     * Updates the view from the controller
+     * @param matrix the int 7x7 matrix
+     */
+    public void updateView(int[][] matrix) {
         String txt = "";
-        for (int[] row : model) {
+        for (int[] row : matrix) {
             txt += Arrays.toString(row) + "\n";
         }
         display.setText(txt);
 
     }
 
+    /**
+     * Calling the controller using btns
+     */
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()== btnShiftR) {
@@ -74,9 +76,11 @@ public class ViewWindows extends JPanel {
                 ctrl.shiftRight();
             } else if(e.getSource()==btnRandom) {
                 ctrl.showRandom();
+            } else if(e.getSource()==btnRandomSame) {
+                ctrl.showRandomSame();
             } else if(e.getSource()== btnVisa0) {
                 //visa 0
-                ctrl.showNumber0();
+                ctrl.showNumbers1_7();
             }
 
         }

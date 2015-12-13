@@ -1,5 +1,6 @@
 package mah.se.strategy;
 
+import mah.se.mvc.controller.SHOW;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 
@@ -12,5 +13,5 @@ public interface StrategyFill {
 
     int[][] shiftRight(Array7x7 model);
 
-    int[][] fill(Array7x7 model);
+    int[][] fill(Array7x7 model, SHOW whatToShow);
 }

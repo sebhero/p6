@@ -50,14 +50,29 @@ public class Array7x7 {
     }
 
 
+    /**
+     * Set the row with numbers
+     * @param row
+     * @param array7
+     */
     public void setRow(int row, Array7 array7) {
         matrix[row] = array7.getAll();
     }
 
+    /**
+     * gets the row with numbers
+     * @param row
+     * @return
+     */
     public int[] getRow(int row) {
         return matrix[row];
     }
 
+    /**
+     * Set the column with numbers
+     * @param col
+     * @param array
+     */
     public void setCol(int col, Array7 array) {
         int i = 0;
         for (int row = 0; row < matrix.length; row++) {
@@ -66,6 +81,11 @@ public class Array7x7 {
         }
     }
 
+    /**
+     * get the column with numbers
+     * @param col
+     * @return
+     */
     public Array7 getCol(int col) {
         int[] array = new int[7];
         int colIdx =0;
@@ -76,8 +96,4 @@ public class Array7x7 {
         return new Array7(array);
     }
 
-
-    public Object getLength() {
-        return matrix.length;
-    }
 }
