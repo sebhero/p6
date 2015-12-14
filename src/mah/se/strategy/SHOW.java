@@ -1,4 +1,4 @@
-package mah.se.mvc.controller;
+package mah.se.strategy;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.

@@ -1,9 +1,12 @@
 package mah.se.mvc.controller;
 
+import mah.se.Color.Color;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
-import mah.se.strategy.StrategyFill;
-import mah.se.strategy.StrategyFillNumbers;
+import mah.se.strategy.*;
+
+import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -11,9 +14,9 @@ import mah.se.strategy.StrategyFillNumbers;
  */
 public class Controller {
 
+    private FillAlgorithm filler;
     Array7x7 model;
     ViewWindows view;
-    StrategyFill fill;
 //    ViewAndroid view;
 
     /**
@@ -26,8 +29,8 @@ public class Controller {
         this.view = view;
         this.view.setCtrl(this);
         //TODO use proper just for testing
-        fill = new StrategyFillNumbers();
-        updateView();
+        filler = new FillNumbers();
+//        updateView();
     }
 
 
@@ -61,8 +64,8 @@ public class Controller {
      * Show total random numbers in display
      */
     public void showRandom() {
-
-        model.setMatrix(fill.fill(this.model, SHOW.RANDOM));
+        filler = new FillNumbers();
+        model = filler.fillWithRandom();
         updateView();
     }
 
@@ -71,7 +74,8 @@ public class Controller {
      * show 1-7 numbers
      */
     public void showNumbers1_7() {
-        model.setMatrix(fill.fill(this.model, SHOW.ONE_SEVEN));
+        filler = new FillNumbers();
+        model = filler.fillWithInGaining();
         updateView();
     }
 
@@ -80,7 +84,12 @@ public class Controller {
      * Shift right the matrix
      */
     public void shiftRight() {
-        model.setMatrix(fill.shiftRight(this.model));
+        //TODO add shiftRight algorithm
+        updateView();
+    }
+
+    public void shiftLeft() {
+        //TODO add shiftLeft algorithm
         updateView();
     }
 
@@ -89,7 +98,38 @@ public class Controller {
      * show same random number
      */
     public void showRandomSame() {
-        model.setMatrix(fill.fill(this.model, SHOW.SAME));
+        filler = new FillNumbers();
+        int rnd = new Random().nextInt(7)+1;
+        model = filler.fillWithOneType(rnd);
         updateView();
+    }
+
+    public void showRandomColor() {
+        filler = new FillColor();
+        model = filler.fillWithRandom();
+        updateViewColor();
+    }
+
+    private void updateViewColor() {
+        view.updateViewColor(model.getMatrix());
+    }
+
+    public void showSameColor() {
+        filler = new FillColor();
+        model = filler.fillWithOneType(Color.BLUE);
+        updateViewColor();
+    }
+
+    public void showGradiantColor() {
+        filler = new FillColor();
+        model = filler.fillWithInGaining();
+        updateViewColor();
+    }
+
+    public void showRanomChar() {
+        filler = new FillCharacter();
+        model = filler.fillWithRandom();
+
+        updateViewColor();
     }
 }

@@ -96,4 +96,7 @@ public class Array7x7 {
         return new Array7(array);
     }
 
+    public int getLength() {
+        return this.matrix.length;
+    }
 }

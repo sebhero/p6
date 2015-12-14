@@ -1,5 +1,6 @@
 package mah.se.mvc.view;
 
+import mah.se.Color.ColorDisplay;
 import mah.se.mvc.controller.Controller;
 
 import javax.swing.*;
@@ -14,33 +15,73 @@ import java.util.Arrays;
  */
 public class ViewWindows extends JPanel {
     private Controller ctrl;
-//    private ColorDisplay display;
+    private ColorDisplay displayColor;
     private JTextPane display;
-    private JButton btnShiftR = new JButton("Shifta Right");
     private JButton btnRandom = new JButton("Slumpa tal");
     private JButton btnRandomSame = new JButton("Slumpa samma tal");
-    private JButton btnVisa0 = new JButton("visa Nr 1-7");
+    private JButton btn1_7 = new JButton("visa Nr 1-7");
+    private JButton btnRandomColor = new JButton("Slumpa Color");
+    private JButton btnRandomSameColor = new JButton("Slumpa samma color");
+    private JButton btn1_7Color = new JButton("Color gradient");
+    private JButton btnRandomChar = new JButton("Slumpa Char");
 
     public ViewWindows(int background, int grid) {
         ButtonListener bl = new ButtonListener();
         setLayout(new BorderLayout());
-//        display = new ColorDisplay(background, grid);
+
+        displayColor = new ColorDisplay(background, grid);
+        displayColor.setPreferredSize(new Dimension(200, 120));
+        displayColor.setSize(100, 120);
+        displayColor.setVisible(false);
+        add(displayColor, BorderLayout.CENTER);
+
         display = new JTextPane();
         display.setPreferredSize(new Dimension(100, 120));
+        display.setSize(100,120);
+
         add(display, BorderLayout.CENTER);
-        add(buttonPanel(), BorderLayout.SOUTH);
-        btnShiftR.addActionListener(bl);
+
+        JPanel btnGrid = new JPanel(new GridLayout(2, 1));
+        btnGrid.add(buttonPanel());
+        btnGrid.add(buttonPanelColor());
+
+        add(btnGrid, BorderLayout.SOUTH);
         btnRandom.addActionListener(bl);
         btnRandomSame.addActionListener(bl);
-        btnVisa0.addActionListener(bl);
+        btn1_7.addActionListener(bl);
+
+        btnRandomColor.addActionListener(ae -> {
+            ctrl.showRandomColor();
+            System.out.println("Show random color");
+        });
+
+        btnRandomSameColor.addActionListener(ar ->{
+            System.out.println("show color same");
+            ctrl.showSameColor();
+        });
+        btn1_7Color.addActionListener(ae -> {
+            System.out.println("show color gradient");
+            ctrl.showGradiantColor();
+        });
+
+        btnRandomChar.addActionListener(ae -> {
+            ctrl.showRanomChar();
+        });
     }
 
     private JPanel buttonPanel() {
         JPanel panel = new JPanel(new GridLayout(1,3));
-        panel.add(btnShiftR);
         panel.add(btnRandom);
         panel.add(btnRandomSame);
-        panel.add(btnVisa0);
+        panel.add(btn1_7);
+        return panel;
+    }
+    private JPanel buttonPanelColor() {
+        JPanel panel = new JPanel(new GridLayout(1,4));
+        panel.add(btnRandomColor);
+        panel.add(btnRandomSameColor);
+        panel.add(btn1_7Color);
+        panel.add(btnRandomChar);
         return panel;
     }
 
@@ -58,6 +99,12 @@ public class ViewWindows extends JPanel {
      * @param matrix the int 7x7 matrix
      */
     public void updateView(int[][] matrix) {
+        //TODO fullkod
+        display.setVisible(true);
+        displayColor.setVisible(false);
+        display.setPreferredSize(new Dimension(100, 120));
+        display.setSize(100,120);
+
         String txt = "";
         for (int[] row : matrix) {
             txt += Arrays.toString(row) + "\n";
@@ -66,19 +113,29 @@ public class ViewWindows extends JPanel {
 
     }
 
+    public void updateViewColor(int[][] matrix) {
+
+
+        //TODO fullkod
+        display.setVisible(false);
+        displayColor.setVisible(true);
+        displayColor.setPreferredSize(new Dimension(200, 120));
+
+        displayColor.setDisplay(matrix);
+        displayColor.updateDisplay();
+
+    }
+
     /**
      * Calling the controller using btns
      */
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource()== btnShiftR) {
-                //slumpa tal
-                ctrl.shiftRight();
-            } else if(e.getSource()==btnRandom) {
+             if(e.getSource()==btnRandom) {
                 ctrl.showRandom();
             } else if(e.getSource()==btnRandomSame) {
                 ctrl.showRandomSame();
-            } else if(e.getSource()== btnVisa0) {
+            } else if(e.getSource()== btn1_7) {
                 //visa 0
                 ctrl.showNumbers1_7();
             }

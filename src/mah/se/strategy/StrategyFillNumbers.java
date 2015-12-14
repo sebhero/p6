@@ -1,6 +1,5 @@
 package mah.se.strategy;
 
-import mah.se.mvc.controller.SHOW;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 
