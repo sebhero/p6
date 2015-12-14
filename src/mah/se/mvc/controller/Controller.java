@@ -3,9 +3,8 @@ package mah.se.mvc.controller;
 import mah.se.Color.Color;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
-import mah.se.strategy.*;
+import mah.se.patterns.strategy.*;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -28,9 +27,8 @@ public class Controller {
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
-        //TODO use proper just for testing
-        filler = new FillNumbers();
-//        updateView();
+        filler = getFiller(FILLERTYPE.NUMBERS);
+        updateView();
     }
 
 
@@ -59,25 +57,7 @@ public class Controller {
         view.updateView(model.getMatrix());
     }
 
-    /**
-     * btn click
-     * Show total random numbers in display
-     */
-    public void showRandom() {
-        filler = new FillNumbers();
-        model = filler.fillWithRandom();
-        updateView();
-    }
 
-    /**
-     * btn click
-     * show 1-7 numbers
-     */
-    public void showNumbers1_7() {
-        filler = new FillNumbers();
-        model = filler.fillWithInGaining();
-        updateView();
-    }
 
     /**
      * Btn call from view
@@ -93,19 +73,55 @@ public class Controller {
         updateView();
     }
 
+
+    /**
+     * btn click
+     * Show total random numbers in display
+     */
+    public void showRandom() {
+        filler = getFiller(FILLERTYPE.NUMBERS);
+        model = filler.fillWithRandom();
+        updateView();
+    }
+
+    /**
+     * btn click
+     * show 1-7 numbers
+     */
+    public void showNumbers1_7() {
+        filler = getFiller(FILLERTYPE.NUMBERS);
+        model = filler.fillWithInGaining();
+        updateView();
+    }
+
     /**
      * btn click from view
      * show same random number
      */
     public void showRandomSame() {
-        filler = new FillNumbers();
+        filler = getFiller(FILLERTYPE.NUMBERS);
+
         int rnd = new Random().nextInt(7)+1;
         model = filler.fillWithOneType(rnd);
         updateView();
     }
 
+    private FillAlgorithm getFiller(FILLERTYPE typeOfFiller) {
+        //TODO use singelton
+        switch (typeOfFiller) {
+
+            case COLORS:
+                return new FillColor();
+            case CHARACTERS:
+                return new FillCharacter();
+            case NUMBERS:
+            default:
+                return new FillNumbers();
+        }
+    }
+
     public void showRandomColor() {
-        filler = new FillColor();
+        filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithRandom();
         updateViewColor();
     }
@@ -115,19 +131,19 @@ public class Controller {
     }
 
     public void showSameColor() {
-        filler = new FillColor();
+        filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithOneType(Color.BLUE);
         updateViewColor();
     }
 
     public void showGradiantColor() {
-        filler = new FillColor();
+        filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithInGaining();
         updateViewColor();
     }
 
     public void showRanomChar() {
-        filler = new FillCharacter();
+        filler = getFiller(FILLERTYPE.CHARACTERS);
         model = filler.fillWithRandom();
 
         updateViewColor();

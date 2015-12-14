@@ -8,7 +8,6 @@ public class Array7x7 {
 
     public Array7x7(int[][] matrix) {
         this.matrix = matrix;
-        init();
     }
 
     public Array7x7() {

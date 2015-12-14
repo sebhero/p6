@@ -1,4 +1,4 @@
-package mah.se.strategy;
+package mah.se.patterns.strategy;
 
 
 import mah.se.mvc.model.Array7x7;
