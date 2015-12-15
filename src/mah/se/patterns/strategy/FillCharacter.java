@@ -44,6 +44,7 @@ public class FillCharacter implements FillAlgorithm {
     @Override
     public Array7x7 fillWithRandom() {
 
+
         int randomChar = rnd.nextInt('Z' - 'A') + 'A';	//ascii värde 65 - 90 A-Z
 //        int randomChar = rnd.nextInt(90 - 65) + 65;	//ascii värde 65 - 90 A-Z
         int[][] character = alphabet.getLetter((char) randomChar);
