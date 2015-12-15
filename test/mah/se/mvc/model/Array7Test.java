@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class Array7Test {
 
-    Array7 testArray = new Array7();
+    private Array7 testArray = new Array7();
 
     @Test
     public void testDefaultConstruct() throws Exception {

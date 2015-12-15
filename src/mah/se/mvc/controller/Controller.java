@@ -17,8 +17,8 @@ public class Controller extends ViewAndroid {
 
     private final ShiftArray shifter;
     private FillAlgorithm filler;
-    Array7x7 model;
-    ViewWindows view;
+    private Array7x7 model;
+    private ViewWindows view;
 //    ViewAndroid view;
 
     /**

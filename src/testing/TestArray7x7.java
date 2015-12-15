@@ -5,8 +5,8 @@ import mah.se.mvc.model.Array7;
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  */
-public class TestArray7x7 {
-    int[][] matrix;
+class TestArray7x7 {
+    private int[][] matrix;
 
     public TestArray7x7(int[][] matrix) {
         this.matrix = matrix;

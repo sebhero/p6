@@ -16,7 +16,7 @@ import mah.se.mvc.view.ViewWindows;
  * anton
  * Creates the model and controller and view
  */
-public class App {
+class App {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -34,3 +34,4 @@ public class App {
     }
 
 }
+

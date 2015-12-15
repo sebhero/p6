@@ -10,8 +10,8 @@ import java.util.Random;
  * Created by Sebastian Börebäck on 2015-12-14.
  */
 public class FillCharacter implements FillAlgorithm {
-    Alphabet alphabet = new Alphabet();
-    Random rnd = new Random();
+    private final Alphabet alphabet = new Alphabet();
+    private final Random rnd = new Random();
 
     @Override
     public Array7x7 fillWithRandom() {

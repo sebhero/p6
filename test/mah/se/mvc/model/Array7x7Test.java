@@ -1,6 +1,5 @@
 package mah.se.mvc.model;
 
-import mah.se.patterns.strategy.FillNumbers;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -9,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class Array7x7Test {
 
-    Array7x7 testMatrix;
+    private Array7x7 testMatrix;
     @Test
     public void testSetRow() throws Exception {
         testMatrix = new Array7x7();
