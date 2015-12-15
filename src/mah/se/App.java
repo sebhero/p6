@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 
 import mah.se.Color.Color;
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.model.TestArray7x7;
 import mah.se.mvc.view.ViewWindows;
 
 /**
@@ -23,7 +23,7 @@ public class App {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 ViewWindows demo = new ViewWindows(Color.BLACK, Color.GRAY);
-                Array7x7 model = new Array7x7();
+                TestArray7x7 model = new TestArray7x7();
                 new Controller(model,demo);
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

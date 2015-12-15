@@ -1,6 +1,6 @@
 package mah.se.patterns.strategy;
 
-import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.model.TestArray7x7;
 
 import java.util.Random;
 
@@ -9,8 +9,8 @@ import java.util.Random;
  */
 public class FillNumbers implements FillAlgorithm {
     @Override
-    public Array7x7 fillWithOneType(int type) {
-        Array7x7 theMatrix = new Array7x7();
+    public TestArray7x7 fillWithOneType(int type) {
+        TestArray7x7 theMatrix = new TestArray7x7();
         for (int row = 0; row < theMatrix.getLength(); row++) {
             for (int col = 0; col < theMatrix.getRow(row).length; col++) {
                 theMatrix.setElement(row,col,type);
@@ -20,8 +20,8 @@ public class FillNumbers implements FillAlgorithm {
     }
 
     @Override
-    public Array7x7 fillWithRandom() {
-        Array7x7 theMatrix = new Array7x7();
+    public TestArray7x7 fillWithRandom() {
+        TestArray7x7 theMatrix = new TestArray7x7();
         Random rnd = new Random();
         for (int row = 0; row < theMatrix.getLength(); row++) {
             for (int col = 0; col < theMatrix.getRow(row).length; col++) {
@@ -32,8 +32,8 @@ public class FillNumbers implements FillAlgorithm {
     }
 
     @Override
-    public Array7x7 fillWithInGaining() {
-        Array7x7 theMatrix = new Array7x7();
+    public TestArray7x7 fillWithInGaining() {
+        TestArray7x7 theMatrix = new TestArray7x7();
         for (int row = 0; row < theMatrix.getLength(); row++) {
             for (int col = 0; col < theMatrix.getRow(row).length; col++) {
                 //col is the 0+1...6+1

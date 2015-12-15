@@ -1,7 +1,7 @@
 package mah.se.patterns.strategy;
 
 import mah.se.Color.Color;
-import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.model.TestArray7x7;
 
 import java.util.Random;
 
@@ -14,8 +14,8 @@ import java.util.Random;
 public class FillColor implements FillAlgorithm {
 
     @Override
-    public Array7x7 fillWithOneType(int type) {
-        Array7x7 theMatrix = new Array7x7();
+    public TestArray7x7 fillWithOneType(int type) {
+        TestArray7x7 theMatrix = new TestArray7x7();
         for (int row = 0; row < theMatrix.getLength(); row++) {
             for (int col = 0; col < theMatrix.getRow(row).length; col++) {
                 theMatrix.setElement(row,col,type);
@@ -25,8 +25,8 @@ public class FillColor implements FillAlgorithm {
     }
 
     @Override
-    public Array7x7 fillWithRandom() {
-        Array7x7 theMatrix = new Array7x7();
+    public TestArray7x7 fillWithRandom() {
+        TestArray7x7 theMatrix = new TestArray7x7();
         Random rnd = new Random();
 
         for (int row = 0; row < theMatrix.getLength(); row++) {
@@ -41,12 +41,12 @@ public class FillColor implements FillAlgorithm {
     }
 
     @Override
-    public Array7x7 fillWithInGaining() {
+    public TestArray7x7 fillWithInGaining() {
 
         int color1 = Color.RED;
         int color2 = Color.BLUE;
 
-        Array7x7 theMatrix = new Array7x7();
+        TestArray7x7 theMatrix = new TestArray7x7();
         for (int row = 0; row < theMatrix.getLength(); row++) {
             for (int col = 0; col < theMatrix.getRow(row).length; col++) {
                 float ratio = (float) col / (float) theMatrix.getRow(row).length;

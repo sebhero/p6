@@ -2,7 +2,7 @@ package mah.se.patterns.strategy;
 
 import mah.se.Color.Color;
 import mah.se.algorithms.Alphabet;
-import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.model.TestArray7x7;
 
 import java.util.Random;
 
@@ -14,7 +14,7 @@ public class FillCharacter implements FillAlgorithm {
     Random rnd = new Random();
 
     @Override
-    public Array7x7 fillWithOneType(int charValue) {
+    public TestArray7x7 fillWithOneType(int charValue) {
 
         int[][] character = alphabet.getLetter((char) charValue);
 
@@ -38,11 +38,11 @@ public class FillCharacter implements FillAlgorithm {
             }
         }
 
-        return  new Array7x7(matrix);
+        return  new TestArray7x7(matrix);
     }
 
     @Override
-    public Array7x7 fillWithRandom() {
+    public TestArray7x7 fillWithRandom() {
 
 
         int randomChar = rnd.nextInt('Z' - 'A') + 'A';	//ascii värde 65 - 90 A-Z
@@ -71,12 +71,12 @@ public class FillCharacter implements FillAlgorithm {
             }
         }
 
-        return  new Array7x7(matrix);
+        return  new TestArray7x7(matrix);
     }
 
     //TODO move this out of the Algorithm
     @Override
-    public Array7x7 fillWithInGaining() {
+    public TestArray7x7 fillWithInGaining() {
         return null;
     }
 }
