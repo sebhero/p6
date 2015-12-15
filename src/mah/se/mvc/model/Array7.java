@@ -4,7 +4,7 @@ package mah.se.mvc.model;
  * Klassen kommer att inneh�lla en lista med sju int variabler
  * 
  * @author Jonatan Fridsten
- *
+ * testar
  */
 public class Array7 {
 
