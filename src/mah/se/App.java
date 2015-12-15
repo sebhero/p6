@@ -13,6 +13,7 @@ import javax.swing.*;
 
 /**
  * Start the app.
+ * asdf
  * Creates the model and controller and view
  */
 public class App {
