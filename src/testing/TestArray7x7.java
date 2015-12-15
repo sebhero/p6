@@ -1,4 +1,6 @@
-package mah.se.mvc.model;
+package testing;
+
+import mah.se.mvc.model.Array7;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.

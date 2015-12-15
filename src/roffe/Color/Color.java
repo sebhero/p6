@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package mah.se.Color;
+package roffe.Color;
 
 /**
  * The Color class defines methods for creating and converting color ints.

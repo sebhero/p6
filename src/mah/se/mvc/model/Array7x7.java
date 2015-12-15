@@ -1,11 +1,14 @@
 package mah.se.mvc.model;
 
+import java.util.Arrays;
+
 public class Array7x7 {
 	
 	private int array[][] = new int[7][7];
-	
-	
-	public Array7x7(int array[][]) {
+    //private int[][] matrix;
+
+
+    public Array7x7(int array[][]) {
 		this.array = array;
 	}
 	
@@ -57,4 +60,22 @@ public class Array7x7 {
 		this.array[row][col] = value;
 	}
 
+    public int[][] getMatrix() {
+        return array;
+    }
+
+    public int getLength() {
+        return array.length;
+    }
+
+    @Override
+    public String toString() {
+        String txt="";
+        for (int[] row : array) {
+            txt += Arrays.toString(row)+"\n";
+        }
+        return "Array7x7{\n" +
+                txt+
+                '}';
+    }
 }

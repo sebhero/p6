@@ -1,4 +1,4 @@
-package mah.se.Color;
+package roffe.Color;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

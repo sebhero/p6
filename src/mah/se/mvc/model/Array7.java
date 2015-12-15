@@ -60,4 +60,8 @@ public class Array7 {
     public int[] getAll() {
         return array;
     }
+
+    public int getLength() {
+        return array.length;
+    }
 }

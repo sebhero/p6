@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 
 /**
@@ -16,8 +17,9 @@ import mah.se.mvc.model.Array7x7;
  */
 public class ViewWindows extends JPanel {
 	private JLabel[][] lblArray = new JLabel[7][7];
+    private Controller ctrl;
 
-	public ViewWindows() {
+    public ViewWindows() {
 		this.setPreferredSize(new Dimension(300, 300));
 		this.setLayout(new GridLayout(7, 7, 5, 5));
 
@@ -43,9 +45,35 @@ public class ViewWindows extends JPanel {
 		}
 	}
 
-	// test för att få ut matrisen
+	// test fï¿½r att fï¿½ ut matrisen
 	public static void main(String[] args) {
 		ViewWindows pnl = new ViewWindows();
 		JOptionPane.showMessageDialog(null, pnl);
 	}
+
+    /**
+     * Uppdaterar view med en color matris
+     * @param matrix matrisen po alla farg element
+     */
+    public void updateViewColor(int[][] matrix) {
+        //TODO implement
+    }
+
+    /**
+     * Uppdatera view med en siffer matris
+     * @param matrix matris med siffror
+     */
+    public void updateView(int[][] matrix) {
+        //TODO implement
+    }
+
+    /**
+     * Satter controller till viewen som styr viewn. den skoter all
+     * kommunikation med array7x7. hanterar knapptryckningar m.m.
+     * @param ctrl sjalva controllern
+     */
+    public void setCtrl(Controller ctrl) {
+        this.ctrl = ctrl;
+    }
+
 }

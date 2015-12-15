@@ -1,4 +1,4 @@
-package mah.se.Color;
+package roffe.Color;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

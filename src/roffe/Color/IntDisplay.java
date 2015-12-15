@@ -1,14 +1,13 @@
-package mah.se.Color;
+package roffe.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
+
 /**
  * Created by tsroax on 2014-11-27.
  */

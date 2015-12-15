@@ -1,4 +1,4 @@
-package mah.se.Color;
+package roffe.Color;
 
 import java.util.Random;
 import java.util.Timer;

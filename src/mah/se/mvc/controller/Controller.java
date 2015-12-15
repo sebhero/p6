@@ -1,8 +1,10 @@
 package mah.se.mvc.controller;
 
-import mah.se.Color.Color;
-import mah.se.mvc.model.TestArray7x7;
-import mah.se.mvc.view.ViewWindowsSebbe;
+import mah.se.mvc.view.ViewAndroid;
+import roffe.Color.Color;
+import mah.se.algorithms.ShiftArray;
+import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.view.ViewWindows;
 import mah.se.patterns.strategy.*;
 
 import java.util.Random;
@@ -11,11 +13,12 @@ import java.util.Random;
  * Created by Sebastian Börebäck on 2015-12-13.
  * 20:00 2015-12-13.
  */
-public class Controller {
+public class Controller extends ViewAndroid {
 
+    private final ShiftArray shifter;
     private FillAlgorithm filler;
-    TestArray7x7 model;
-    ViewWindowsSebbe view;
+    Array7x7 model;
+    ViewWindows view;
 //    ViewAndroid view;
 
     /**
@@ -23,11 +26,12 @@ public class Controller {
      * @param model the Array7x7 model
      * @param view the view we are displaying the matrix on
      */
-    public Controller(TestArray7x7 model, ViewWindowsSebbe view) {
+    public Controller(Array7x7 model, ViewWindows view) {
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
         filler = getFiller(FILLERTYPE.NUMBERS);
+        shifter = new ShiftArray();
         updateView();
     }
 
@@ -36,7 +40,7 @@ public class Controller {
      * Add the view to the controller
      * @param view
      */
-    public void addView(ViewWindowsSebbe view) {
+    public void addView(ViewWindows view) {
         this.view = view;
         this.view.setCtrl(this);
 
@@ -46,7 +50,7 @@ public class Controller {
      * Add the model to the controller.
      * @param model
      */
-    public void addModel(TestArray7x7 model) {
+    public void addModel(Array7x7 model) {
         this.model = model;
     }
 
@@ -70,6 +74,8 @@ public class Controller {
 
     public void shiftLeft() {
         //TODO add shiftLeft algorithm
+        //TODO need to return left over array
+        shifter.shiftLeft(model.getMatrix());
         updateView();
     }
 
@@ -145,7 +151,10 @@ public class Controller {
     public void showRanomChar() {
         filler = getFiller(FILLERTYPE.CHARACTERS);
         model = filler.fillWithRandom();
-
         updateViewColor();
+    }
+
+    public Array7x7 getModel() {
+        return model;
     }
 }

@@ -1,6 +1,6 @@
-package mah.se.testing;
+package testing;
 
-import mah.se.Color.Color;
+import roffe.Color.Color;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-14.

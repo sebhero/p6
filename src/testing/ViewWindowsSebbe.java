@@ -1,6 +1,6 @@
-package mah.se.mvc.view;
+package testing;
 
-import mah.se.Color.ColorDisplay;
+import roffe.Color.ColorDisplay;
 import mah.se.mvc.controller.Controller;
 
 import javax.swing.*;
@@ -51,23 +51,23 @@ public class ViewWindowsSebbe extends JPanel {
         btn1_7.addActionListener(bl);
 
         
-//        btnRandomColor.addActionListener(ae -> {
-//            ctrl.showRandomColor();
-//            System.out.println("Show random color");
-//        });
-//
-//        btnRandomSameColor.addActionListener(ar ->{
-//            System.out.println("show color same");
-//            ctrl.showSameColor();
-//        });
-//        btn1_7Color.addActionListener(ae -> {
-//            System.out.println("show color gradient");
-//            ctrl.showGradiantColor();
-//        });
-//
-//        btnRandomChar.addActionListener(ae -> {
-//            ctrl.showRanomChar();
-//        });
+        btnRandomColor.addActionListener(ae -> {
+            ctrl.showRandomColor();
+            System.out.println("Show random color");
+        });
+
+        btnRandomSameColor.addActionListener(ar ->{
+            System.out.println("show color same");
+            ctrl.showSameColor();
+        });
+        btn1_7Color.addActionListener(ae -> {
+            System.out.println("show color gradient");
+            ctrl.showGradiantColor();
+        });
+
+        btnRandomChar.addActionListener(ae -> {
+            ctrl.showRanomChar();
+        });
     }
 
     private JPanel buttonPanel() {
