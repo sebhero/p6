@@ -1,11 +1,12 @@
 package mah.se;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 import mah.se.Color.Color;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
-
-import javax.swing.*;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -13,7 +14,7 @@ import javax.swing.*;
 
 /**
  * Start the app.
- * jonte
+ * anton
  * Creates the model and controller and view
  */
 public class App {
