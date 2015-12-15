@@ -50,23 +50,24 @@ public class ViewWindows extends JPanel {
         btnRandomSame.addActionListener(bl);
         btn1_7.addActionListener(bl);
 
-        btnRandomColor.addActionListener(ae -> {
-            ctrl.showRandomColor();
-            System.out.println("Show random color");
-        });
-
-        btnRandomSameColor.addActionListener(ar ->{
-            System.out.println("show color same");
-            ctrl.showSameColor();
-        });
-        btn1_7Color.addActionListener(ae -> {
-            System.out.println("show color gradient");
-            ctrl.showGradiantColor();
-        });
-
-        btnRandomChar.addActionListener(ae -> {
-            ctrl.showRanomChar();
-        });
+        
+//        btnRandomColor.addActionListener(ae -> {
+//            ctrl.showRandomColor();
+//            System.out.println("Show random color");
+//        });
+//
+//        btnRandomSameColor.addActionListener(ar ->{
+//            System.out.println("show color same");
+//            ctrl.showSameColor();
+//        });
+//        btn1_7Color.addActionListener(ae -> {
+//            System.out.println("show color gradient");
+//            ctrl.showGradiantColor();
+//        });
+//
+//        btnRandomChar.addActionListener(ae -> {
+//            ctrl.showRanomChar();
+//        });
     }
 
     private JPanel buttonPanel() {
