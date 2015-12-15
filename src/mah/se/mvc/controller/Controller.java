@@ -2,7 +2,7 @@ package mah.se.mvc.controller;
 
 import mah.se.Color.Color;
 import mah.se.mvc.model.TestArray7x7;
-import mah.se.mvc.view.ViewWindows;
+import mah.se.mvc.view.ViewWindowsSebbe;
 import mah.se.patterns.strategy.*;
 
 import java.util.Random;
@@ -15,7 +15,7 @@ public class Controller {
 
     private FillAlgorithm filler;
     TestArray7x7 model;
-    ViewWindows view;
+    ViewWindowsSebbe view;
 //    ViewAndroid view;
 
     /**
@@ -23,7 +23,7 @@ public class Controller {
      * @param model the Array7x7 model
      * @param view the view we are displaying the matrix on
      */
-    public Controller(TestArray7x7 model, ViewWindows view) {
+    public Controller(TestArray7x7 model, ViewWindowsSebbe view) {
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
@@ -36,7 +36,7 @@ public class Controller {
      * Add the view to the controller
      * @param view
      */
-    public void addView(ViewWindows view) {
+    public void addView(ViewWindowsSebbe view) {
         this.view = view;
         this.view.setCtrl(this);
 
