@@ -60,7 +60,7 @@ public class Array7x7 {
 		this.array[row][col] = value;
 	}
 
-    public int[][] getMatrix() {
+    public int[][] getAll() {
         return array;
     }
 

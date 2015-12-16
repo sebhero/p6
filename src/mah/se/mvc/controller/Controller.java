@@ -58,7 +58,7 @@ public class Controller extends ViewAndroid {
      * Update the view
      */
     private void updateView() {
-        view.updateView(model.getMatrix());
+        view.updateView(model.getAll());
     }
 
 
@@ -75,7 +75,7 @@ public class Controller extends ViewAndroid {
     public void shiftLeft() {
         //TODO add shiftLeft algorithm
         //TODO need to return left over array
-        shifter.shiftLeft(model.getMatrix());
+        shifter.shiftLeft(model.getAll());
         updateView();
     }
 
@@ -133,7 +133,7 @@ public class Controller extends ViewAndroid {
     }
 
     private void updateViewColor() {
-        view.updateViewColor(model.getMatrix());
+        view.updateViewColor(model.getAll());
     }
 
     public void showSameColor() {
