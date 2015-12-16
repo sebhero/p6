@@ -68,7 +68,7 @@ public class Alphabet {
             		array[y][x] = Color.TRANSPARENT;
             	}
             	else {
-            		array[y][x] = Color.BLACK;
+            		array[y][x] = Color.WHITE;
             		isChar = true;
             	}
             }
