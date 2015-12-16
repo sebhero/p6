@@ -1,25 +1,41 @@
 package mah.se.mvc.controller;
 
-import mah.se.mvc.view.ViewAndroid;
-import roffe.Color.Color;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.view.ViewAndroid;
 import mah.se.mvc.view.ViewWindows;
-import mah.se.patterns.strategy.*;
-
-import java.util.Random;
+import mah.se.patterns.strategy.FILLERTYPE;
+import mah.se.patterns.strategy.FillAlgorithm;
+import mah.se.patterns.strategy.FillCharacter;
+import mah.se.patterns.strategy.FillColor;
+import mah.se.patterns.strategy.FillNumbers;
+import roffe.Color.Color;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  * 20:00 2015-12-13.
  */
 public class Controller extends ViewAndroid {
+	
+	public static enum DIRECTION {
+		RIGHT,
+		LEFT
+	}
 
+	private DIRECTION dir = DIRECTION.LEFT;
     private final ShiftArray shifter;
     private FillAlgorithm filler;
     private Array7x7 model;
     private ViewWindows view;
+    private ArrayList<Array7x7> message = new ArrayList<>();
+    private Timer timer;
+    
 //    ViewAndroid view;
 
     /**
@@ -67,18 +83,16 @@ public class Controller extends ViewAndroid {
     /**
      * Btn call from view
      * Shift right the matrix
-     */
-    public void shiftRight() {
-    	shifter.shiftRight(model,new Array7());
-        updateView();
+     */    
+    public void shift() {
+    	Array7 aids;//TODO fixa overflow
+    	aids = shifter.shift(model, new Array7(), dir);
     }
-
-    public void shiftLeft() {
-        shifter.shiftLeft(model, new Array7());
-        updateView();
+    
+    public void setDirection(DIRECTION dir) {
+    	this.dir = dir;
     }
-
-
+    
     /**
      * btn click
      * Show total random numbers in display
@@ -155,5 +169,27 @@ public class Controller extends ViewAndroid {
 
     public Array7x7 getModel() {
         return model;
+    }
+    
+    public void flowText(String texy) {
+    	filler = getFiller(FILLERTYPE.CHARACTERS);
+    	for(int n = 0; n < texy.length(); n++) {
+    		Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));
+    		message.add(character);
+    	}
+    	model = message.get(0);
+    	updateViewColor();
+    	timer = new Timer();
+    	timer.schedule(new timerTask(), 500, 500);
+    	
+    }
+    
+    private class timerTask extends TimerTask {
+		@Override
+		public void run() {
+			shift();
+			updateViewColor();
+		}
+    	
     }
 }

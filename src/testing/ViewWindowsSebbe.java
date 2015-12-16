@@ -27,6 +27,7 @@ public class ViewWindowsSebbe extends ViewWindows {
     private JButton btnRandomChar = new JButton("Slumpa Char");
 
     public ViewWindowsSebbe(int background, int grid) {
+    	super(background, grid);
         ButtonListener bl = new ButtonListener();
         setLayout(new BorderLayout());
 

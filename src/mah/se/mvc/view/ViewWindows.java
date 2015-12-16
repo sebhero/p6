@@ -30,7 +30,11 @@ public class ViewWindows extends JPanel {
 	private JTextField txtInput = new JTextField();
 
 	public ViewWindows(int background, int grid) {
-		colorDisplay = new ColorDisplay(background, grid);
+		this(1, 1, background, grid);
+	}
+	
+	public ViewWindows(int verticalPages, int horizontalPages, int background, int grid) {
+		colorDisplay = new ColorDisplay(verticalPages, horizontalPages, background, grid);
 		pnlDisplay = new JPanel();
 		pnlButtons = new JPanel();
 		
