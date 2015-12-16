@@ -1,6 +1,6 @@
 package mah.se.mvc.controller;
 
-import mah.se.mvc.view.ViewAndroid;
+import mah.se.mvc.view.ViewWindowsImpl;
 import roffe.Color.Color;
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
@@ -14,12 +14,12 @@ import java.util.Random;
  * Created by Sebastian Börebäck on 2015-12-13.
  * 20:00 2015-12-13.
  */
-public class Controller extends ViewAndroid {
+public class Controller {
 
     private final ShiftArray shifter;
     private FillAlgorithm filler;
     private Array7x7 model;
-    private ViewWindows view;
+    private ViewWindowsImpl view;
 //    ViewAndroid view;
 
     /**
@@ -27,7 +27,7 @@ public class Controller extends ViewAndroid {
      * @param model the Array7x7 model
      * @param view the view we are displaying the matrix on
      */
-    public Controller(Array7x7 model, ViewWindows view) {
+    public Controller(Array7x7 model, ViewWindowsImpl view) {
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
@@ -41,7 +41,7 @@ public class Controller extends ViewAndroid {
      * Add the view to the controller
      * @param view
      */
-    public void addView(ViewWindows view) {
+    public void addView(ViewWindowsImpl view) {
         this.view = view;
         this.view.setCtrl(this);
 
@@ -76,6 +76,28 @@ public class Controller extends ViewAndroid {
     public void shiftLeft() {
         shifter.shiftLeft(model, new Array7());
         updateView();
+    }
+
+    public void flowText(String text) {
+        //TODO implent flowing text
+        //using array of text and timer
+        /**
+         * Tar en string som omvandlas till char array.
+         * d'refter kor vi fillchar som skapar array av charen
+         * nasta char gor vi ocksa till en matrix
+         * rita ut forsta char
+         * dar efter var 300ms so gor vi en shiftright och skriver ut.
+         */
+        text = "AB";
+
+        //char current = text.charAt(0);
+        //char next = text.charAt(1);
+        filler = getFiller(FILLERTYPE.CHARACTERS);
+        Array7x7 current = filler.fillWithOneType(text.charAt(0));
+        Array7x7 next = filler.fillWithOneType(text.charAt(1));
+
+
+
     }
 
 

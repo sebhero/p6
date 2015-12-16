@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
+import mah.se.mvc.view.ViewWindowsImpl;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -21,7 +22,7 @@ class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ViewWindows demo = new ViewWindows();
+                ViewWindowsImpl demo = new ViewWindows();
                 Array7x7 model = new Array7x7();
                 new Controller(model, demo);
                 JFrame frame = new JFrame();
