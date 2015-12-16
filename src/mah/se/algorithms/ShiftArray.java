@@ -1,43 +1,31 @@
 package mah.se.algorithms;
 
-import java.util.Arrays;
+import mah.se.mvc.model.Array7;
+import mah.se.mvc.model.Array7x7;
 
 /**
  *Moves the Arrays 1 step at a time in the chosen direction. Main focus is shifting left.
- *@author Robin Johnsson
+ *@author Johnatan Sona, Robin Johnsson
  **/
-public class ShiftArray {
-	
-	public int[][] shiftLeft(int[][] array){
-		//Goes through the first column, to the last
-		for (int col = 0; col < array.length; col++) {
-			//Goes throught the first row, then second, and lastly the last row.
-			  for (int row = 0; row < array.length; row++) {
-				  //shifts the value of next column onto "active" column
-				  if(col!=array.length-1){
-					  array[row][col] = array[row][col+1];
-				  }
-				  //if it's the last column, changes the value of the column to 0.
-				  else if(col==array.length-1){
-					  array[row][col]=0;
-				  }
-			  }
-			}
+public class ShiftArray{
+	public Array7 shiftLeft(Array7x7 model, Array7 array7){
+		Array7 array = new Array7();
+		array = model.getCol(0);
+		for(int col = 0; col<model.getLength()-1; col++){
+			model.setCol(col, model.getCol(col+1));
+			
+		}
+		model.setCol(6, array7);
+		
 		return array;
 	}
-	public static void main(String[] args){
-
-		int[][] arr2 = {{1,1,1,1,1,1,1},{2,2,2,2,2,2,2},{3,3,3,3,3,3,3},{4,4,4,4,4,4,4},{5,5,5,5,5,5,5},{6,6,6,6,6,6,6},{7,7,7,7,7,7,7}};
-		ShiftArray test = new ShiftArray();
-		for(int i = 0; i<arr2.length+1; i++){
-
-			
-				for(int j = 0; j<arr2.length; j++){
-					System.out.println(Arrays.toString(arr2[j]));
-				}
-			
-			test.shiftLeft(arr2);
-			System.out.println();
+	public Array7 shiftRight(Array7x7 model, Array7 array7 ){
+		Array7 array = new Array7();
+		array = model.getCol(6);
+		for(int col = model.getLength()-1; col>0; col--){
+			model.setCol(col, model.getCol(col-1));
 		}
+		model.setCol(0, array7);
+		return array;
 	}
 }

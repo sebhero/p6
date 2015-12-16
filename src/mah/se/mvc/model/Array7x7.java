@@ -38,7 +38,7 @@ public class Array7x7 {
 	
 	public void setCol(int col, Array7 theCol) {
 		for(int i=0; i<array.length; i++) {
-			array[col][i] = theCol.getElement(i);
+			array[i][col] = theCol.getElement(i);
 		}
 			
 	}

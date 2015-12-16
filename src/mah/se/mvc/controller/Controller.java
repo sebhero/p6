@@ -3,6 +3,7 @@ package mah.se.mvc.controller;
 import mah.se.mvc.view.ViewAndroid;
 import roffe.Color.Color;
 import mah.se.algorithms.ShiftArray;
+import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
 import mah.se.patterns.strategy.*;
@@ -58,7 +59,7 @@ public class Controller extends ViewAndroid {
      * Update the view
      */
     private void updateView() {
-        view.updateView(model.getMatrix());
+        view.updateView(model.getAll());
     }
 
 
@@ -68,6 +69,7 @@ public class Controller extends ViewAndroid {
      * Shift right the matrix
      */
     public void shiftRight() {
+    	shifter.shiftRight(model,new Array7());
         //TODO add shiftRight algorithm
         updateView();
     }
@@ -75,7 +77,7 @@ public class Controller extends ViewAndroid {
     public void shiftLeft() {
         //TODO add shiftLeft algorithm
         //TODO need to return left over array
-        shifter.shiftLeft(model.getMatrix());
+        shifter.shiftLeft(model, new Array7());
         updateView();
     }
 
@@ -133,7 +135,7 @@ public class Controller extends ViewAndroid {
     }
 
     private void updateViewColor() {
-        view.updateViewColor(model.getMatrix());
+        view.updateViewColor(model.getAll());
     }
 
     public void showSameColor() {
