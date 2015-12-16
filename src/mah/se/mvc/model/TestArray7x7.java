@@ -38,11 +38,11 @@ public class TestArray7x7 {
     }
 
     /**
-     * Returnerar ett v�rde p� en specifik position
+     * Returnerar ett vï¿½rde pï¿½ en specifik position
      *
      * @param row:
-     *            vilken position man vill veta v�rdet i
-     * @return : v�rdet man vill veta
+     *            vilken position man vill veta vï¿½rdet i
+     * @return : vï¿½rdet man vill veta
      */
     public int getElement(int row,int col) {
         return matrix[row][col];
