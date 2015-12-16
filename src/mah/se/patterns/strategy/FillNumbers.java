@@ -7,6 +7,12 @@ import java.util.Random;
 /**
  * Created by Sebastian Börebäck on 2015-12-14.
  */
+
+/**
+ * Hjälp klass för Array7x7.
+ * För att Fyller Array7x7 med nummer.
+ * Med hjälp av Strategypattern
+ */
 public class FillNumbers implements FillAlgorithm {
     @Override
     public Array7x7 fillWithOneType(int type) {

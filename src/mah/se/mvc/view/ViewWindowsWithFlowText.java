@@ -8,9 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * 
- * @author Jonatan Fridsten
- *
+ * @author Sebastian Börebäck
+ * Vyn visar i swing/windows en representation av modelen
+ * manipuleras modeln via kontrollern och dess hjälpklasser
  */
 public class ViewWindowsWithFlowText extends ViewWindows {
     //testing

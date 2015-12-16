@@ -20,6 +20,10 @@ import roffe.Color.Color;
  * Created by Sebastian Börebäck on 2015-12-13.
  * 20:00 2015-12-13.
  */
+
+/**
+ * Kontroller styr kommunikationen mellan Vyn och modelen.
+ */
 public class Controller {
 
     //för flowtext hålla kolla på vilket tecken i string
