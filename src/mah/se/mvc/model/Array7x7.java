@@ -22,7 +22,7 @@ public class Array7x7 {
 	
 	public void setRow(int row, Array7 theRow) {
 		for(int i=0; i<array.length; i++) {
-			array[i][row] = theRow.getElement(i);
+			array[row][i] = theRow.getElement(i);
 		}
 		
 	}
