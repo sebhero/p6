@@ -1,7 +1,7 @@
 package mah.se.patterns.strategy;
 
 
-import mah.se.mvc.model.TestArray7x7;
+import mah.se.mvc.model.Array7x7;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-14.
@@ -13,19 +13,19 @@ public interface FillAlgorithm {
      * @param type the color number/number or char
      * @return
      */
-    public TestArray7x7 fillWithOneType(int type);
+    public Array7x7 fillWithOneType(int type);
 
     /**
      * Fill Array7x7 with random numbers/color/char
      * @return a random filled Array7x7
      */
-    public TestArray7x7 fillWithRandom();
+    public Array7x7 fillWithRandom();
 
     /**
      * Fill the Array7x7 with gaining from 1-7 numbers/color
      * @return a increasing filled Array7x7
      */
-    public TestArray7x7 fillWithInGaining();
+    public Array7x7 fillWithInGaining();
 
         /*
         fill med 1 typ av number

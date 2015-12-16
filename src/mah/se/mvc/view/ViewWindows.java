@@ -1,146 +1,79 @@
 package mah.se.mvc.view;
 
-import mah.se.Color.ColorDisplay;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import mah.se.mvc.controller.Controller;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
-
+import mah.se.mvc.model.Array7x7;
 
 /**
- * Created by Sebastian Börebäck on 2015-12-13.
+ * 
+ * @author Jonatan Fridsten
+ *
  */
 public class ViewWindows extends JPanel {
+	private JLabel[][] lblArray = new JLabel[7][7];
     private Controller ctrl;
-    private ColorDisplay displayColor;
-    private JTextPane display;
-    private JButton btnRandom = new JButton("Slumpa tal");
-    private JButton btnRandomSame = new JButton("Slumpa samma tal");
-    private JButton btn1_7 = new JButton("visa Nr 1-7");
-    private JButton btnRandomColor = new JButton("Slumpa Color");
-    private JButton btnRandomSameColor = new JButton("Slumpa samma color");
-    private JButton btn1_7Color = new JButton("Color gradient");
-    private JButton btnRandomChar = new JButton("Slumpa Char");
 
-    public ViewWindows(int background, int grid) {
-        ButtonListener bl = new ButtonListener();
-        setLayout(new BorderLayout());
+    public ViewWindows() {
+		this.setPreferredSize(new Dimension(300, 300));
+		this.setLayout(new GridLayout(7, 7, 5, 5));
 
-        displayColor = new ColorDisplay(background, grid);
-        displayColor.setPreferredSize(new Dimension(200, 120));
-        displayColor.setSize(100, 120);
-        displayColor.setVisible(false);
-        add(displayColor, BorderLayout.CENTER);
+		for (int i = 0; i < lblArray.length; i++) {
+			for (int j = 0; j < lblArray[i].length; j++) {
+				lblArray[i][j] = new JLabel("");
+				lblArray[i][j].setBackground(new java.awt.Color(0, 0, 0));
+				lblArray[i][j].setOpaque(true);
+				add(lblArray[i][j]);
+			}
+		}
+	}
 
-        display = new JTextPane();
-        display.setPreferredSize(new Dimension(100, 120));
-        display.setSize(100,120);
+	public void setColor(Array7x7 array) {
+		for (int i = 0; i < lblArray.length; i++) {
+			for (int j = 0; j < lblArray[i].length; j++) {
+				if(array.getElement(i, j) == 1){
+					lblArray[i][j].setBackground(new java.awt.Color(0, 0, 0));
+				}else{
+					lblArray[i][j].setBackground(new java.awt.Color(255, 255, 255));
+				}
+			}
+		}
+	}
 
-        add(display, BorderLayout.CENTER);
+	// test f�r att f� ut matrisen
+	public static void main(String[] args) {
+		ViewWindows pnl = new ViewWindows();
+		JOptionPane.showMessageDialog(null, pnl);
+	}
 
-        JPanel btnGrid = new JPanel(new GridLayout(2, 1));
-        btnGrid.add(buttonPanel());
-        btnGrid.add(buttonPanelColor());
-
-        add(btnGrid, BorderLayout.SOUTH);
-        btnRandom.addActionListener(bl);
-        btnRandomSame.addActionListener(bl);
-        btn1_7.addActionListener(bl);
-
-        
-//        btnRandomColor.addActionListener(ae -> {
-//            ctrl.showRandomColor();
-//            System.out.println("Show random color");
-//        });
-//
-//        btnRandomSameColor.addActionListener(ar ->{
-//            System.out.println("show color same");
-//            ctrl.showSameColor();
-//        });
-//        btn1_7Color.addActionListener(ae -> {
-//            System.out.println("show color gradient");
-//            ctrl.showGradiantColor();
-//        });
-//
-//        btnRandomChar.addActionListener(ae -> {
-//            ctrl.showRanomChar();
-//        });
-    }
-
-    private JPanel buttonPanel() {
-        JPanel panel = new JPanel(new GridLayout(1,3));
-        panel.add(btnRandom);
-        panel.add(btnRandomSame);
-        panel.add(btn1_7);
-        return panel;
-    }
-    private JPanel buttonPanelColor() {
-        JPanel panel = new JPanel(new GridLayout(1,4));
-        panel.add(btnRandomColor);
-        panel.add(btnRandomSameColor);
-        panel.add(btn1_7Color);
-        panel.add(btnRandomChar);
-        return panel;
+    /**
+     * Uppdaterar view med en color matris
+     * @param matrix matrisen po alla farg element
+     */
+    public void updateViewColor(int[][] matrix) {
+        //TODO implement
     }
 
     /**
-     * Set the controller to the view
-     * @param ctrl
+     * Uppdatera view med en siffer matris
+     * @param matrix matris med siffror
+     */
+    public void updateView(int[][] matrix) {
+        //TODO implement
+    }
+
+    /**
+     * Satter controller till viewen som styr viewn. den skoter all
+     * kommunikation med array7x7. hanterar knapptryckningar m.m.
+     * @param ctrl sjalva controllern
      */
     public void setCtrl(Controller ctrl) {
         this.ctrl = ctrl;
     }
 
-
-    /**
-     * Updates the view from the controller
-     * @param matrix the int 7x7 matrix
-     */
-    public void updateView(int[][] matrix) {
-        //TODO fullkod
-        display.setVisible(true);
-        displayColor.setVisible(false);
-        display.setPreferredSize(new Dimension(100, 120));
-        display.setSize(100,120);
-
-        String txt = "";
-        for (int[] row : matrix) {
-            txt += Arrays.toString(row) + "\n";
-        }
-        display.setText(txt);
-
-    }
-
-    public void updateViewColor(int[][] matrix) {
-
-
-        //TODO fullkod
-        display.setVisible(false);
-        displayColor.setVisible(true);
-        displayColor.setPreferredSize(new Dimension(200, 120));
-
-        displayColor.setDisplay(matrix);
-        displayColor.updateDisplay();
-
-    }
-
-    /**
-     * Calling the controller using btns
-     */
-    private class ButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-             if(e.getSource()==btnRandom) {
-                ctrl.showRandom();
-            } else if(e.getSource()==btnRandomSame) {
-                ctrl.showRandomSame();
-            } else if(e.getSource()== btn1_7) {
-                //visa 0
-                ctrl.showNumbers1_7();
-            }
-
-        }
-    }
 }

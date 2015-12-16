@@ -1,10 +1,12 @@
-package mah.se.mvc.model;
+package testing;
+
+import mah.se.mvc.model.Array7;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  */
-public class TestArray7x7 {
-    int[][] matrix;
+class TestArray7x7 {
+    private int[][] matrix;
 
     public TestArray7x7(int[][] matrix) {
         this.matrix = matrix;
@@ -38,11 +40,11 @@ public class TestArray7x7 {
     }
 
     /**
-     * Returnerar ett vï¿½rde pï¿½ en specifik position
+     * Returnerar ett v�rde p� en specifik position
      *
      * @param row:
-     *            vilken position man vill veta vï¿½rdet i
-     * @return : vï¿½rdet man vill veta
+     *            vilken position man vill veta v�rdet i
+     * @return : v�rdet man vill veta
      */
     public int getElement(int row,int col) {
         return matrix[row][col];

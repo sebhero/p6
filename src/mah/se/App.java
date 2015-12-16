@@ -3,9 +3,8 @@ package mah.se;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import mah.se.Color.Color;
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.TestArray7x7;
+import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
 
 /**
@@ -14,17 +13,17 @@ import mah.se.mvc.view.ViewWindows;
 
 /**
  * Start the app.
- * anton
+ * FUCKFACE
  * Creates the model and controller and view
  */
-public class App {
+class App {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ViewWindows demo = new ViewWindows(Color.BLACK, Color.GRAY);
-                TestArray7x7 model = new TestArray7x7();
-                new Controller(model,demo);
+                ViewWindows demo = new ViewWindows();
+                Array7x7 model = new Array7x7();
+                new Controller(model, demo);
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.add(demo);
@@ -35,3 +34,4 @@ public class App {
     }
 
 }
+
