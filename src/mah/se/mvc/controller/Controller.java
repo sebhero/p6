@@ -77,7 +77,11 @@ public class Controller extends ViewAndroid {
     public void shiftLeft() {
         //TODO add shiftLeft algorithm
         //TODO need to return left over array
+<<<<<<< HEAD
         shifter.shiftLeft(model, new Array7());
+=======
+        shifter.shiftLeft(model.getAll());
+>>>>>>> branch 'master' of https://github.com/sebhero/p6.git
         updateView();
     }
 

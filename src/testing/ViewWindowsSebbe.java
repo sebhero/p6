@@ -1,5 +1,6 @@
 package testing;
 
+import mah.se.mvc.view.ViewWindows;
 import roffe.Color.ColorDisplay;
 import mah.se.mvc.controller.Controller;
 
@@ -13,7 +14,7 @@ import java.util.Arrays;
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  */
-public class ViewWindowsSebbe extends JPanel {
+public class ViewWindowsSebbe extends ViewWindows {
     private Controller ctrl;
     private ColorDisplay displayColor;
     private JTextPane display;
