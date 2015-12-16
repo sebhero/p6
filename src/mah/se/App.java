@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
+import mah.se.mvc.view.ViewWindowsWithFlowText;
 import roffe.Color.Color;
 
 /**
@@ -22,12 +23,14 @@ class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ViewWindows demo = new ViewWindows(Color.BLACK, Color.GRAY);
+                ViewWindows view = new ViewWindows(Color.BLACK, Color.GRAY);
+                //with FlowText
+//                ViewWindowsWithFlowText view = new ViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
                 Array7x7 model = new Array7x7();
-                new Controller(model, demo);
+                new Controller(model, view);
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add(demo);
+                frame.add(view);
                 frame.pack();
                 frame.setVisible(true);
             }

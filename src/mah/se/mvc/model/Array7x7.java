@@ -30,7 +30,7 @@ public class Array7x7 {
 	public Array7 getRow(int row) {
 		Array7 arr = new Array7();
 		for(int i = 0; i < array.length;i++){
-			arr.setElement(i, this.getElement(i,row));
+			arr.setElement(i, this.getElement(row, i));
 		}
 		
 		return arr;

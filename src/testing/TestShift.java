@@ -16,15 +16,15 @@ public class TestShift {
 		array = fill.fillWithInGaining();
 		System.out.print(array.toString());
 		ShiftArray a = new ShiftArray();
-		Array7 aids = null;
-		aids = a.shiftLeft(array, new Array7());
+		Array7 shift = null;
+		shift = a.shiftLeft(array, new Array7());
 
 		System.out.println(array.toString());
-		a.shiftRight(array, aids);
+		a.shiftRight(array, shift);
 		System.out.println(array.toString());
-		aids = a.shiftRight(array, new Array7());
+		shift = a.shiftRight(array, new Array7());
 		System.out.println(array.toString());
-		a.shiftLeft(array, aids);
+		a.shiftLeft(array, shift);
 		System.out.println(array.toString());
 	}
 }

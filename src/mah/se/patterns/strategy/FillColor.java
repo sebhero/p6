@@ -9,8 +9,12 @@ import java.util.Random;
  * Created by Sebastian Börebäck on 2015-12-14.
  */
 
-//int Color.rgb(red, green, blue); you get the color int
 
+/**
+ * Hjälp klass för Array7x7.
+ * För att Fyller Array7x7 med färg.
+ * Med hjälp av Strategypattern
+ */
 public class FillColor implements FillAlgorithm {
 
     @Override

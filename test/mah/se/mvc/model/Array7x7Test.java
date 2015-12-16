@@ -9,6 +9,12 @@ import static org.junit.Assert.*;
 public class Array7x7Test {
 
     private Array7x7 testMatrix;
+
+    /**
+     * Testar att setRow.
+     * sätter en rad med 1:or och kollar att alla är 1:or
+     * @throws Exception
+     */
     @Test
     public void testSetRow() throws Exception {
         testMatrix = new Array7x7();
@@ -19,6 +25,11 @@ public class Array7x7Test {
         assertArrayEquals(correct,testMatrix.getRow(2).getAll());
     }
 
+    /**
+     * Kollar att getRow fungerar
+     * sätter en row till ettor och kollar att man får det tillbaka.
+     * @throws Exception
+     */
     @Test
     public void testGetRow() throws Exception {
         testMatrix = new Array7x7();
@@ -29,6 +40,10 @@ public class Array7x7Test {
         assertArrayEquals(correct,testMatrix.getRow(2).getAll());
     }
 
+    /**
+     * Testar setCol
+     * @throws Exception
+     */
     @Test
     public void testSetCol() throws Exception {
         testMatrix = new Array7x7();
