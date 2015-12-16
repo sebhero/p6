@@ -18,7 +18,6 @@ import roffe.Color.Color;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
- * 20:00 2015-12-13.
  */
 
 /**
@@ -90,7 +89,6 @@ public class Controller {
      */
     public Array7 shiftWithRedColor() {
         Array7 newArray = new Array7(Color.RED);
-        System.out.println("shifted color red");
         newArray = shift(newArray);
         updateViewColor();
         return newArray;
