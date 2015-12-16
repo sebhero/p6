@@ -1,25 +1,41 @@
 package mah.se.mvc.controller;
 
-import mah.se.mvc.view.ViewWindowsImpl;
-import roffe.Color.Color;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.view.ViewAndroid;
 import mah.se.mvc.view.ViewWindows;
-import mah.se.patterns.strategy.*;
-
-import java.util.Random;
+import mah.se.patterns.strategy.FILLERTYPE;
+import mah.se.patterns.strategy.FillAlgorithm;
+import mah.se.patterns.strategy.FillCharacter;
+import mah.se.patterns.strategy.FillColor;
+import mah.se.patterns.strategy.FillNumbers;
+import roffe.Color.Color;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  * 20:00 2015-12-13.
  */
-public class Controller {
+public class Controller extends ViewAndroid {
+	
+	public static enum DIRECTION {
+		RIGHT,
+		LEFT
+	}
 
+	private DIRECTION dir = DIRECTION.LEFT;
     private final ShiftArray shifter;
     private FillAlgorithm filler;
     private Array7x7 model;
-    private ViewWindowsImpl view;
+    private ViewWindows view;
+    private ArrayList<Array7x7> message = new ArrayList<>();
+    private Timer timer;
+    
 //    ViewAndroid view;
 
     /**
@@ -27,7 +43,7 @@ public class Controller {
      * @param model the Array7x7 model
      * @param view the view we are displaying the matrix on
      */
-    public Controller(Array7x7 model, ViewWindowsImpl view) {
+    public Controller(Array7x7 model, ViewWindows view) {
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
@@ -41,7 +57,7 @@ public class Controller {
      * Add the view to the controller
      * @param view
      */
-    public void addView(ViewWindowsImpl view) {
+    public void addView(ViewWindows view) {
         this.view = view;
         this.view.setCtrl(this);
 
@@ -67,40 +83,16 @@ public class Controller {
     /**
      * Btn call from view
      * Shift right the matrix
-     */
-    public void shiftRight() {
-    	shifter.shiftRight(model,new Array7());
-        updateView();
+     */    
+    public void shift() {
+    	Array7 aids;//TODO fixa overflow
+    	aids = shifter.shift(model, new Array7(), dir);
     }
-
-    public void shiftLeft() {
-        shifter.shiftLeft(model, new Array7());
-        updateView();
+    
+    public void setDirection(DIRECTION dir) {
+    	this.dir = dir;
     }
-
-    public void flowText(String text) {
-        //TODO implent flowing text
-        //using array of text and timer
-        /**
-         * Tar en string som omvandlas till char array.
-         * d'refter kor vi fillchar som skapar array av charen
-         * nasta char gor vi ocksa till en matrix
-         * rita ut forsta char
-         * dar efter var 300ms so gor vi en shiftright och skriver ut.
-         */
-        text = "AB";
-
-        //char current = text.charAt(0);
-        //char next = text.charAt(1);
-        filler = getFiller(FILLERTYPE.CHARACTERS);
-        Array7x7 current = filler.fillWithOneType(text.charAt(0));
-        Array7x7 next = filler.fillWithOneType(text.charAt(1));
-
-
-
-    }
-
-
+    
     /**
      * btn click
      * Show total random numbers in display
@@ -177,5 +169,27 @@ public class Controller {
 
     public Array7x7 getModel() {
         return model;
+    }
+    
+    public void flowText(String texy) {
+    	filler = getFiller(FILLERTYPE.CHARACTERS);
+    	for(int n = 0; n < texy.length(); n++) {
+    		Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));
+    		message.add(character);
+    	}
+    	model = message.get(0);
+    	updateViewColor();
+    	timer = new Timer();
+    	timer.schedule(new timerTask(), 500, 500);
+    	
+    }
+    
+    private class timerTask extends TimerTask {
+		@Override
+		public void run() {
+			shift();
+			updateViewColor();
+		}
+    	
     }
 }

@@ -1,21 +1,26 @@
 package testing;
 
-import mah.se.mvc.view.ViewWindows;
-import mah.se.mvc.view.ViewWindowsImpl;
-import roffe.Color.ColorDisplay;
-import mah.se.mvc.controller.Controller;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+
+import mah.se.mvc.controller.Controller;
+import mah.se.mvc.view.ViewWindows;
+import roffe.Color.ColorDisplay;
 
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  */
-public class ViewWindowsSebbe extends ViewWindows implements ViewWindowsImpl{
+public class ViewWindowsSebbe extends ViewWindows {
+	
     private Controller ctrl;
     private ColorDisplay displayColor;
     private JTextPane display;
@@ -28,7 +33,7 @@ public class ViewWindowsSebbe extends ViewWindows implements ViewWindowsImpl{
     private JButton btnRandomChar = new JButton("Slumpa Char");
 
     public ViewWindowsSebbe(int background, int grid) {
-        super(background, grid);
+    	super(background, grid);
         ButtonListener bl = new ButtonListener();
         setLayout(new BorderLayout());
 

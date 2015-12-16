@@ -1,5 +1,6 @@
 package mah.se.algorithms;
 
+import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 
@@ -27,5 +28,15 @@ public class ShiftArray{
 		}
 		model.setCol(0, array7);
 		return array;
+	}
+	public Array7 shift(Array7x7 model, Array7 array7, Controller.DIRECTION dir) {
+		switch(dir) {
+		case LEFT:
+			return shiftLeft(model, array7);
+		case RIGHT: 
+		default:
+			return shiftRight(model, array7);
+		}
+		
 	}
 }
