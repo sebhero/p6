@@ -1,4 +1,6 @@
-package roffe.Color;
+package testing.rolfStuff;
+
+import roffe.Color.Color;
 
 import java.util.Random;
 import java.util.Timer;

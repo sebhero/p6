@@ -13,6 +13,7 @@ import javax.swing.JTextPane;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.view.ViewWindows;
+import roffe.Color.Color;
 import roffe.Color.ColorDisplay;
 
 
@@ -65,8 +66,8 @@ public class ViewWindowsSebbe extends ViewWindows {
         });
 
         btnRandomSameColor.addActionListener(ar ->{
-            System.out.println("show color same");
-            ctrl.showSameColor();
+            //visa samma farg blå
+            ctrl.showSameColor(Color.BLUE);
         });
         btn1_7Color.addActionListener(ae -> {
             System.out.println("show color gradient");

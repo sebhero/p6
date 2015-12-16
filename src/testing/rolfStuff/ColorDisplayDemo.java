@@ -1,4 +1,6 @@
-package roffe.Color;
+package testing.rolfStuff;
+
+import roffe.Color.ColorDisplay;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

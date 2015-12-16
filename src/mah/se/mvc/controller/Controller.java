@@ -8,7 +8,6 @@ import java.util.TimerTask;
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.ViewAndroid;
 import mah.se.mvc.view.ViewWindows;
 import mah.se.patterns.strategy.FILLERTYPE;
 import mah.se.patterns.strategy.FillAlgorithm;
@@ -21,14 +20,22 @@ import roffe.Color.Color;
  * Created by Sebastian Börebäck on 2015-12-13.
  * 20:00 2015-12-13.
  */
-public class Controller extends ViewAndroid {
-	
-	public static enum DIRECTION {
+public class Controller {
+
+    //för flowtext hålla kolla på vilket tecken i string
+    private int shiftCounter;
+    //för flowtext håller koll på vilken kolumn vi är i tecknet
+    private int shiftArrayIdx;
+
+    //håller koll på vilket håll vi shiftar
+    public static enum DIRECTION {
 		RIGHT,
 		LEFT
 	}
 
+    //vilket håll vi ska rita ut
 	private DIRECTION dir = DIRECTION.LEFT;
+    //våran algoritm för att skifta a7x7
     private final ShiftArray shifter;
     private FillAlgorithm filler;
     private Array7x7 model;
@@ -84,18 +91,57 @@ public class Controller extends ViewAndroid {
      * Btn call from view
      * Shift right the matrix
      */    
-    public void shift() {
-    	Array7 aids;//TODO fixa overflow
-    	aids = shifter.shift(model, new Array7(), dir);
+    public Array7 shift(Array7 newArray) {
+
+        return shifter.shift(model, newArray, dir);
+
     }
-    
+
+    public Array7 shiftWithRedColor() {
+        Array7 newArray = new Array7(Color.RED);
+        System.out.println("shifted color red");
+        newArray = shift(newArray);
+        updateViewColor();
+        return newArray;
+    }
+
+
+    /**
+     * FlowText timern kallar på denna var 50ms
+     * för att få en rullande text
+     */
+    private void shiftString() {
+        //hämta nästa a7x7
+        Array7x7 next = message.get(shiftCounter);
+        //hämta nästa kolumn
+        Array7 nextArray = next.getCol(shiftArrayIdx);
+        //do shift
+        shift(nextArray);
+
+        //update index to shift
+        shiftArrayIdx++;
+        if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
+            shiftCounter++;
+            shiftArrayIdx=0;
+            if (shiftCounter >= message.size()) {
+                //done flowing
+                message.clear();
+                timer.cancel();
+            }
+        }
+    }
+
+    /**
+     * Sätter vilket håll vi ska shifta
+     * @param dir riktigt vi shiftar
+     */
     public void setDirection(DIRECTION dir) {
     	this.dir = dir;
     }
     
     /**
      * btn click
-     * Show total random numbers in display
+     * Slumpar antal siffror och ritar ut den i vyn
      */
     public void showRandom() {
         filler = getFiller(FILLERTYPE.NUMBERS);
@@ -105,7 +151,14 @@ public class Controller extends ViewAndroid {
 
     /**
      * btn click
-     * show 1-7 numbers
+     * Ritar ut 1-7 i vyn
+     * 1234567
+     * 1234567
+     * 1234567
+     * 1234567
+     * 1234567
+     * 1234567
+     * 1234567
      */
     public void showNumbers1_7() {
         filler = getFiller(FILLERTYPE.NUMBERS);
@@ -115,7 +168,8 @@ public class Controller extends ViewAndroid {
 
     /**
      * btn click from view
-     * show same random number
+     * Slumpar ett tal och fyller Array7x7 med detta tal
+     * därefter visar den i vyn
      */
     public void showRandomSame() {
         filler = getFiller(FILLERTYPE.NUMBERS);
@@ -125,6 +179,11 @@ public class Controller extends ViewAndroid {
         updateView();
     }
 
+    /**
+     * Hämtar vilken fyll algoritm vi ska använda
+     * @param typeOfFiller val av fyllnings algoritm
+     * @return fyllnings algoritmen.
+     */
     private FillAlgorithm getFiller(FILLERTYPE typeOfFiller) {
         //TODO use singelton
         switch (typeOfFiller) {
@@ -139,57 +198,89 @@ public class Controller extends ViewAndroid {
         }
     }
 
+    /**
+     * btn click
+     * Visa slumpade färger i vyn
+     */
     public void showRandomColor() {
         filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithRandom();
         updateViewColor();
     }
 
+    /**
+     * uppdatera vyn med nya Array7x7
+     * av typen färger
+     */
     private void updateViewColor() {
         view.updateViewColor(model.getAll());
     }
 
-    public void showSameColor() {
+    /**
+     * Visa en färg i på hela Array7x7 i vyn
+     */
+    public void showSameColor(int color) {
         filler = getFiller(FILLERTYPE.COLORS);
-        model = filler.fillWithOneType(Color.BLUE);
+        model = filler.fillWithOneType(color);
         updateViewColor();
     }
 
+    /**
+     * Visar en graident färg mellan 2 färger
+     * i vyn
+     */
     public void showGradiantColor() {
         filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithInGaining();
         updateViewColor();
     }
 
+    /**
+     * Visar en slumpad bokstav i vyn
+     */
     public void showRanomChar() {
         filler = getFiller(FILLERTYPE.CHARACTERS);
         model = filler.fillWithRandom();
         updateViewColor();
     }
 
-    public Array7x7 getModel() {
-        return model;
-    }
-    
+
+    /**
+     * Btn click
+     * Visar rinande text på texy som kommer in från vyn
+     * @param texy
+     */
     public void flowText(String texy) {
     	filler = getFiller(FILLERTYPE.CHARACTERS);
     	for(int n = 0; n < texy.length(); n++) {
     		Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));
     		message.add(character);
     	}
-    	model = message.get(0);
-    	updateViewColor();
+
+        //which char in msg
+        shiftCounter =0;
+        //column index
+        shiftArrayIdx = 0;
+        //start timer
     	timer = new Timer();
-    	timer.schedule(new timerTask(), 500, 500);
+    	timer.schedule(new flowTextTimer(), 50, 50);
     	
     }
-    
-    private class timerTask extends TimerTask {
+
+    /**
+     * Rinnande text timer
+     * shiftar Strängen en kolumn i taget
+     * och kallar på att uppdatera vyn
+     */
+    private class flowTextTimer extends TimerTask {
 		@Override
 		public void run() {
-			shift();
+            //start shifting letters
+			shiftString();
 			updateViewColor();
 		}
-    	
+
+
+
     }
 }

@@ -23,9 +23,9 @@ public class ViewWindows extends JPanel {
 	private JPanel pnlButtons;
 	private ColorDisplay colorDisplay;
 	private Controller ctrl;
-	private JButton btnLeft = new JButton("Shift vänster");
-	private JButton btnRigth = new JButton("Shift höger");
-	private JButton btnChar = new JButton("Lägg till char");
+	private JButton btnLeft = new JButton("Shift vÃ¤nster");
+	private JButton btnRigth = new JButton("Shift hÃ¶ger");
+	private JButton btnChar = new JButton("LÃ¤gg till char");
 	private JTextField txtInput = new JTextField();
 
 	public ViewWindows(int background, int grid) {

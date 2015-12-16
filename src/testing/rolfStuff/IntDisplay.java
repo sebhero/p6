@@ -1,4 +1,6 @@
-package roffe.Color;
+package testing.rolfStuff;
+import roffe.Color.Color;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
