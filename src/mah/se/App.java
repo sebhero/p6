@@ -13,7 +13,7 @@ import mah.se.mvc.view.ViewWindows;
 
 /**
  * Start the app.
- * anton
+ * jaja
  * Creates the model and controller and view
  */
 class App {
