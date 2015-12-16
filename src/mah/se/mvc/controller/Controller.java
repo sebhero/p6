@@ -64,26 +64,8 @@ public class Controller {
     }
 
 
-    /**
-     * Add the view to the controller
-     * @param view
-     */
-    public void addView(ViewWindows view) {
-        this.view = view;
-        this.view.setCtrl(this);
-
-    }
-
-    /**
-     * Add the model to the controller.
-     * @param model
-     */
-    public void addModel(Array7x7 model) {
-        this.model = model;
-    }
-
-    /**
-     * Update the view
+     /**
+     * Update the view med Array7x7 av nummer
      */
     private void updateView() {
         view.updateView(model.getAll());
@@ -101,6 +83,11 @@ public class Controller {
 
     }
 
+    /**
+     * Shifta Array7x7 och fyller på med
+     * en rad med röda rutor
+     * @return det som ramlar över
+     */
     public Array7 shiftWithRedColor() {
         Array7 newArray = new Array7(Color.RED);
         System.out.println("shifted color red");
