@@ -123,7 +123,6 @@ public class ViewWindowsWithFlowText extends ViewWindows {
 	 *            matrisen po alla farg element
 	 */
 	public void updateViewColor(int[][] matrix) {
-		// TODO implement
         colorDisplay.setDisplay(matrix);
         colorDisplay.updateDisplay();
 
