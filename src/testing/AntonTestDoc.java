@@ -17,9 +17,13 @@ public class AntonTestDoc {
 			arr.setElement(i, rand.nextInt(10));
 		}
 		
+		Array7 arr2 = new Array7();
+		
 		array.setRow(6, arr);
 		
-		System.out.print(array.toString());
+		arr2 = array.getRow(6);
+		
+		System.out.print(arr2.toString());
 		
 		
 		
