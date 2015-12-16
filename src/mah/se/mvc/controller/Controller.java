@@ -9,7 +9,6 @@ import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
-import mah.se.patterns.strategy.FILLERTYPE;
 import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
@@ -35,6 +34,13 @@ public class Controller {
 		RIGHT,
 		LEFT
 	}
+
+    /**
+     * Väljer vilken filler metod
+     */
+    public enum FILLERTYPE{
+        COLORS, CHARACTERS, NUMBERS
+    }
 
     //vilket håll vi ska rita ut
 	private DIRECTION dir = DIRECTION.LEFT;
