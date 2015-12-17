@@ -268,6 +268,7 @@ public class Controller {
      * Satter en ny rad i modelen.
      */
     public void setRow(int rowPos, int[] newRow) {
+        //todo do test
         model.setRow(rowPos, new Array7(newRow));
     }
 
@@ -276,6 +277,7 @@ public class Controller {
      * Satter en ny kolumn i modelen.
      */
     public void setCol(int colPos, int[] newCol) {
+        //todo do test
         model.setCol(colPos, new Array7(newCol));
     }
 
@@ -285,6 +287,7 @@ public class Controller {
      * Satter ett nytt element i modelen.
      */
     public void setElement(int rowPos, int colPos, int value) {
+        //todo do test
         model.setElement(rowPos, colPos, value);
     }
 
@@ -293,6 +296,7 @@ public class Controller {
      * Hamtar rad i modelen.
      */
     public int[] getRow(int rowPos) {
+        //todo do test
         return model.getRow(rowPos).getAll();
     }
 
@@ -301,6 +305,7 @@ public class Controller {
      * Hamtar kolumn i modelen.
      */
     public int[] getCol(int colPos) {
+        //todo do test
         return model.getCol(colPos).getAll();
     }
 
@@ -309,6 +314,7 @@ public class Controller {
      * Hamtar element i modelen.
      */
     public int getElement(int rowPos, int colPos) {
+        //todo do test
         return model.getElement(rowPos,colPos);
     }
 
