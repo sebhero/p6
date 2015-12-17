@@ -24,7 +24,7 @@ public class ViewWindows extends JPanel {
 	private ColorDisplay colorDisplay;
 	private Controller ctrl;
 	private JButton btnLeft = new JButton("Shift vänster");
-	private JButton btnRigth = new JButton("Shift höger");
+	private JButton btnRigth = new JButton("flow text");
 	private JButton btnChar = new JButton("Lägg till char");
 	private JTextField txtInput = new JTextField();
 
@@ -33,26 +33,43 @@ public class ViewWindows extends JPanel {
 	}
 	
 	public ViewWindows(int verticalPages, int horizontalPages, int background, int grid) {
-		colorDisplay = new ColorDisplay(verticalPages, horizontalPages, background, grid);
+
+		//colorDisplay = new ColorDisplay(verticalPages, horizontalPages, background, grid);
+		colorDisplay = new ColorDisplay(background, grid);
+		colorDisplay .setPreferredSize(new Dimension(300, 350));
+		colorDisplay .setSize(100, 120);
 		pnlDisplay = new JPanel();
 		pnlButtons = new JPanel();
-		
+
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(400, 400));
 
 		pnlDisplay.setPreferredSize(new Dimension(400, 300));
 		pnlDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		pnlDisplay.add(colorDisplay);
-		
+
 		pnlButtons.setPreferredSize(new Dimension(400, 40));
 		pnlButtons.setLayout(new GridLayout(0, 4));
-		
+
 		pnlButtons.add(txtInput);
 		pnlButtons.add(btnChar);
 		pnlButtons.add(btnLeft);
 		pnlButtons.add(btnRigth);
 		add(pnlButtons, BorderLayout.SOUTH);
 		add(pnlDisplay, BorderLayout.CENTER);
+
+		btnChar.addActionListener(ae -> {
+			ctrl.showRanomChar();
+		});
+
+		btnLeft.addActionListener(ae -> {
+			ctrl.setDirection(Controller.DIRECTION.LEFT);
+			ctrl.shiftWithRedColor();
+		});
+
+		btnRigth.addActionListener(ae -> {
+			ctrl.flowText("HEJ");
+		});
 	}
 
 	/**
@@ -62,7 +79,9 @@ public class ViewWindows extends JPanel {
 	 *            matrisen po alla farg element
 	 */
 	public void updateViewColor(int[][] matrix) {
-		// TODO implement
+
+		colorDisplay.setDisplay(matrix);
+		colorDisplay.updateDisplay();
 	}
 
 	/**

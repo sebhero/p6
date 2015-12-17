@@ -262,6 +262,56 @@ public class Controller {
     	
     }
 
+
+    /**
+     * Btn click
+     * Satter en ny rad i modelen.
+     */
+    public void setRow(int rowPos, int[] newRow) {
+        model.setRow(rowPos, new Array7(newRow));
+    }
+
+    /**
+     * Btn click
+     * Satter en ny kolumn i modelen.
+     */
+    public void setCol(int colPos, int[] newCol) {
+        model.setCol(colPos, new Array7(newCol));
+    }
+
+
+    /**
+     * Btn click
+     * Satter ett nytt element i modelen.
+     */
+    public void setElement(int rowPos, int colPos, int value) {
+        model.setElement(rowPos, colPos, value);
+    }
+
+    /**
+     * Btn click
+     * Hamtar rad i modelen.
+     */
+    public int[] getRow(int rowPos) {
+        return model.getRow(rowPos).getAll();
+    }
+
+    /**
+     * Btn click
+     * Hamtar kolumn i modelen.
+     */
+    public int[] getCol(int colPos) {
+        return model.getCol(colPos).getAll();
+    }
+
+    /**
+     * Btn click
+     * Hamtar element i modelen.
+     */
+    public int getElement(int rowPos, int colPos) {
+        return model.getElement(rowPos,colPos);
+    }
+
     /**
      * Rinnande text timer
      * shiftar Strängen en kolumn i taget
@@ -274,8 +324,7 @@ public class Controller {
 			shiftString();
 			updateViewColor();
 		}
-
-
-
     }
+
+
 }

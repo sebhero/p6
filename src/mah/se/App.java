@@ -23,9 +23,9 @@ class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ViewWindows view = new ViewWindows(Color.BLACK, Color.GRAY);
+//                ViewWindows view = new ViewWindows(Color.BLACK, Color.GRAY);
                 //with FlowText
-//                ViewWindowsWithFlowText view = new ViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
+                ViewWindowsWithFlowText view = new ViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
                 JFrame frame = new JFrame();
