@@ -31,7 +31,7 @@ public class Controller implements controllerImpl{
     private int shiftArrayIdx;
 
     //håller koll på vilket håll vi shiftar
-    public static enum DIRECTION {
+    public enum DIRECTION {
 		RIGHT,
 		LEFT,
 		UP,
@@ -262,9 +262,41 @@ public class Controller implements controllerImpl{
         //start timer
     	timer = new Timer();
     	timer.schedule(new flowTextTimer(), 50, 50);
-    	
     }
 
+    /**
+     * Pausar timern
+     */
+    public void pause() {
+        timer.cancel();
+    }
+
+    /**
+     * Startar timern igen
+     */
+    public void resume() {
+        timer = new Timer();    //Då shiftcounter och shiftArrayIdx inte ändras kan man bara göra en ny timer
+        timer.schedule(new flowTextTimer(), 50, 50);
+    }
+
+    /**
+     * Skiftar bara ett steg åt dir
+     * @param dir vilket håll det ska skiftas åt
+     */
+    public void simpleShift(DIRECTION dir) {
+        DIRECTION currentDir = this.dir;
+        this.dir = dir;
+        shiftString();
+        this.dir = currentDir;
+    }
+
+    /**
+     * Returnerar nuvarande direction
+     * @return dir
+     */
+    public DIRECTION getDirection() {
+        return dir;
+    }
 
     /**
      * Btn click
