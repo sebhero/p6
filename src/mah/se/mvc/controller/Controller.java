@@ -33,7 +33,9 @@ public class Controller {
     //håller koll på vilket håll vi shiftar
     public static enum DIRECTION {
 		RIGHT,
-		LEFT
+		LEFT,
+		UP,
+		DOWN
 	}
 
     /**

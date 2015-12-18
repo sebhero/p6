@@ -1,4 +1,4 @@
-package testHelpers;
+package test.testHelpers;
 
 import java.lang.reflect.Field;
 
