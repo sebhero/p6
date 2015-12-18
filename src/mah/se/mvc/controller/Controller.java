@@ -23,7 +23,7 @@ import roffe.Color.Color;
 /**
  * Kontroller styr kommunikationen mellan Vyn och modelen.
  */
-public class Controller {
+public class Controller implements controllerImpl{
 
     //för flowtext hålla kolla på vilket tecken i string
     private int shiftCounter;
