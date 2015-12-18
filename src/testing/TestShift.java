@@ -26,5 +26,14 @@ public class TestShift {
 		System.out.println(array.toString());
 		a.shiftLeft(array, shift);
 		System.out.println(array.toString());
+		
+		shift = a.shiftUp(array, new Array7());
+		System.out.println(array.toString());
+		a.shiftDown(array, shift);
+		System.out.println(array.toString());
+		a.shiftDown(array, new Array7());
+		System.out.println(array.toString());
+		a.shiftUp(array, shift);
+		System.out.println(array.toString());
 	}
 }
