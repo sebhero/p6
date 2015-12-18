@@ -9,6 +9,7 @@ import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
+import mah.se.mvc.view.viewImpl;
 import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
@@ -48,7 +49,7 @@ public class Controller {
     private final ShiftArray shifter;
     private FillAlgorithm filler;
     private Array7x7 model;
-    private ViewWindows view;
+    private viewImpl view;
     private ArrayList<Array7x7> message = new ArrayList<>();
     private Timer timer;
     
