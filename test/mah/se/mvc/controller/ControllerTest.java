@@ -15,6 +15,7 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 import static testHelpers.TestHelper.getPrivateField;
 
+
 public class ControllerTest {
 
     Array7x7 model;
