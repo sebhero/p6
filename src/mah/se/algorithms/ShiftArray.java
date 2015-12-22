@@ -29,13 +29,37 @@ public class ShiftArray{
 		model.setCol(0, array7);
 		return array;
 	}
+	public Array7 shiftUp(Array7x7 model, Array7 array7){
+		Array7 array = new Array7();
+		array = model.getRow(0);//array gets the values of the first column
+		for(int row = 0; row<model.getLength()-1; row++){
+			model.setRow(row, model.getRow(row+1));
+			//Current column gets thevalue of the next column
+		}
+		model.setRow(6, array7); // last column of model gets the value from array7 in param
+
+		return array;
+	}
+	public Array7 shiftDown(Array7x7 model, Array7 array7 ){
+		Array7 array = new Array7();
+		array = model.getRow(6);
+		for(int row = model.getLength()-1; row>0; row--){
+			model.setRow(row, model.getRow(row-1));
+		}
+		model.setRow(0, array7);
+		return array;
+	}
 	public Array7 shift(Array7x7 model, Array7 array7, Controller.DIRECTION dir) {
 		switch(dir) {
-		case LEFT:
-			return shiftLeft(model, array7);
-		case RIGHT: 
-		default:
+		case RIGHT:
 			return shiftRight(model, array7);
+		case UP:
+			return shiftUp(model, array7);
+		case DOWN:
+			return shiftDown(model,array7);
+		case LEFT:
+		default:
+			return shiftLeft(model, array7);
 		}
 		
 	}
