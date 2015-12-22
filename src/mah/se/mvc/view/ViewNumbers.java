@@ -113,6 +113,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	}
 
+
 	/**
 	 * Inre klass fï¿½r att det ska hï¿½nda nï¿½got nï¿½r man trycker pï¿½
 	 * knapparna
@@ -130,7 +131,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if (e.getSource() == btnColRead) {
-				ctrl.getCol(getChoice("Välj Columb"));
+				ctrl.getCol(getChoice("Vï¿½lj Columb"));
 			}
 			if (e.getSource() == btnColWrite) {
 

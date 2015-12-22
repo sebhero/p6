@@ -12,5 +12,6 @@ public interface ViewImpl {
 
     void updateView(int[][] all);
 
+
     void updateViewColor(int[][] all);
 }

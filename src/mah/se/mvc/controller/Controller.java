@@ -16,6 +16,8 @@ import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
 import roffe.Color.Color;
 
+import javax.swing.text.View;
+
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  */
@@ -117,16 +119,36 @@ public class Controller implements controllerImpl{
         shift(nextArray);
 
         //update index to shift
-        shiftArrayIdx++;
-        if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
-            shiftCounter++;
-            shiftArrayIdx=0;
-            if (shiftCounter >= message.size()) {
-                //done flowing
-                message.clear();
-                timer.cancel();
+
+        if (dir == DIRECTION.LEFT) {
+            shiftArrayIdx++;
+            if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
+                shiftCounter++;
+                shiftArrayIdx=0;
+
+                if (shiftCounter >= message.size()) {
+                    //done flowing
+                    message.clear();
+                    timer.cancel();
+                }
             }
         }
+        if (dir == DIRECTION.RIGHT) {
+            shiftArrayIdx--;
+            //begin next char
+            if (shiftArrayIdx < 0) {
+                shiftCounter++;
+                shiftArrayIdx=6;
+
+                if (shiftCounter >= message.size()) {
+                    //done flowing
+                    message.clear();
+                    timer.cancel();
+                }
+            }
+        }
+
+
     }
 
     /**
@@ -258,7 +280,14 @@ public class Controller implements controllerImpl{
         //which char in msg
         shiftCounter =0;
         //column index
-        shiftArrayIdx = 0;
+        if (dir == DIRECTION.LEFT) {
+            shiftArrayIdx = 0;
+
+        }
+        if(dir == DIRECTION.RIGHT)
+        {
+            shiftArrayIdx = 6;
+        }
         //start timer
     	timer = new Timer();
     	timer.schedule(new flowTextTimer(), 50, 50);

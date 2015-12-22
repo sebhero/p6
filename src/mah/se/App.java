@@ -5,6 +5,8 @@ import javax.swing.SwingUtilities;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.view.ViewImpl;
+import mah.se.mvc.view.ViewNumbers;
 import mah.se.mvc.view.ViewWindows;
 import mah.se.mvc.view.ViewWindowsWithFlowText;
 import roffe.Color.Color;
@@ -26,6 +28,7 @@ class App {
 //                ViewWindows view = new ViewWindows(Color.BLACK, Color.GRAY);
                 //with FlowText
                 ViewWindowsWithFlowText view = new ViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
+//                ViewImpl view = new ViewNumbers();
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
                 JFrame frame = new JFrame();

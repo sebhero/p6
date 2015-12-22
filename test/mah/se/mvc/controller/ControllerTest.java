@@ -13,8 +13,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
-
-import static testHelper.TestHelper.getPrivateField;
+import static testHelpers.TestHelper.getPrivateField;
 
 
 public class ControllerTest {

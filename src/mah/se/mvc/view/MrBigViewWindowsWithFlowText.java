@@ -135,11 +135,11 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     }
 
-    //fattar inte riktigt vad denna ska göra
     @Override
     public void updateViewColor(int[][] all) {
 
     }
+
 
     private class ButtonListener implements ActionListener {
 
