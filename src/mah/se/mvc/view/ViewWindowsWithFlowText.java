@@ -12,7 +12,7 @@ import java.awt.*;
  * Vyn visar i swing/windows en representation av modelen
  * manipuleras modeln via kontrollern och dess hjälpklasser
  */
-public class ViewWindowsWithFlowText extends ViewWindows {
+public class ViewWindowsWithFlowText extends JPanel implements ViewImpl{
     //testing
     private final JPanel pnlButtonsExtra;
 
@@ -34,7 +34,6 @@ public class ViewWindowsWithFlowText extends ViewWindows {
 	}
 
 	public ViewWindowsWithFlowText(int verticalPages, int horizontalPages, int background, int grid) {
-        super(verticalPages,  horizontalPages,  background,  grid);
         colorDisplay = new ColorDisplay(verticalPages, horizontalPages, background, grid);
 		pnlDisplay = new JPanel();
 		pnlButtons = new JPanel();

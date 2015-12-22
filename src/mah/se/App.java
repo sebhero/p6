@@ -11,6 +11,8 @@ import mah.se.mvc.view.ViewWindows;
 import mah.se.mvc.view.ViewWindowsWithFlowText;
 import roffe.Color.Color;
 
+import java.awt.*;
+
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
  */
@@ -25,15 +27,15 @@ class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-//                ViewWindows view = new ViewWindows(Color.BLACK, Color.GRAY);
                 //with FlowText
-                ViewWindowsWithFlowText view = new ViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
+                ViewImpl view = new ViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
+                //With numbers
 //                ViewImpl view = new ViewNumbers();
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add(view);
+                frame.add((Component) view);
                 frame.pack();
                 frame.setVisible(true);
             }
