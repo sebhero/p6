@@ -17,6 +17,11 @@ import javax.swing.JTextField;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 
+/**
+ * 
+ * @author jonatan
+ *
+ */
 public class ViewNumbers extends JPanel implements viewImpl{
 	private Controller ctrl;
 	private JPanel eastPanel = new JPanel();
