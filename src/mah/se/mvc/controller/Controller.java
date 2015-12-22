@@ -8,8 +8,7 @@ import java.util.TimerTask;
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.ViewWindows;
-import mah.se.mvc.view.viewImpl;
+import mah.se.mvc.view.ViewImpl;
 import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
@@ -29,6 +28,10 @@ public class Controller implements controllerImpl{
     private int shiftCounter;
     //för flowtext håller koll på vilken kolumn vi är i tecknet
     private int shiftArrayIdx;
+
+    public DIRECTION getDirection() {
+        return dir;
+    }
 
     //håller koll på vilket håll vi shiftar
     public enum DIRECTION {
@@ -223,16 +226,17 @@ public class Controller implements controllerImpl{
     public void showRandomColor() {
         filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithRandom();
-        updateViewColor();
+        updateView();
     }
 
     /**
+     * @deprecated use updateView()
      * uppdatera vyn med nya Array7x7
      * av typen färger
      */
-    private void updateViewColor() {
-        view.updateViewColor(model.getAll());
-    }
+//    private void updateViewColor() {
+//        view.updateViewColor(model.getAll());
+//    }
 
     /**
      * Visa en färg i på hela Array7x7 i vyn
@@ -240,7 +244,7 @@ public class Controller implements controllerImpl{
     public void showSameColor(int color) {
         filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithOneType(color);
-        updateViewColor();
+        updateView();
     }
 
     /**
@@ -250,7 +254,7 @@ public class Controller implements controllerImpl{
     public void showGradiantColor() {
         filler = getFiller(FILLERTYPE.COLORS);
         model = filler.fillWithInGaining();
-        updateViewColor();
+        updateView();
     }
 
     /**
@@ -259,7 +263,7 @@ public class Controller implements controllerImpl{
     public void showRanomChar() {
         filler = getFiller(FILLERTYPE.CHARACTERS);
         model = filler.fillWithRandom();
-        updateViewColor();
+        updateView();
     }
 
 
@@ -380,23 +384,9 @@ public class Controller implements controllerImpl{
      * Hamtar element i modelen.
      */
     public int getElement(int rowPos, int colPos) {
-        //todo do test
         return model.getElement(rowPos,colPos);
     }
 
-    /**
-     * Rinnande text timer
-     * shiftar Strängen en kolumn i taget
-     * och kallar på att uppdatera vyn
-     */
-    private class flowTextTimer extends TimerTask {
-		@Override
-		public void run() {
-            //start shifting letters
-			shiftString();
-			updateViewColor();
-		}
-    }
 
 
 }

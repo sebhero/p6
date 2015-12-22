@@ -136,7 +136,8 @@ public class ViewWindowsWithFlowText extends ViewWindows {
 	 *            matris med siffror
 	 */
 	public void updateView(int[][] matrix) {
-		// TODO implement
+        colorDisplay.setDisplay(matrix);
+        colorDisplay.updateDisplay();
 	}
 
 	/**

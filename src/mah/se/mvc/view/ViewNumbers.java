@@ -108,10 +108,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		}
 	}
 
-	@Override
-	public void updateViewColor(int[][] all) {
 
-	}
 
 
 	/**
