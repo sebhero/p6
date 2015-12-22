@@ -272,6 +272,7 @@ public class Controller implements controllerImpl{
      */
     public void flowText(String texy) {
     	filler = getFiller(FILLERTYPE.CHARACTERS);
+        texy = texy.toUpperCase();
     	for(int n = 0; n < texy.length(); n++) {
     		Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));
     		message.add(character);
