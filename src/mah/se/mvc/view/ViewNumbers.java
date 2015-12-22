@@ -22,7 +22,7 @@ import mah.se.mvc.model.Array7x7;
  * @author jonatan
  *
  */
-public class ViewNumbers extends JPanel implements viewImpl{
+public class ViewNumbers extends JPanel implements ViewImpl{
 	private Controller ctrl;
 	private JPanel eastPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
@@ -31,10 +31,10 @@ public class ViewNumbers extends JPanel implements viewImpl{
 	private JLabel[][] array2D = new JLabel[7][7];
 	private JTextField[] arrayInputWest = new JTextField[7];
 	private JTextField[] arrayInputSouth = new JTextField[7];
-	private JButton btnColRead = new JButton("Läs Col");
+	private JButton btnColRead = new JButton("Lï¿½s Col");
 	private JButton btnColWrite = new JButton("Skriv Col");
 	private JButton btnInputColNbr = new JButton("Input col nr");
-	private JButton btnRowRead = new JButton("Läs Rad");
+	private JButton btnRowRead = new JButton("Lï¿½s Rad");
 	private JButton btnRowWrite = new JButton("Skriv Rad");
 	private JButton btnInputRowNbr = new JButton("Input Rad nr");
 	
@@ -93,9 +93,9 @@ public class ViewNumbers extends JPanel implements viewImpl{
 		add(eastPanel, BorderLayout.EAST);
 	}
 
-	// TODO Kontrollera om det behövs mer metoder?
+	// TODO Kontrollera om det behï¿½vs mer metoder?
 	/**
-	 * Metoden kommer att måla om bilden till ett nytt värde
+	 * Metoden kommer att mï¿½la om bilden till ett nytt vï¿½rde
 	 * 
 	 * @param arr
 	 */
@@ -115,8 +115,23 @@ public class ViewNumbers extends JPanel implements viewImpl{
 		JOptionPane.showMessageDialog(null, vn);
 	}
 
+	@Override
+	public void setCtrl(Controller ctrl) {
+
+	}
+
+	@Override
+	public void updateView(int[][] all) {
+
+	}
+
+	@Override
+	public void updateViewColor(int[][] all) {
+
+	}
+
 	/**
-	 * Inre klass för att det ska hända något när man trycker på knapparna
+	 * Inre klass fï¿½r att det ska hï¿½nda nï¿½got nï¿½r man trycker pï¿½ knapparna
 	 * 
 	 * @author jonatan
 	 *
