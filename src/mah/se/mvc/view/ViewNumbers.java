@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import jdk.nashorn.internal.scripts.JO;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 
@@ -22,7 +23,8 @@ import mah.se.mvc.model.Array7x7;
  * @author jonatan
  *
  */
-public class ViewNumbers extends JPanel implements ViewImpl{
+public class ViewNumbers extends JPanel implements ViewImpl {
+
 	private Controller ctrl;
 	private JPanel eastPanel = new JPanel();
 	private JPanel southPanel = new JPanel();
@@ -37,23 +39,20 @@ public class ViewNumbers extends JPanel implements ViewImpl{
 	private JButton btnRowRead = new JButton("Lï¿½s Rad");
 	private JButton btnRowWrite = new JButton("Skriv Rad");
 	private JButton btnInputRowNbr = new JButton("Input Rad nr");
-	
-	public ViewNumbers(Array7x7 array) {
+
+	public ViewNumbers() {
 		this.setPreferredSize(new Dimension(500, 550));
 		this.setLayout(new BorderLayout());
 		ViewNumberListener listener = new ViewNumberListener();
 
-		
 		centerPanel.setPreferredSize(new Dimension(400, 400));
 		centerPanel.setLayout(new GridLayout(7, 7, 2, 2));
 		centerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
 
 		for (int i = 0; i < array2D.length; i++) {
 			for (int j = 0; j < array2D[i].length; j++) {
 				array2D[i][j] = new JLabel("");
 				array2D[i][j].setBackground(Color.BLUE);
-				array2D[i][j].setText("" + array.getElement(i, j));
 				array2D[i][j].setOpaque(true);
 				centerPanel.add(array2D[i][j]);
 			}
@@ -94,35 +93,19 @@ public class ViewNumbers extends JPanel implements ViewImpl{
 	}
 
 	// TODO Kontrollera om det behï¿½vs mer metoder?
-	/**
-	 * Metoden kommer att mï¿½la om bilden till ett nytt vï¿½rde
-	 * 
-	 * @param arr
-	 */
-	public void rePaint(Array7x7 arr) {
-
-		for (int i = 0; i < array2D.length; i++) {
-			for (int j = 0; j < array2D[i].length; j++) {
-				array2D[i][j].setText("" + arr.getElement(i, j));
-			}
-		}
-	}
-
-	// TODO ta bort main
-	public static void main(String[] args) {
-		Array7x7 arr = new Array7x7();
-		ViewNumbers vn = new ViewNumbers(arr);
-		JOptionPane.showMessageDialog(null, vn);
-	}
 
 	@Override
 	public void setCtrl(Controller ctrl) {
-
+		this.ctrl = ctrl;
 	}
 
 	@Override
 	public void updateView(int[][] all) {
-
+		for (int i = 0; i < all.length; i++) {
+			for (int j = 0; j < all[i].length; j++) {
+				array2D[i][j].setText(String.valueOf(all[i][j]));
+			}
+		}
 	}
 
 	@Override
@@ -131,17 +114,23 @@ public class ViewNumbers extends JPanel implements ViewImpl{
 	}
 
 	/**
-	 * Inre klass fï¿½r att det ska hï¿½nda nï¿½got nï¿½r man trycker pï¿½ knapparna
+	 * Inre klass fï¿½r att det ska hï¿½nda nï¿½got nï¿½r man trycker pï¿½
+	 * knapparna
 	 * 
 	 * @author jonatan
 	 *
 	 */
 	private class ViewNumberListener implements ActionListener {
 
+		public int getChoice(String res){
+			int choice = Integer.parseInt(JOptionPane.showInputDialog(res));
+			return choice;
+		}
+		
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if (e.getSource() == btnColRead) {
-
+				ctrl.getCol(getChoice("Välj Columb"));
 			}
 			if (e.getSource() == btnColWrite) {
 

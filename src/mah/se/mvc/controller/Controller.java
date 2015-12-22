@@ -62,7 +62,7 @@ public class Controller implements controllerImpl{
      * @param model the Array7x7 model
      * @param view the view we are displaying the matrix on
      */
-    public Controller(Array7x7 model, ViewWindows view) {
+    public Controller(Array7x7 model, ViewImpl view) {
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
