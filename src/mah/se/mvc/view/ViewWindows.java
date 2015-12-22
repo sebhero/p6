@@ -18,7 +18,7 @@ import roffe.Color.ColorDisplay;
  * @author Jonatan Fridsten
  *
  */
-public class ViewWindows extends JPanel implements viewImpl {
+public class ViewWindows extends JPanel implements ViewImpl {
 	private JPanel pnlDisplay;
 	private JPanel pnlButtons;
 	private ColorDisplay colorDisplay;

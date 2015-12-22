@@ -81,15 +81,16 @@ public class ViewWindowsWithFlowText extends ViewWindows {
                 txt = "?";
             }
             ctrl.setDirection(Controller.DIRECTION.RIGHT);
-            Array7 leftOver = ctrl.shiftWithRedColor();
-            txtInput.setText(leftOver.toString());
+            ctrl.flowText(txtInput.getText());
+            //txtInput.setText(leftOver.toString());
         });
 
         btnLeft.addActionListener(ae -> {
             //shifta allt till vänster och fyller på med röd färg
             ctrl.setDirection(Controller.DIRECTION.LEFT);
-            Array7 leftOver = ctrl.shiftWithRedColor();
-            txtInput.setText(leftOver.toString());
+            ctrl.flowText(txtInput.getText());
+//            Array7 leftOver = ctrl.shiftWithRedColor();
+            //txtInput.setText(leftOver.toString());
         });
 
         btnChar.addActionListener(ae ->{

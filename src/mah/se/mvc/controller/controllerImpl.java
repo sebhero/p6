@@ -1,20 +1,6 @@
 package mah.se.mvc.controller;
 
-import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
-import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.ViewWindows;
-import mah.se.mvc.view.viewImpl;
-import mah.se.patterns.strategy.FillAlgorithm;
-import mah.se.patterns.strategy.FillCharacter;
-import mah.se.patterns.strategy.FillColor;
-import mah.se.patterns.strategy.FillNumbers;
-import roffe.Color.Color;
-
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by seb on 2015-12-18.
