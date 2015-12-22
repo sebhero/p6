@@ -5,7 +5,7 @@ import mah.se.mvc.controller.Controller;
 /**
  * Created by seb on 2015-12-18.
  */
-public interface viewImpl {
+public interface ViewImpl {
 
     void setCtrl(Controller ctrl);
 
