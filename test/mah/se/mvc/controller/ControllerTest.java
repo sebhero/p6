@@ -6,8 +6,11 @@ import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
 import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillNumbers;
+
 import org.junit.Test;
+
 import roffe.Color.Color;
+import testHelpers.TestHelper;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -104,7 +107,7 @@ public class ControllerTest {
     public void testShiftWithRedColor() throws Exception {
         Controller testCtrl = new Controller(new Array7x7(),new ViewWindows(1,1));
         testCtrl.setDirection(Controller.DIRECTION.RIGHT);
-        Array7x7 model =getPrivateField("model", testCtrl);
+        Array7x7 model =TestHelper.getPrivateField("model", testCtrl);
 
         Array7 returnArr = testCtrl.shiftWithRedColor();
 
@@ -134,7 +137,7 @@ public class ControllerTest {
     public void testShowNumbers1_7() throws Exception {
         Controller testCtrl = new Controller(new Array7x7(),new ViewWindows(1,1));
         testCtrl.showNumbers1_7();
-        Array7x7 model =getPrivateField("model", testCtrl);
+        Array7x7 model =TestHelper.getPrivateField("model", testCtrl);
 
         //exp
         int[][] expect ={
@@ -159,7 +162,7 @@ public class ControllerTest {
     public void testShowSameColor() throws Exception {
         Controller testCtrl = new Controller(new Array7x7(),new ViewWindows(1,1));
         testCtrl.showSameColor(Color.BLUE);
-        Array7x7 model =getPrivateField("model", testCtrl);
+        Array7x7 model =TestHelper.getPrivateField("model", testCtrl);
 
         //exp
         int[][] expect ={
