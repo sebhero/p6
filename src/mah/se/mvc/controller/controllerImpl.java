@@ -8,16 +8,6 @@ import mah.se.mvc.model.Array7;
 public interface controllerImpl {
 
         /**
-
-
-
-        /**
-         * Btn call from view
-         * Shift right the matrix
-         */
-        public Array7 shift(Array7 newArray);
-
-        /**
          * Shifta Array7x7 och fyller på med
          * en rad med röda rutor
          * @return det som ramlar över
@@ -31,33 +21,7 @@ public interface controllerImpl {
          */
         public void setDirection(Controller.DIRECTION dir);
 
-        /**
-         * btn click
-         * Slumpar antal siffror och ritar ut den i vyn
-         */
-        public void showRandom();
-
-        /**
-         * btn click
-         * Ritar ut 1-7 i vyn
-         * 1234567
-         * 1234567
-         * 1234567
-         * 1234567
-         * 1234567
-         * 1234567
-         * 1234567
-         */
-        public void showNumbers1_7();
-
-        /**
-         * btn click from view
-         * Slumpar ett tal och fyller Array7x7 med detta tal
-         * därefter visar den i vyn
-         */
-        public void showRandomSame();
-
-        /**
+         /**
          * btn click
          * Visa slumpade färger i vyn
          */
@@ -89,41 +53,7 @@ public interface controllerImpl {
 
 
 
-        /**
-         * Btn click
-         * Satter en ny rad i modelen.
-         */
-        public void setRow(int rowPos, int[] newRow);
 
-        /**
-         * Btn click
-         * Satter en ny kolumn i modelen.
-         */
-        public void setCol(int colPos, int[] newCol);
-
-        /**
-         * Btn click
-         * Satter ett nytt element i modelen.
-         */
-        public void setElement(int rowPos, int colPos, int value);
-
-        /**
-         * Btn click
-         * Hamtar rad i modelen.
-         */
-        public int[] getRow(int rowPos);
-
-        /**
-         * Btn click
-         * Hamtar kolumn i modelen.
-         */
-        public int[] getCol(int colPos);
-
-        /**
-         * Btn click
-         * Hamtar element i modelen.
-         */
-        public int getElement(int rowPos, int colPos);
 
 
 }

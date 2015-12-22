@@ -28,6 +28,7 @@ public class ViewWindows extends JPanel implements ViewImpl {
 	private JButton btnChar = new JButton("Lägg till char");
 	private JTextField txtInput = new JTextField();
 
+
 	public ViewWindows(int background, int grid) {
 		this(1, 1, background, grid);
 	}
@@ -80,8 +81,7 @@ public class ViewWindows extends JPanel implements ViewImpl {
 	 */
 	public void updateViewColor(int[][] matrix) {
 
-		colorDisplay.setDisplay(matrix);
-		colorDisplay.updateDisplay();
+
 	}
 
 	/**
@@ -91,10 +91,12 @@ public class ViewWindows extends JPanel implements ViewImpl {
 	 *            matris med siffror
 	 */
 	public void updateView(int[][] matrix) {
-		// TODO implement
+        colorDisplay.setDisplay(matrix);
+        colorDisplay.updateDisplay();
 	}
 
-	/**
+
+    /**
 	 * Satter controller till viewen som styr viewn. den skoter all
 	 * kommunikation med array7x7. hanterar knapptryckningar m.m.
 	 * 

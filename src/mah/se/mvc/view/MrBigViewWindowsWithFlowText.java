@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Gustaf on 18/12/2015.
  */
-public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
+public class MrBigViewWindowsWithFlowText extends JPanel implements viewImpl {
 
     public enum STATE {
         RUNNING,
@@ -134,12 +134,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     public void updateView(int[][] all) {
 
     }
-
-    @Override
-    public void updateViewColor(int[][] all) {
-
-    }
-
 
     private class ButtonListener implements ActionListener {
 

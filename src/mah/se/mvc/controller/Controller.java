@@ -9,14 +9,12 @@ import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewWindows;
-import mah.se.mvc.view.ViewImpl;
+import mah.se.mvc.view.viewImpl;
 import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
 import roffe.Color.Color;
-
-import javax.swing.text.View;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -77,7 +75,7 @@ public class Controller implements controllerImpl{
      /**
      * Update the view med Array7x7 av nummer
      */
-    public void updateView() {
+    private void updateView() {
         view.updateView(model.getAll());
     }
 
@@ -101,7 +99,7 @@ public class Controller implements controllerImpl{
     public Array7 shiftWithRedColor() {
         Array7 newArray = new Array7(Color.RED);
         newArray = shift(newArray);
-        updateViewColor();
+        updateView();
         return newArray;
     }
 
@@ -295,6 +293,20 @@ public class Controller implements controllerImpl{
     }
 
     /**
+     * Rinnande text timer
+     * shiftar Strängen en kolumn i taget
+     * och kallar på att uppdatera vyn
+     */
+    private class flowTextTimer extends TimerTask {
+        @Override
+        public void run() {
+            //start shifting letters
+            shiftString();
+            updateView();
+        }
+    }
+
+    /**
      * Pausar timern
      */
     public void pause() {
@@ -320,20 +332,13 @@ public class Controller implements controllerImpl{
         this.dir = currentDir;
     }
 
-    /**
-     * Returnerar nuvarande direction
-     * @return dir
-     */
-    public DIRECTION getDirection() {
-        return dir;
-    }
+
 
     /**
      * Btn click
      * Satter en ny rad i modelen.
      */
     public void setRow(int rowPos, int[] newRow) {
-        //todo do test
         model.setRow(rowPos, new Array7(newRow));
     }
 
@@ -342,7 +347,6 @@ public class Controller implements controllerImpl{
      * Satter en ny kolumn i modelen.
      */
     public void setCol(int colPos, int[] newCol) {
-        //todo do test
         model.setCol(colPos, new Array7(newCol));
     }
 
@@ -352,7 +356,6 @@ public class Controller implements controllerImpl{
      * Satter ett nytt element i modelen.
      */
     public void setElement(int rowPos, int colPos, int value) {
-        //todo do test
         model.setElement(rowPos, colPos, value);
     }
 
@@ -361,7 +364,6 @@ public class Controller implements controllerImpl{
      * Hamtar rad i modelen.
      */
     public int[] getRow(int rowPos) {
-        //todo do test
         return model.getRow(rowPos).getAll();
     }
 
@@ -370,7 +372,6 @@ public class Controller implements controllerImpl{
      * Hamtar kolumn i modelen.
      */
     public int[] getCol(int colPos) {
-        //todo do test
         return model.getCol(colPos).getAll();
     }
 
