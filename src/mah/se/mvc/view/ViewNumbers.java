@@ -14,9 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import jdk.nashorn.internal.scripts.JO;
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.Array7x7;
 
 /**
  * 
@@ -148,4 +146,5 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		}
 
 	}
+
 }

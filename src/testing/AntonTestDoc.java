@@ -12,19 +12,13 @@ public class AntonTestDoc {
 		Array7 arr = new Array7();
 		
 		Random rand = new Random();
-		
-		for(int i = 0; i<arr.getLength(); i++) {
-			arr.setElement(i, rand.nextInt(10));
+		for(int i=0; i<arr.getLength(); i++) {
+		arr.setElement(i, rand.nextInt(10));
 		}
 		
-		Array7 arr2 = new Array7();
+		array.setCol(0, arr);
 		
-		array.setRow(6, arr);
-		
-		arr2 = array.getRow(6);
-		
-		System.out.print(arr2.toString());
-		
+		System.out.print(array.toString());
 		
 		
 	}

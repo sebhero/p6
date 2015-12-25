@@ -107,4 +107,6 @@ public class ViewWindows extends JPanel implements ViewImpl {
 		this.ctrl = ctrl;
 	}
 
+
+
 }
