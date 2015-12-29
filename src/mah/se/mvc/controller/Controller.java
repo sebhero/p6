@@ -378,6 +378,7 @@ public class Controller implements controllerImpl{
      */
     public void setRow(int rowPos, int[] newRow) {
         model.setRow(rowPos, new Array7(newRow));
+        updateView();
     }
 
     /**
@@ -386,6 +387,7 @@ public class Controller implements controllerImpl{
      */
     public void setCol(int colPos, int[] newCol) {
         model.setCol(colPos, new Array7(newCol));
+        updateView();
     }
 
 
@@ -394,7 +396,9 @@ public class Controller implements controllerImpl{
      * Satter ett nytt element i modelen.
      */
     public void setElement(int rowPos, int colPos, int value) {
+
         model.setElement(rowPos, colPos, value);
+        updateView();
     }
 
     /**
