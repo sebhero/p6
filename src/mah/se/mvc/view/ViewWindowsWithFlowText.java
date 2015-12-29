@@ -20,8 +20,12 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl{
 	private JPanel pnlButtons;
 	private ColorDisplay colorDisplay;
 	private Controller ctrl;
+	//Buttons that controll the direction of the shift
 	private JButton btnLeft = new JButton("Shift vänster");
 	private JButton btnRigth = new JButton("Shift höger");
+	private JButton btnUp = new JButton("Shift upp");
+	private JButton btnDown = new JButton("Shift ner");
+	
 	private JButton btnChar = new JButton("Lägg till char");
 
     private JButton btnFillColor = new JButton("Fyll med slumpfärger");
@@ -44,7 +48,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl{
         pnlButtonsExtra.add(btnFlowText);
 
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(400, 400));
+		this.setPreferredSize(new Dimension(700, 400));
 
 		pnlDisplay.setPreferredSize(new Dimension(400, 300));
 		pnlDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
@@ -57,6 +61,9 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl{
 		pnlButtons.add(btnChar);
 		pnlButtons.add(btnLeft);
 		pnlButtons.add(btnRigth);
+		pnlButtons.add(btnUp);
+		pnlButtons.add(btnDown);
+		
 		//add(pnlButtons, BorderLayout.SOUTH);
         JPanel pnl = new JPanel(new GridLayout(2, 1));
         pnl.add(pnlButtons);
@@ -85,8 +92,22 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl{
         });
 
         btnLeft.addActionListener(ae -> {
-            //shifta allt till vänster och fyller på med röd färg
+            //shifts everything to the left
             ctrl.setDirection(Controller.DIRECTION.LEFT);
+            ctrl.flowText(txtInput.getText());
+//            Array7 leftOver = ctrl.shiftWithRedColor();
+            //txtInput.setText(leftOver.toString());
+        });
+        btnUp.addActionListener(ae -> {
+            //shifts everything up
+            ctrl.setDirection(Controller.DIRECTION.UP);
+            ctrl.flowText(txtInput.getText());
+//            Array7 leftOver = ctrl.shiftWithRedColor();
+            //txtInput.setText(leftOver.toString());
+        });
+        btnDown.addActionListener(ae -> {
+            //shifts everything downwards
+            ctrl.setDirection(Controller.DIRECTION.DOWN);
             ctrl.flowText(txtInput.getText());
 //            Array7 leftOver = ctrl.shiftWithRedColor();
             //txtInput.setText(leftOver.toString());

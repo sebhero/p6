@@ -9,16 +9,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.controller.Controller;
+import mah.se.mvc.model.Array7;
+import mah.se.mvc.model.Array7x7;
+import mah.se.patterns.strategy.FillNumbers;
 
 public class ViewShiftTest extends JPanel implements ViewImpl {
 	
+	private FillNumbers fill;
 	private Controller ctrl;
+	private ShiftArray shift;
 	private JPanel eastPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
@@ -30,6 +35,7 @@ public class ViewShiftTest extends JPanel implements ViewImpl {
 	private JButton btnShiftRight = new JButton("ShitRight");
 	
 	public ViewShiftTest() {
+		ButtonListener listener = new ButtonListener();
 		setPreferredSize(new Dimension(550,500));
 		setLayout(new BorderLayout());
 		
@@ -70,34 +76,77 @@ public class ViewShiftTest extends JPanel implements ViewImpl {
 		add(westPanel, BorderLayout.WEST);
 		add(southPanel, BorderLayout.SOUTH);
 		add(eastPanel, BorderLayout.EAST);
+
+		
+		btnShiftLeft.addActionListener(listener);
+		btnShiftRight.addActionListener(listener);
 	}
 
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
+		ctrl.showRandom();
 		
 	}
 
 	@Override
 	public void updateView(int[][] all) {
-		// TODO Auto-generated method stub
+		for(int i=0; i<all.length; i++) {
+			for(int j=0; j<all[i].length; j++) {
+				arrd2d[i][j].setText(Integer.toString(all[i][j]));
+			}
+		}
 		
 	}
+	
+	public Array7x7 getText() {
+		Array7x7 arr = new Array7x7();
+		for(int i=0; i<arrd2d.length; i++) {
+			for(int j=0; j<arrd2d[i].length; j++) {
+				arr.setElement(i, j, Integer.parseInt(arrd2d[i][j].getText()));
+			}
+		}
+		return arr;
+	}
+	
+	public void setText(Array7x7 arr) {
+		for(int i=0; i<arrd2d.length; i++) {
+			for(int j=0; j<arrd2d[i].length; j++) {
+				arrd2d[i][j].setText(String.valueOf(arr.getElement(i, j)));
+			}
+		}
+	}
+	
+	public Array7 Input() {
+		Array7 arr = new Array7();
+		for(int i=0; i<arr.getLength(); i++) {
+			arr.setElement(i, Integer.parseInt(westInput[i].getText()));
+		}
+		
+		return arr;
+	}
+			
 	
 	private class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == btnShiftLeft) {
+				
+			}
+			if(e.getSource() == btnShiftRight){
+				
+			}
 			
 			
 		}
 		
 	}
 	
-	public static void main (String args[]) {
-		JFrame frame = new JFrame("Test");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new ViewShiftTest());
-		frame.pack();
-		frame.setVisible(true);
-	}
+//	public static void main (String args[]) {
+//		JFrame frame = new JFrame("Test");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.add(new ViewShiftTest());
+//		frame.pack();
+//		frame.setVisible(true);
+//	}
 
 }

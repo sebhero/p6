@@ -116,6 +116,13 @@ public class Controller implements controllerImpl{
         Array7x7 next = message.get(shiftCounter);
         //hämta nästa kolumn
         Array7 nextArray = next.getCol(shiftArrayIdx);
+        //kollar om det är nästa kolumn eller rad som ska hämtas!
+        if(dir==DIRECTION.LEFT || dir==DIRECTION.RIGHT){
+        nextArray = next.getCol(shiftArrayIdx);
+        }
+        if(dir==DIRECTION.UP || dir==DIRECTION.DOWN){
+            nextArray = next.getRow(shiftArrayIdx);
+            }
         //do shift
         shift(nextArray);
 
@@ -148,7 +155,34 @@ public class Controller implements controllerImpl{
                 }
             }
         }
+        if (dir == DIRECTION.UP) {
+            shiftArrayIdx++;
+            //begin next char
+            if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
+                shiftCounter++;
+                shiftArrayIdx=0;
 
+                if (shiftCounter >= message.size()) {
+                    //done flowing
+                    message.clear();
+                    timer.cancel();
+                }
+            }
+        }
+        if (dir == DIRECTION.DOWN) {
+            shiftArrayIdx--;
+            //begin next char
+            if (shiftArrayIdx < 0) {
+                shiftCounter++;
+                shiftArrayIdx=6;
+
+                if (shiftCounter >= message.size()) {
+                    //done flowing
+                    message.clear();
+                    timer.cancel();
+                }
+            }
+        }
 
     }
 
@@ -344,6 +378,7 @@ public class Controller implements controllerImpl{
      */
     public void setRow(int rowPos, int[] newRow) {
         model.setRow(rowPos, new Array7(newRow));
+        updateView();
     }
 
     /**
@@ -352,6 +387,7 @@ public class Controller implements controllerImpl{
      */
     public void setCol(int colPos, int[] newCol) {
         model.setCol(colPos, new Array7(newCol));
+        updateView();
     }
 
 
@@ -360,7 +396,9 @@ public class Controller implements controllerImpl{
      * Satter ett nytt element i modelen.
      */
     public void setElement(int rowPos, int colPos, int value) {
+
         model.setElement(rowPos, colPos, value);
+        updateView();
     }
 
     /**
