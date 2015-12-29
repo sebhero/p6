@@ -1,19 +1,12 @@
 package testing.views;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewImpl;
 import roffe.Color.ColorDisplay;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * 
@@ -67,7 +60,7 @@ public class ViewWindows extends JPanel implements ViewImpl {
 
 		btnLeft.addActionListener(ae -> {
 			ctrl.setDirection(Controller.DIRECTION.LEFT);
-			ctrl.shiftWithRedColor();
+//			ctrl.shiftWithRedColor();
 		});
 
 		btnRigth.addActionListener(ae -> {

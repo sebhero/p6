@@ -95,37 +95,7 @@ public class ControllerTest {
 
 
 
-    /**
-     * Testar att shift med röd kolumn fungerar
-     * förväntar mig få tillbaks en array med nollor
-     * och att det läggs till en array på första kolumn med röd färg.
-     * @throws Exception
-     */
-    @Test
-    public void testShiftWithRedColor() throws Exception {
-        Controller testCtrl = new Controller(new Array7x7(),new ViewWindows(1,1));
-        testCtrl.setDirection(Controller.DIRECTION.RIGHT);
-        Array7x7 model =TestHelper.getPrivateField("model", testCtrl);
 
-        Array7 returnArr = testCtrl.shiftWithRedColor();
-
-        //expected
-        int[] expReturn = {0, 0, 0, 0, 0, 0, 0};
-        assertArrayEquals(expReturn,returnArr.getAll());
-
-        int[][] expModel = {
-                {-65536, 0, 0, 0, 0, 0, 0},
-                {-65536, 0, 0, 0, 0, 0, 0},
-                {-65536, 0, 0, 0, 0, 0, 0},
-                {-65536, 0, 0, 0, 0, 0, 0},
-                {-65536, 0, 0, 0, 0, 0, 0},
-                {-65536, 0, 0, 0, 0, 0, 0},
-                {-65536, 0, 0, 0, 0, 0, 0}
-        };
-
-        assertArrayEquals(expModel, model.getAll());
-
-    }
 
     /**
      * Testar ifall showNumber1_7 fyller på med tal från 1-7
