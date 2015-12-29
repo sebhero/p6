@@ -10,9 +10,6 @@ import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewImpl;
 import mah.se.mvc.view.ViewNumbers;
-import mah.se.mvc.view.ViewWindows;
-import mah.se.mvc.view.ViewWindowsWithFlowText;
-import roffe.Color.Color;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.

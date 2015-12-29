@@ -3,7 +3,7 @@ package mah.se.mvc.controller;
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.ViewWindows;
+import testing.views.ViewWindows;
 import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillNumbers;
 
@@ -12,11 +12,9 @@ import org.junit.Test;
 import roffe.Color.Color;
 import testHelpers.TestHelper;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
-import static testHelpers.TestHelper.getPrivateField;
 
 
 public class ControllerTest {

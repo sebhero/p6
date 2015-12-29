@@ -2,7 +2,6 @@ package testing;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.ViewWindows;
 import roffe.Color.Color;
 
 import javax.swing.*;

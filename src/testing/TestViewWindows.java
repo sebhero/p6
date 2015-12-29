@@ -1,10 +1,10 @@
 package testing;
 
 import javax.swing.JOptionPane;
-import mah.se.mvc.view.ViewWindows;
+import testing.views.ViewWindows;
 
 /**
- * Klass för att testa den grafiska miljön
+ * Klass fï¿½r att testa den grafiska miljï¿½n
  * 
  * @author jonatan
  *

@@ -1,8 +1,9 @@
-package mah.se.mvc.view;
+package testing.views;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
+import mah.se.mvc.view.ViewImpl;
 import roffe.Color.ColorDisplay;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.*;
  * Vyn visar i swing/windows en representation av modelen
  * manipuleras modeln via kontrollern och dess hjälpklasser
  */
-public class ViewWindowsWithFlowText extends JPanel implements ViewImpl{
+public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
     //testing
     private final JPanel pnlButtonsExtra;
 

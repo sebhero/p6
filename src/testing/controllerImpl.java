@@ -1,5 +1,6 @@
-package mah.se.mvc.controller;
+package testing;
 
+import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7;
 
 /**

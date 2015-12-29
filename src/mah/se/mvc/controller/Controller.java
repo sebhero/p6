@@ -1,10 +1,5 @@
 package mah.se.mvc.controller;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
@@ -13,7 +8,11 @@ import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
-import roffe.Color.Color;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -22,7 +21,7 @@ import roffe.Color.Color;
 /**
  * Kontroller styr kommunikationen mellan Vyn och modelen.
  */
-public class Controller implements controllerImpl{
+public class Controller{
 
     private final Array7x7[] colorDisplay;
     //för flowtext hålla kolla på vilket tecken i string
@@ -100,18 +99,6 @@ public class Controller implements controllerImpl{
 
         return shifter.shift(model, newArray, dir);
 
-    }
-
-    /**
-     * Shifta Array7x7 och fyller på med
-     * en rad med röda rutor
-     * @return det som ramlar över
-     */
-    public Array7 shiftWithRedColor() {
-        Array7 newArray = new Array7(Color.RED);
-        newArray = shift(newArray);
-        updateView();
-        return newArray;
     }
 
 

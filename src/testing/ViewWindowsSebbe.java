@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.view.ViewWindows;
+import testing.views.ViewWindows;
 import roffe.Color.Color;
 import roffe.Color.ColorDisplay;
 
