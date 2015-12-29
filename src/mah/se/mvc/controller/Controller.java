@@ -116,6 +116,7 @@ public class Controller implements controllerImpl{
         Array7x7 next = message.get(shiftCounter);
         //hämta nästa kolumn
         Array7 nextArray = next.getCol(shiftArrayIdx);
+        //kollar om det är nästa kolumn eller rad som ska hämtas!
         if(dir==DIRECTION.LEFT || dir==DIRECTION.RIGHT){
         nextArray = next.getCol(shiftArrayIdx);
         }
