@@ -426,5 +426,11 @@ public class Controller implements controllerImpl{
     }
 
 
+	public void showShift(Array7 input) {
+		shift(input);
+		updateView();
+		
+	}
+
 
 }

@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.controller.Controller;
+import mah.se.mvc.controller.Controller.DIRECTION;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import mah.se.patterns.strategy.FillNumbers;
@@ -116,7 +117,7 @@ public class ViewShiftTest extends JPanel implements ViewImpl {
 		}
 	}
 	
-	public Array7 Input() {
+	public Array7 getInput() {
 		Array7 arr = new Array7();
 		for(int i=0; i<arr.getLength(); i++) {
 			arr.setElement(i, Integer.parseInt(westInput[i].getText()));
@@ -130,9 +131,12 @@ public class ViewShiftTest extends JPanel implements ViewImpl {
 
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == btnShiftLeft) {
-				
+				ctrl.setDirection(DIRECTION.LEFT);
+				ctrl.showShift(getInput());
 			}
 			if(e.getSource() == btnShiftRight){
+				ctrl.setDirection(DIRECTION.RIGHT);
+				ctrl.showShift(getInput());
 				
 			}
 			
