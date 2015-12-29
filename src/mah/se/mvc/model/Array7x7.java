@@ -42,7 +42,12 @@ public class Array7x7 {
 		}
 			
 	}
-	
+
+	/**
+	 * Returnerar col, begränsningar 0-6
+	 * @param col
+	 * @return
+     */
 	public Array7 getCol(int col) {
 		Array7 arr = new Array7();
 		for(int i = 0; i < array.length; i++){

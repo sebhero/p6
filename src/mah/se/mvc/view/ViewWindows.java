@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mah.se.mvc.controller.Controller;
+import mah.se.mvc.model.Array7x7;
 import roffe.Color.ColorDisplay;
 
 /**
@@ -95,8 +96,18 @@ public class ViewWindows extends JPanel implements ViewImpl {
         colorDisplay.updateDisplay();
 	}
 
+	@Override
+	public void updateBigView(Array7x7[] all) {
 
-    /**
+	}
+
+	@Override
+	public int getPages() {
+		return 0;
+	}
+
+
+	/**
 	 * Satter controller till viewen som styr viewn. den skoter all
 	 * kommunikation med array7x7. hanterar knapptryckningar m.m.
 	 * 

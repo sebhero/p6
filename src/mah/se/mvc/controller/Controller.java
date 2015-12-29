@@ -24,6 +24,7 @@ import roffe.Color.Color;
  */
 public class Controller implements controllerImpl{
 
+    private final Array7x7[] colorDisplay;
     //för flowtext hålla kolla på vilket tecken i string
     private int shiftCounter;
     //för flowtext håller koll på vilken kolumn vi är i tecknet
@@ -69,7 +70,10 @@ public class Controller implements controllerImpl{
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
+        colorDisplay = new Array7x7[view.getPages()];
         filler = getFiller(FILLERTYPE.NUMBERS);
+        for(int n = 0; n < colorDisplay.length; n++)
+            colorDisplay[n] = filler.fillWithOneType(0);
         shifter = new ShiftArray();
         updateView();
     }
@@ -80,6 +84,10 @@ public class Controller implements controllerImpl{
      */
     private void updateView() {
         view.updateView(model.getAll());
+    }
+
+    private void updateView2() {
+        view.updateBigView(colorDisplay);
     }
 
 
@@ -330,6 +338,16 @@ public class Controller implements controllerImpl{
     	timer.schedule(new flowTextTimer(), 50, 50);
     }
 
+    public void flowBigText() {
+        colorDisplay[view.getPages() - 1] = model;
+        Array7 lastCol = colorDisplay[view.getPages() - 1].getCol(6);
+        for(int n = colorDisplay.length - 1; n >= 0; n--) {
+            lastCol = shifter.shift(colorDisplay[n], lastCol, dir);
+        }
+    }
+
+
+
     /**
      * Rinnande text timer
      * shiftar Strängen en kolumn i taget
@@ -340,7 +358,8 @@ public class Controller implements controllerImpl{
         public void run() {
             //start shifting letters
             shiftString();
-            updateView();
+            flowBigText();
+            updateView2();
         }
     }
 
@@ -429,7 +448,7 @@ public class Controller implements controllerImpl{
 	public void showShift(Array7 input) {
 		shift(input);
 		updateView();
-		
+
 	}
 
 

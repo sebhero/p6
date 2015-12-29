@@ -1,14 +1,14 @@
 package mah.se;
 
-import java.awt.Component;
-
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.ViewImpl;
-import mah.se.mvc.view.ViewShiftTest;
+import mah.se.mvc.view.*;
+import roffe.Color.Color;
+
+import java.awt.*;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -25,8 +25,7 @@ class App {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 //with FlowText
-//                ViewImpl view = new ViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
-            	ViewImpl view = new ViewShiftTest();
+                ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
                 //With numbers
 //                ViewImpl view = new ViewNumbers();
                 Array7x7 model = new Array7x7();

@@ -1,4 +1,4 @@
-	package mah.se.algorithms;
+package mah.se.algorithms;
         import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
@@ -62,14 +62,16 @@ public class Alphabet {
         boolean isChar = false;
         //skriver bilden i arrayen genom att loppa igenom den.
         //-16777216 är blank ruta
-        if(letter == ' '){
-			for(int i = 0; i<7 ; i++){
-				for(int j = 0; j<7 ; j++){
+
+		if (letter == ' ') {
+			for (int i = 0; i < 7; i++) {
+				for (int j = 0; j < 7; j++) {
 					array[i][j] = Color.TRANSPARENT;
-					isChar = true;
 				}
 			}
+			return new Array7x7(array);
 		}
+
         for (int y = 0; y < 7; y++) {
             for (int x = 0; x < 7; x++) {
             	if(image.getRGB(x, y) == -16777216) {

@@ -14,6 +14,10 @@ public interface ViewImpl {
 
     void updateView(int[][] all);
 
+    void updateBigView(Array7x7[] all);
+
+    int getPages();
+
 //    void updateView(ArrayList<int[][]> all);
 //    void updateView(ArrayList<Array7x7> all);
 

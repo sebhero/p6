@@ -2,6 +2,7 @@ package mah.se.mvc.view;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7;
+import mah.se.mvc.model.Array7x7;
 import roffe.Color.ColorDisplay;
 
 import javax.swing.*;
@@ -158,6 +159,16 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl{
 	public void updateView(int[][] matrix) {
         colorDisplay.setDisplay(matrix);
         colorDisplay.updateDisplay();
+	}
+
+	@Override
+	public void updateBigView(Array7x7[] all) {
+
+	}
+
+	@Override
+	public int getPages() {
+		return 0;
 	}
 
 	/**

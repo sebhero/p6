@@ -42,6 +42,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         this.horizontalPages = horizontalPages;
         this.backgroundColor = backgroundColor;
         this.gridColor = gridColor;
+        this.setPreferredSize(new Dimension(1900,400));
         init();
     }
 
@@ -126,13 +127,30 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
    // @Override kommentera bort detta när det finns metod för att skicka in Array7x7[] ist för int[][]
     // En int[][] räcker inte då vi har flera Array7x7 objekt som visas
-    public void updateView(Array7x7[] all) {
+    public void updateAllViews(Array7x7[] all) {
         for(int n = 0; n < horizontalPages; n++) colorDisplay.setDisplay(all[n].getAll(), 0, n);
     }
 
     @Override
     public void updateView(int[][] all) {
 
+    }
+
+    @Override
+    public void updateBigView(Array7x7[] all) {
+        for(int n = 0; n < horizontalPages; n++)
+            colorDisplay.setDisplay(all[n].getAll(), 0, n);
+        colorDisplay.updateDisplay();
+    }
+
+    public void runThisShit(String texy) {
+        controller.flowText(texy);
+        currentState = STATE.RUNNING;
+    }
+
+
+    public int getPages() {
+        return horizontalPages;
     }
 
 
@@ -153,9 +171,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 currentState = STATE.RUNNING;
             }
             else if(e.getSource() == displayText) {
-                if((flowText = input.getText()).length() != 0) {
+                if((flowText = input.getText().toString()).length() != 0) {
                     currentState = STATE.PAUSED;
-                    actionPerformed(new ActionEvent(start, 0, "")); //denna e fan tvek, annars får man göra en metod
+                    runThisShit(flowText);
                 } else
                     JOptionPane.showMessageDialog(null, "Empty input");
             }
@@ -175,6 +193,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                         break;
                 }
             }
+            setButtonsActive();
         }
     }
 }
