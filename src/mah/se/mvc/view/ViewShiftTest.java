@@ -98,7 +98,17 @@ public class ViewShiftTest extends JPanel implements ViewImpl {
 		}
 		
 	}
-	
+
+	@Override
+	public void updateBigView(Array7x7[] all) {
+
+	}
+
+	@Override
+	public int getPages() {
+		return 0;
+	}
+
 	public Array7x7 getText() {
 		Array7x7 arr = new Array7x7();
 		for(int i=0; i<arrd2d.length; i++) {

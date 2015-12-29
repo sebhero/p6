@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mah.se.mvc.controller.Controller;
+import mah.se.mvc.model.Array7x7;
 
 /**
  * 
@@ -108,6 +109,16 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		}
 
 
+	}
+
+	@Override
+	public void updateBigView(Array7x7[] all) {
+
+	}
+
+	@Override
+	public int getPages() {
+		return 0;
 	}
 
 	/**
