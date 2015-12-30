@@ -28,7 +28,7 @@ public class Controller{
 	//Hanterar text shiftning
 	private ShiftText shiftText = new ShiftText();
 
-	private final Array7x7[] colorDisplay;
+	private Array7x7[] colorDisplay;
 	//TODO remove use ShiftText instead
     //för flowtext hålla kolla på vilket tecken i string
     private int shiftCounter;
@@ -280,82 +280,7 @@ public class Controller{
 
 	}
 
-	 // TODO new FlowText using the shiftText that works in all directions
 
-	/**
-	 * Uppdaterar vyn med den nya message list<7x7>
-	 */
-	private void updateViewMessage() {
-		view.updateView(shiftText.getMessageView(), dir);
-	}
-
-	/**
-	 * Laddar in strängen från vyn till en lista av 7x7
-	 * @param texy strängen av alla char
-	 */
-	public void loadFlowText(String texy) {
-		shiftText.loadText(texy);
-	}
-
-	/**
-	 * btn click för att steppa genom strängen vi har laddat in
-	 */
-	public void showStepText() {
-
-		shiftText.stepText(dir);
-		updateViewMessage();
-	}
-
-
-	/**
-	 * Rullande text av strängen vi har laddat in
-	 */
-	public void flowText() {
-		switch (dir) {
-			case RIGHT:
-			case LEFT:
-				shiftText.setupMessageView(view.getHorizontalPages());
-				if (view.getHorizontalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getHorizontalPages() * 7);
-
-				}
-				else {
-					shiftText.setMaxSteps(shiftText.getMessageSize()*7);
-				}
-				break;
-			case UP:
-			case DOWN:
-				shiftText.setupMessageView(view.getVerticalPages());
-				if (view.getVerticalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getVerticalPages() * 7);
-				}
-				else {
-					shiftText.setMaxSteps(shiftText.getMessageSize()*7);
-				}
-				break;
-		}
-
-		//start timer
-		timer = new Timer();
-		timer.schedule(new shiftTextTimer(), 50, 50);
-	}
-
-	/**
-	 * Timmer till flowText för strängen vi har laddat in
-	 */
-	private class shiftTextTimer extends TimerTask {
-		@Override
-		public void run() {
-			if (shiftText.checkIfDoneStepping()){
-				//TODO if want continues flow remove this line
-				timer.cancel();
-				return;
-			}
-			shiftText.stepText(dir);
-			shiftText.increaseSteps();
-			updateViewMessage();
-		}
-	}
 
 	//TODO OLD flowtext
 
@@ -408,6 +333,10 @@ public class Controller{
 	 * @param texy
 	 */
 	public void flowText(String texy) {
+		//TODO Added so that the shifttext get the string and sets the size of the messageview
+		this.shiftText.loadText(texy);
+		this.shiftText.setupMessageView(colorDisplay.length);
+
 		filler = getFiller(FILLERTYPE.CHARACTERS);
 		texy = texy.toUpperCase();
 		for(int n = 0; n < texy.length(); n++) {
@@ -432,11 +361,24 @@ public class Controller{
 	}
 
 	public void flowBigText() {
-		colorDisplay[view.getHorizontalPages() - 1] = model;
-		Array7 lastCol = colorDisplay[view.getHorizontalPages() - 1].getCol(6);
-		for(int n = colorDisplay.length - 1; n >= 0; n--) {
-			lastCol = shifter.shift(colorDisplay[n], lastCol, dir);
-		}
+//		colorDisplay[view.getHorizontalPages() - 1] = model;
+//		Array7 lastCol = colorDisplay[view.getHorizontalPages() - 1].getCol(6);
+//		for(int n = colorDisplay.length - 1; n >= 0; n--) {
+//			lastCol = shifter.shift(colorDisplay[n], lastCol, dir);
+//		}
+
+		shiftText.stepText(dir);
+		colorDisplay = shiftText.getMessageView7x7();
+		//code above does this
+//		next = new Array7(Color.BLACK);
+//		for (int i = message.size()-1; i >= 0 ; i--) {
+//			next= shifter.shift(message.get(i), next, dir);
+//		}
+//
+//		for (int i = colorDisplay.length-1; i >= 0 ; i--) {
+//			next= shifter.shift(colorDisplay[i], next, dir);
+//		}
+
 
 	}
 
@@ -444,10 +386,10 @@ public class Controller{
 	 * FlowText timern kallar på denna var 50ms
 	 * för att få en rullande text
 	 */
-	private void shiftString() {
+	private Array7 shiftString() {
 
 		if (message.size() <= 0) {
-			return;
+			return null;
 		}
 
 		//hämta nästa a7x7
@@ -462,7 +404,7 @@ public class Controller{
 			nextArray = next.getRow(shiftArrayIdx);
 		}
 		//do shift
-		shift(nextArray);
+		nextArray = shift(nextArray);
 
 		//update index to shift
 
@@ -522,10 +464,94 @@ public class Controller{
 			}
 		}
 
+		return nextArray;
+
 	}
 
 	private void updateView2() {
 		view.updateBigView(colorDisplay);
+	}
+
+	// TODO new FlowText using the shiftText that works in all directions
+
+	/**
+	 * Uppdaterar vyn med den nya message list<7x7>
+	 */
+	private void updateViewMessage() {
+		view.updateView(shiftText.getMessageView(), dir);
+	}
+
+	/**
+	 * Laddar in strängen från vyn till en lista av 7x7
+	 * @param texy strängen av alla char
+	 */
+	public void loadFlowText(String texy) {
+		shiftText.loadText(texy);
+	}
+
+	/**
+	 * btn click för att steppa genom strängen vi har laddat in
+	 */
+	public void showStepText() {
+
+		shiftText.stepText(dir);
+		updateViewMessage();
+	}
+
+
+	/**
+	 * Rullande text av strängen vi har laddat in
+	 */
+	public void flowText() {
+
+		switch (dir) {
+			case RIGHT:
+			case LEFT:
+				//setup messageView size
+				shiftText.setupMessageView(view.getHorizontalPages());
+				//setup max steps how many Columns/rows
+				if (view.getHorizontalPages() > shiftText.getMessageSize()) {
+					shiftText.setMaxSteps(view.getHorizontalPages() * 7);
+
+				}
+				else {
+					shiftText.setMaxSteps(shiftText.getMessageSize()*7);
+				}
+				break;
+			case UP:
+			case DOWN:
+				//setup messageView size
+				shiftText.setupMessageView(view.getVerticalPages());
+				//setup max steps how many Columns/rows
+				if (view.getVerticalPages() > shiftText.getMessageSize()) {
+					shiftText.setMaxSteps(view.getVerticalPages() * 7);
+				}
+				else {
+					shiftText.setMaxSteps(shiftText.getMessageSize()*7);
+				}
+				break;
+		}
+
+		//start timer
+		timer = new Timer();
+		timer.schedule(new shiftTextTimer(), 50, 50);
+	}
+
+	/**
+	 * Timmer till flowText för strängen vi har laddat in
+	 */
+	private class shiftTextTimer extends TimerTask {
+		@Override
+		public void run() {
+			if (shiftText.checkIfDoneStepping()){
+				//TODO if want continues flow remove this line
+				timer.cancel();
+				return;
+			}
+			shiftText.stepText(dir);
+			shiftText.increaseSteps();
+			updateViewMessage();
+		}
 	}
 
 }

@@ -19,6 +19,7 @@ public interface ViewImpl {
     int getHorizontalPages();
     int getVerticalPages();
 
+
     void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir);
 
 
