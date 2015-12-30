@@ -1,13 +1,13 @@
 package testing.views;
 
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewImpl;
 import roffe.Color.ColorDisplay;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Sebastian Börebäck
@@ -23,12 +23,13 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	private ColorDisplay colorDisplay;
 	private Controller ctrl;
 	//Buttons that controll the direction of the shift
-	private JButton btnLeft = new JButton("Shift vänster");
-	private JButton btnRigth = new JButton("Shift höger");
-	private JButton btnUp = new JButton("Shift upp");
-	private JButton btnDown = new JButton("Shift ner");
+	private JButton btnFlowRight  = new JButton("shift right");
+	private JButton btnFlowLeft = new JButton("Shift let");
+	private JButton btnFlowUp = new JButton("Shift upp");
+	private JButton btnFlowDown = new JButton("Shift ner");
 	
 	private JButton btnChar = new JButton("Lägg till char");
+	private JButton btnLoadString = new JButton("load string");
 
     private JButton btnFillColor = new JButton("Fyll med slumpfärger");
     private JButton btnFlowText = new JButton("Rinnande Text");
@@ -36,7 +37,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	private JTextField txtInput = new JTextField();
 
 	public ViewWindowsWithFlowText(int background, int grid) {
-		this(1, 1, background, grid);
+		this(3,3, background, grid);
 	}
 
 	public ViewWindowsWithFlowText(int verticalPages, int horizontalPages, int background, int grid) {
@@ -50,21 +51,22 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
         pnlButtonsExtra.add(btnFlowText);
 
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(700, 400));
+		this.setPreferredSize(new Dimension(horizontalPages*300, verticalPages*300));
 
-		pnlDisplay.setPreferredSize(new Dimension(400, 300));
+		colorDisplay.setPreferredSize(new Dimension(horizontalPages*200, verticalPages*200));
+//		pnlDisplay.setPreferredSize(new Dimension(400, 400));
 		pnlDisplay.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 		pnlDisplay.add(colorDisplay);
 		
-		pnlButtons.setPreferredSize(new Dimension(400, 40));
+		pnlButtons.setPreferredSize(new Dimension(900, 40));
 		pnlButtons.setLayout(new GridLayout(1, 4));
 		
 		pnlButtons.add(txtInput);
-		pnlButtons.add(btnChar);
-		pnlButtons.add(btnLeft);
-		pnlButtons.add(btnRigth);
-		pnlButtons.add(btnUp);
-		pnlButtons.add(btnDown);
+		pnlButtons.add(btnLoadString);
+		pnlButtons.add(btnFlowUp);
+		pnlButtons.add(btnFlowLeft);
+		pnlButtons.add(btnFlowRight);
+		pnlButtons.add(btnFlowDown);
 		
 		//add(pnlButtons, BorderLayout.SOUTH);
         JPanel pnl = new JPanel(new GridLayout(2, 1));
@@ -82,37 +84,41 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
      * Init alla knappar
      */
     private void initButtons() {
-        btnRigth.addActionListener(ae -> {
-            //shifta allt till höger och fyller på med röd färg
-            String txt = txtInput.getText();
-            if (txt.length() <= 0) {
-                txt = "?";
-            }
-            ctrl.setDirection(Controller.DIRECTION.RIGHT);
-            ctrl.flowText(txtInput.getText());
-            //txtInput.setText(leftOver.toString());
+
+	    btnLoadString.addActionListener(ae ->{
+		    String txt = "hej";
+		    ctrl.setDirection(Controller.DIRECTION.UP);
+		    ctrl.loadFlowText(txt);
+	    });
+
+	    btnFlowUp.addActionListener(ae -> {
+		    //shifts everything to the left
+		    ctrl.setDirection(Controller.DIRECTION.UP);
+		    ctrl.loadFlowText(txtInput.getText());
+//		    ctrl.flowText(txtInput.getText());
+		    ctrl.flowText();
+	    });
+
+	    btnFlowLeft.addActionListener(ae -> {
+            ctrl.setDirection(Controller.DIRECTION.LEFT);
+		    ctrl.loadFlowText(txtInput.getText());
+		    ctrl.flowText();
+
+//            ctrl.flowText(txtInput.getText());
         });
 
-        btnLeft.addActionListener(ae -> {
-            //shifts everything to the left
-            ctrl.setDirection(Controller.DIRECTION.LEFT);
-            ctrl.flowText(txtInput.getText());
-//            Array7 leftOver = ctrl.shiftWithRedColor();
-            //txtInput.setText(leftOver.toString());
-        });
-        btnUp.addActionListener(ae -> {
+
+        btnFlowRight.addActionListener(ae -> {
             //shifts everything up
-            ctrl.setDirection(Controller.DIRECTION.UP);
-            ctrl.flowText(txtInput.getText());
-//            Array7 leftOver = ctrl.shiftWithRedColor();
-            //txtInput.setText(leftOver.toString());
+            ctrl.setDirection(Controller.DIRECTION.RIGHT);
+	        ctrl.loadFlowText(txtInput.getText());
+	        ctrl.flowText();
         });
-        btnDown.addActionListener(ae -> {
+        btnFlowDown.addActionListener(ae -> {
             //shifts everything downwards
             ctrl.setDirection(Controller.DIRECTION.DOWN);
-            ctrl.flowText(txtInput.getText());
-//            Array7 leftOver = ctrl.shiftWithRedColor();
-            //txtInput.setText(leftOver.toString());
+	        ctrl.loadFlowText(txtInput.getText());
+	        ctrl.flowText();
         });
 
         btnChar.addActionListener(ae ->{
@@ -168,8 +174,32 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	}
 
 	@Override
-	public int getPages() {
-		return 0;
+	public int getHorizontalPages() {
+		return colorDisplay.getHorizontalPages();
+	}
+
+	@Override
+	public int getVerticalPages() {
+		return colorDisplay.getVerticalPages();
+	}
+
+	@Override
+	public void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir) {
+		for (int i = 0; i < all.size(); i++) {
+			switch (dir) {
+
+				case RIGHT:
+				case LEFT:
+					colorDisplay.setDisplay(all.get(i),0,i);
+					break;
+				case UP:
+				case DOWN:
+					colorDisplay.setDisplay(all.get(i),i,0);
+					break;
+			}
+
+		}
+		colorDisplay.updateDisplay();
 	}
 
 	/**

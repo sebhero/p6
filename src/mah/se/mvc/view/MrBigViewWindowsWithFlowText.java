@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by Gustaf on 18/12/2015.
@@ -149,8 +150,19 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     }
 
 
-    public int getPages() {
-        return horizontalPages;
+    @Override
+    public int getHorizontalPages() {
+        return colorDisplay.getHorizontalPages();
+    }
+
+    @Override
+    public int getVerticalPages() {
+        return colorDisplay.getVerticalPages();
+    }
+
+    @Override
+    public void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir) {
+
     }
 
 

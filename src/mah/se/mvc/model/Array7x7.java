@@ -19,7 +19,15 @@ public class Array7x7 {
 			}
 		}
 	}
-	
+
+	public Array7x7(int fillWith) {
+		for(int i=0; i<array.length; i++) {
+			for(int j=0; j<array[i].length; j++) {
+				array[i][j] = fillWith;
+			}
+		}
+	}
+
 	public void setRow(int row, Array7 theRow) {
 		for(int i=0; i<array.length; i++) {
 			array[row][i] = theRow.getElement(i);
