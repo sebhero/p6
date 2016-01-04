@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * 
  * @author Johnatan Sona
- *
+ *	2016-01-03
  */
 @SuppressWarnings("serial")
 public class ViewColor extends JPanel implements ViewImpl {
