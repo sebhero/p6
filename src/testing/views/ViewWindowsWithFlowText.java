@@ -139,7 +139,8 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
             if (txt.length() <= 0) {
                 txt = "?";
             }
-            ctrl.flowText(txt.toUpperCase());
+//            ctrl.flowText(txt.toUpperCase());
+			ctrl.loadFlowText(txt);
         });
 
 

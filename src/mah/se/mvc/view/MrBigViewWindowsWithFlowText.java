@@ -18,7 +18,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     public enum STATE {
         RUNNING,
         PAUSED,
-        UNINITIATED
+        INITIATED, UNINITIATED
     }
 
     private STATE currentState = STATE.UNINITIATED;
@@ -114,6 +114,13 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 simpleShiftRight.setEnabled(false);
                 changeDirection.setEnabled(false);
                 break;
+            case INITIATED:
+                start.setEnabled(true);
+                pause.setEnabled(false);
+                simpleShiftLeft.setEnabled(true);
+                simpleShiftRight.setEnabled(true);
+                changeDirection.setEnabled(false);
+                break;
         }
     }
 
@@ -145,7 +152,8 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     }
 
     public void runThisShit(String texy) {
-        controller.flowText(texy);
+        controller.loadFlowText(texy);
+        controller.flowText();
         currentState = STATE.RUNNING;
     }
 
@@ -186,7 +194,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == start) {
+            if(e.getSource() == start && currentState == STATE.INITIATED) {
                 controller.flowText();
                 currentState = STATE.RUNNING;
             }
@@ -200,7 +208,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             }
             else if(e.getSource() == displayText) {
                 if((flowText = input.getText().toString()).length() != 0) {
-                    currentState = STATE.PAUSED;
+                    currentState = STATE.INITIATED;
                     controller.setDirection(Controller.DIRECTION.LEFT);
                     controller.loadFlowText(flowText);
                 } else

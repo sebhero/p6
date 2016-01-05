@@ -289,32 +289,18 @@ public class Controller{
 	 * shiftar Strängen en kolumn i taget
 	 * och kallar på att uppdatera vyn
 	 */
-	private class flowTextTimer extends TimerTask {
-		@Override
-		public void run() {
-			//start shifting letters
-			shiftString();
+//	private class flowTextTimer extends TimerTask {
+//		@Override
+//		public void run() {
+//			//start shifting letters
+//			shiftString();
+//
+//			flowBigText();
+//
+//			updateView2();
+//		}
+//	}
 
-			flowBigText();
-
-			updateView2();
-		}
-	}
-
-	/**
-	 * Pausar timern
-	 */
-	public void pause() {
-		timer.cancel();
-	}
-
-	/**
-	 * Startar timern igen
-	 */
-	public void resume() {
-		timer = new Timer();    //Då shiftcounter och shiftArrayIdx inte ändras kan man bara göra en ny timer
-		timer.schedule(new flowTextTimer(), 50, 50);
-	}
 
 	/**
 	 * Skiftar bara ett steg åt dir
@@ -331,150 +317,150 @@ public class Controller{
 		this.dir = currentDir;
 	}
 
-	/**
-	 * Btn click
-	 * Visar rinande text på texy som kommer in från vyn
-	 * @param texy
-	 */
-	public void flowText(String texy) {
-		//TODO Added so that the shifttext get the string and sets the size of the messageview
-		this.shiftText.loadText(texy);
-		this.shiftText.setupMessageView(colorDisplay.length);
-
-		filler = getFiller(FILLERTYPE.CHARACTERS);
-		texy = texy.toUpperCase();
-		for(int n = 0; n < texy.length(); n++) {
-			Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));
-			message.add(character);
-		}
-
-		//which char in msg
-		shiftCounter =0;
-		//column index
-		if (dir == DIRECTION.LEFT) {
-			shiftArrayIdx = 0;
-
-		}
-		if(dir == DIRECTION.RIGHT)
-		{
-			shiftArrayIdx = 6;
-		}
-		//start timer
-		timer = new Timer();
-		timer.schedule(new flowTextTimer(), 50, 50);
-	}
-
-	public void flowBigText() {
-//		colorDisplay[view.getHorizontalPages() - 1] = model;
-//		Array7 lastCol = colorDisplay[view.getHorizontalPages() - 1].getCol(6);
-//		for(int n = colorDisplay.length - 1; n >= 0; n--) {
-//			lastCol = shifter.shift(colorDisplay[n], lastCol, dir);
-//		}
-
-		shiftText.stepText(dir);
-		colorDisplay = shiftText.getMessageView7x7();
-		//code above does this
-//		next = new Array7(Color.BLACK);
-//		for (int i = message.size()-1; i >= 0 ; i--) {
-//			next= shifter.shift(message.get(i), next, dir);
+//	/**
+//	 * Btn click
+//	 * Visar rinande text på texy som kommer in från vyn
+//	 * @param texy
+//	 */
+//	public void flowText(String texy) {
+//		//TODO Added so that the shifttext get the string and sets the size of the messageview
+//		this.shiftText.loadText(texy);
+//		this.shiftText.setupMessageView(colorDisplay.length);
+//
+//		filler = getFiller(FILLERTYPE.CHARACTERS);
+//		texy = texy.toUpperCase();
+//		for(int n = 0; n < texy.length(); n++) {
+//			Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));
+//			message.add(character);
 //		}
 //
-//		for (int i = colorDisplay.length-1; i >= 0 ; i--) {
-//			next= shifter.shift(colorDisplay[i], next, dir);
+//		//which char in msg
+//		shiftCounter =0;
+//		//column index
+//		if (dir == DIRECTION.LEFT) {
+//			shiftArrayIdx = 0;
+//
 //		}
+//		if(dir == DIRECTION.RIGHT)
+//		{
+//			shiftArrayIdx = 6;
+//		}
+//		//start timer
+//		timer = new Timer();
+//		timer.schedule(new flowTextTimer(), 50, 50);
+//	}
 
+//	public void flowBigText() {
+////		colorDisplay[view.getHorizontalPages() - 1] = model;
+////		Array7 lastCol = colorDisplay[view.getHorizontalPages() - 1].getCol(6);
+////		for(int n = colorDisplay.length - 1; n >= 0; n--) {
+////			lastCol = shifter.shift(colorDisplay[n], lastCol, dir);
+////		}
+//
+//		shiftText.stepText(dir);
+//		colorDisplay = shiftText.getMessageView7x7();
+//		//code above does this
+////		next = new Array7(Color.BLACK);
+////		for (int i = message.size()-1; i >= 0 ; i--) {
+////			next= shifter.shift(message.get(i), next, dir);
+////		}
+////
+////		for (int i = colorDisplay.length-1; i >= 0 ; i--) {
+////			next= shifter.shift(colorDisplay[i], next, dir);
+////		}
+//
+//
+//	}
 
-	}
+//	/**
+//	 * FlowText timern kallar på denna var 50ms
+//	 * för att få en rullande text
+//	 */
+//	private Array7 shiftString() {
+//
+//		if (message.size() <= 0) {
+//			return null;
+//		}
+//
+//		//hämta nästa a7x7
+//		Array7x7 next = message.get(shiftCounter);
+//		//hämta nästa kolumn
+//		Array7 nextArray = next.getCol(shiftArrayIdx);
+//		//kollar om det är nästa kolumn eller rad som ska hämtas!
+//		if(dir==DIRECTION.LEFT || dir==DIRECTION.RIGHT){
+//			nextArray = next.getCol(shiftArrayIdx);
+//		}
+//		if(dir==DIRECTION.UP || dir==DIRECTION.DOWN){
+//			nextArray = next.getRow(shiftArrayIdx);
+//		}
+//		//do shift
+//		nextArray = shift(nextArray);
+//
+//		//update index to shift
+//
+//		if (dir == DIRECTION.LEFT) {
+//			shiftArrayIdx++;
+//			if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
+//				shiftCounter++;
+//				shiftArrayIdx=0;
+//
+//				if (shiftCounter >= message.size()) {
+//					//done flowing
+//					message.clear();
+//					timer.cancel();
+//				}
+//			}
+//		}
+//		if (dir == DIRECTION.RIGHT) {
+//			shiftArrayIdx--;
+//			//begin next char
+//			if (shiftArrayIdx < 0) {
+//				shiftCounter++;
+//				shiftArrayIdx=6;
+//
+//				if (shiftCounter >= message.size()) {
+//					//done flowing
+//					message.clear();
+//					timer.cancel();
+//				}
+//			}
+//		}
+//		if (dir == DIRECTION.UP) {
+//			shiftArrayIdx++;
+//			//begin next char
+//			if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
+//				shiftCounter++;
+//				shiftArrayIdx=0;
+//
+//				if (shiftCounter >= message.size()) {
+//					//done flowing
+//					message.clear();
+//					timer.cancel();
+//				}
+//			}
+//		}
+//		if (dir == DIRECTION.DOWN) {
+//			shiftArrayIdx--;
+//			//begin next char
+//			if (shiftArrayIdx < 0) {
+//				shiftCounter++;
+//				shiftArrayIdx=6;
+//
+//				if (shiftCounter >= message.size()) {
+//					//done flowing
+//					message.clear();
+//					timer.cancel();
+//				}
+//			}
+//		}
+//
+//		return nextArray;
+//
+//	}
 
-	/**
-	 * FlowText timern kallar på denna var 50ms
-	 * för att få en rullande text
-	 */
-	private Array7 shiftString() {
-
-		if (message.size() <= 0) {
-			return null;
-		}
-
-		//hämta nästa a7x7
-		Array7x7 next = message.get(shiftCounter);
-		//hämta nästa kolumn
-		Array7 nextArray = next.getCol(shiftArrayIdx);
-		//kollar om det är nästa kolumn eller rad som ska hämtas!
-		if(dir==DIRECTION.LEFT || dir==DIRECTION.RIGHT){
-			nextArray = next.getCol(shiftArrayIdx);
-		}
-		if(dir==DIRECTION.UP || dir==DIRECTION.DOWN){
-			nextArray = next.getRow(shiftArrayIdx);
-		}
-		//do shift
-		nextArray = shift(nextArray);
-
-		//update index to shift
-
-		if (dir == DIRECTION.LEFT) {
-			shiftArrayIdx++;
-			if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
-				shiftCounter++;
-				shiftArrayIdx=0;
-
-				if (shiftCounter >= message.size()) {
-					//done flowing
-					message.clear();
-					timer.cancel();
-				}
-			}
-		}
-		if (dir == DIRECTION.RIGHT) {
-			shiftArrayIdx--;
-			//begin next char
-			if (shiftArrayIdx < 0) {
-				shiftCounter++;
-				shiftArrayIdx=6;
-
-				if (shiftCounter >= message.size()) {
-					//done flowing
-					message.clear();
-					timer.cancel();
-				}
-			}
-		}
-		if (dir == DIRECTION.UP) {
-			shiftArrayIdx++;
-			//begin next char
-			if (shiftArrayIdx >= message.get(shiftCounter).getLength()) {
-				shiftCounter++;
-				shiftArrayIdx=0;
-
-				if (shiftCounter >= message.size()) {
-					//done flowing
-					message.clear();
-					timer.cancel();
-				}
-			}
-		}
-		if (dir == DIRECTION.DOWN) {
-			shiftArrayIdx--;
-			//begin next char
-			if (shiftArrayIdx < 0) {
-				shiftCounter++;
-				shiftArrayIdx=6;
-
-				if (shiftCounter >= message.size()) {
-					//done flowing
-					message.clear();
-					timer.cancel();
-				}
-			}
-		}
-
-		return nextArray;
-
-	}
-
-	private void updateView2() {
-		view.updateBigView(colorDisplay);
-	}
+//	private void updateView2() {
+//		view.updateBigView(colorDisplay);
+//	}
 
 	// TODO new FlowText using the shiftText that works in all directions
 
@@ -559,4 +545,19 @@ public class Controller{
 		}
 	}
 
+	/**
+	 * Pausar timern
+	 */
+	public void pause() {
+		timer.cancel();
+	}
+
+	/**
+	 * Startar timern igen
+	 */
+	public void resume() {
+		timer = new Timer();    //Då shiftcounter och shiftArrayIdx inte ändras kan man bara göra en ny timer
+		timer.schedule(new shiftTextTimer(), 50, 50);
+
+	}
 }
