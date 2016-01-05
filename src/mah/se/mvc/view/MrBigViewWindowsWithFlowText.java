@@ -27,6 +27,19 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     public void setSize(Dimension dimension) {
         super.setSize(dimension);
         //colorDisplay.setSize((int)dimension.getWidth(), (int)dimension.getHeight() - 100);
+
+        double newSize = dimension.getWidth()/1300;
+        int newSizeW = (int) (newSize * 1200);
+        int newSizeH = (int) (newSize * 200);
+//        System.out.println("new size "+newSize+" dim"+dimension.getWidth());
+        System.out.println(colorDisplay.getWidth());
+//        colorDisplay.setSize(newSizeW, newSizeH);
+        colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
+//        colorDisplay.revalidate();
+        colorDisplay.repaint();
+        System.out.println(colorDisplay.getWidth());
+        //1200x200
+        //1300x300
     }
 
     private STATE currentState = STATE.UNINITIATED;
@@ -63,9 +76,21 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         colorDisplay = new ColorDisplay(verticalPages, horizontalPages, backgroundColor, gridColor);
         colorDisplay.setPreferredSize(new Dimension(horizontalPages * 200, verticalPages * 200));
         JPanel buttonPanel = initButtons();
+        JPanel buttonPanel2 = initButtons2();
+        JPanel BigButtonsPanel = new JPanel(new GridLayout(2, 1));
+        BigButtonsPanel.add(buttonPanel);
+        BigButtonsPanel.add(buttonPanel2);
         setButtonsActive();
         add(colorDisplay, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(BigButtonsPanel, BorderLayout.SOUTH);
+
+    }
+
+    private JPanel initButtons2() {
+        JPanel panel = new JPanel();
+        JButton newButton = new JButton("Test");
+        panel.add(newButton);
+        return panel;
     }
 
     /**
@@ -239,14 +264,26 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 controller.simpleShift(Controller.DIRECTION.RIGHT);
             }
             else if(e.getSource() == changeDirection && currentState != STATE.UNINITIATED) {
+                String dirText = "";
                 switch (controller.getDirection()) {
                     case LEFT:
                         controller.setDirection(Controller.DIRECTION.RIGHT);
+                        dirText = "Left";
                         break;
                     case RIGHT:
+                        controller.setDirection(Controller.DIRECTION.UP);
+                        dirText = "Rigt";
+                        break;
+                    case UP:
+                        controller.setDirection(Controller.DIRECTION.DOWN);
+                        dirText = "Down";
+                        break;
+                    case DOWN:
                         controller.setDirection(Controller.DIRECTION.LEFT);
+                        dirText = "Up";
                         break;
                 }
+                changeDirection.setText("ChangeDirection: "+dirText);
             }
             setButtonsActive();
         }

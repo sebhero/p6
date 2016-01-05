@@ -63,8 +63,9 @@ class App extends JFrame{
         frame.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
-                if(choice == 1)
+                if(choice == 1) {
                     ((Component) view).setSize(frame.getSize());
+                }
             }
 
             @Override
