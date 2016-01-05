@@ -92,10 +92,7 @@ public class ViewShiftTest extends JPanel implements ViewImpl {
 		
 	}
 
-	@Override
-	public void updateBigView(Array7x7[] all) {
 
-	}
 
 	@Override
 	public int getHorizontalPages() {

@@ -5,8 +5,6 @@ import mah.se.mvc.model.Array7x7;
 import roffe.Color.ColorDisplay;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -187,12 +185,12 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     }
 
-    @Override
-    public void updateBigView(Array7x7[] all) {
-        for(int n = 0; n < horizontalPages; n++)
-            colorDisplay.setDisplay(all[n].getAll(), 0, n);
-        colorDisplay.updateDisplay();
-    }
+//    @Override
+//    public void updateBigView(Array7x7[] all) {
+//        for(int n = 0; n < horizontalPages; n++)
+//            colorDisplay.setDisplay(all[n].getAll(), 0, n);
+//        colorDisplay.updateDisplay();
+//    }
 
     public void runThisShit(String texy) {
         controller.loadFlowText(texy);

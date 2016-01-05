@@ -8,6 +8,7 @@ import mah.se.patterns.strategy.FillCharacter;
 import roffe.Color.Color;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-30.
@@ -18,18 +19,15 @@ public class ShiftText {
 	//text strängen av alla bokstäver
 	private String text;
 	//strängen omvandlad till 7x7 block
-	private ArrayList<Array7x7> message = new ArrayList<>();
+	private final ArrayList<Array7x7> message = new ArrayList<>();
 	//colordisplay view i 7x7 block
 	private ArrayList<Array7x7> messageView;
 	//för att kunna shifta
-	private ShiftArray shifter = new ShiftArray();
-	//filler algoritm
-	private FillAlgorithm filler;
+	private final ShiftArray shifter = new ShiftArray();
 	//antal steg alltså kolumner/rader som har gått
 	private int stepps;
 	//total antal steg som finns.
 	private int doneStepping;
-	private Array7 temp;
 
 	/**
 	 * Tar ett steg i message och shiftar över det till messageView
@@ -48,6 +46,7 @@ public class ShiftText {
 				}
 
 				//skapa mellan rum mellan bokstaverna. behovs inte eg i left right
+				Array7 temp;
 				if ((stepps) % 7 ==0) {
 					temp =	next;
 					next = new Array7(Color.BLACK);
@@ -92,7 +91,7 @@ public class ShiftText {
 	 * @param size
 	 */
 	public void setupMessageView(int size) {
-				this.messageView = new ArrayList<Array7x7>();
+				this.messageView = new ArrayList<>();
 				for (int i = 0; i < size; i++) {
 					messageView.add(new Array7x7(Color.BLACK));
 				}
@@ -103,10 +102,7 @@ public class ShiftText {
 	 * @return en Arraylist med int[][] likt den som används i view
 	 */
 	public ArrayList<int[][]> getMessageView() {
-		ArrayList<int[][]> temp = new ArrayList<>();
-		for (Array7x7 letter : messageView) {
-			temp.add(letter.getAll());
-		}
+		ArrayList<int[][]> temp = messageView.stream().map(Array7x7::getAll).collect(Collectors.toCollection(ArrayList::new));
 		return temp;
 	}
 
@@ -119,7 +115,7 @@ public class ShiftText {
 		message.clear();
 
 		//save the texy
-		filler = new FillCharacter();
+		FillAlgorithm filler = new FillCharacter();
 		texy = texy.toUpperCase();
 		for(int n = 0; n < texy.length(); n++) {
 			Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));

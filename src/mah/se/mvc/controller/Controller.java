@@ -11,7 +11,6 @@ import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
 import roffe.Color.Color;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,20 +25,19 @@ import java.util.TimerTask;
 public class Controller{
 
 	//Hanterar text shiftning
-	private ShiftText shiftText = new ShiftText();
+	private final ShiftText shiftText = new ShiftText();
 
-	private Array7x7[] colorDisplay;
-	//TODO remove use ShiftText instead
+    //TODO remove use ShiftText instead
     //för flowtext hålla kolla på vilket tecken i string
-    private int shiftCounter;
+//    private int shiftCounter;
 	//TODO remove use ShiftText instead
     //för flowtext håller koll på vilken kolumn vi är i tecknet
-    private int shiftArrayIdx;
+//    private int shiftArrayIdx;
 	private int speed = 50;
 
 
 	//TODO remove use ShiftText instead
-	private ArrayList<Array7x7> message = new ArrayList<>();
+//	private ArrayList<Array7x7> message = new ArrayList<>();
 
 	public DIRECTION getDirection() {
         return dir;
@@ -66,7 +64,7 @@ public class Controller{
     private final ShiftArray shifter;
     private FillAlgorithm filler;
     private Array7x7 model;
-    private ViewImpl view;
+    private final ViewImpl view;
 
     private Timer timer;
 
@@ -79,7 +77,7 @@ public class Controller{
         this.model = model;
         this.view = view;
         this.view.setCtrl(this);
-        colorDisplay = new Array7x7[view.getHorizontalPages()];
+        Array7x7[] colorDisplay = new Array7x7[view.getHorizontalPages()];
         filler = getFiller(FILLERTYPE.COLORS);
         for(int n = 0; n < colorDisplay.length; n++)
             colorDisplay[n] = filler.fillWithOneType(Color.BLACK);

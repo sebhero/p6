@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * 
  * @author Johnatan Sona
  * 
- * Skapar ett Color fönster med UI. 
+ * Skapar ett Color fï¿½nster med UI. 
  * 
  *	2016-01-03
  */
@@ -34,21 +34,21 @@ public class ViewColor extends JPanel implements ViewImpl {
 	private JButton btnShiftLeft = new JButton("Shift left");
 	private JButton btnShiftUp = new JButton("Shift up");
 	private JButton btnShiftDown = new JButton("Shift down");
-	private JButton btnFillRandColor = new JButton("Fyll med slumpfärger");
-	private JButton btnFill = new JButton("Fyll med en färg");
-	private JButton btnChoose1 = new JButton("Välj färg");
-	private JButton btnChoose2 = new JButton("Välj färg");
-	private JButton btnChoose3 = new JButton("Välj färg");
-	private JButton btnChoose4 = new JButton("Välj färg");
-	private JButton btnChoose5 = new JButton("Välj färg");
-	private JButton btnChoose6 = new JButton("Välj färg");
-	private JButton btnChoose7 = new JButton("Välj färg");
+	private JButton btnFillRandColor = new JButton("Fyll med slumpfï¿½rger");
+	private JButton btnFill = new JButton("Fyll med en fï¿½rg");
+	private JButton btnChoose1 = new JButton("Vï¿½lj fï¿½rg");
+	private JButton btnChoose2 = new JButton("Vï¿½lj fï¿½rg");
+	private JButton btnChoose3 = new JButton("Vï¿½lj fï¿½rg");
+	private JButton btnChoose4 = new JButton("Vï¿½lj fï¿½rg");
+	private JButton btnChoose5 = new JButton("Vï¿½lj fï¿½rg");
+	private JButton btnChoose6 = new JButton("Vï¿½lj fï¿½rg");
+	private JButton btnChoose7 = new JButton("Vï¿½lj fï¿½rg");
 	
 	public ViewColor(int background, int grid) {
 		this(1,1, background, grid);
 	}
 /**
- * Konstruktor som skapar fönster med display och knappar
+ * Konstruktor som skapar fï¿½nster med display och knappar
  * 
  * @param verticalPages
  * @param horizontalPages
@@ -99,7 +99,7 @@ public class ViewColor extends JPanel implements ViewImpl {
         initButtons();
 	}
 /**
- * Resetar färgskiftningen
+ * Resetar fï¿½rgskiftningen
  */
 	public void resetTick(){
 		tick1 = 0; 
@@ -111,7 +111,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 		tick7 = 0;
 	}
 /**
- * Skiftar mellan olika färger
+ * Skiftar mellan olika fï¿½rger
  * 
  * @param tick
  */
@@ -219,10 +219,10 @@ public class ViewColor extends JPanel implements ViewImpl {
 	        ctrl.showShift(arr);
         });
 
-        btnFillRandColor.addActionListener(ae -> { //Fyller fönstret med slumpade färger
+        btnFillRandColor.addActionListener(ae -> { //Fyller fï¿½nstret med slumpade fï¿½rger
             ctrl.showRandomColor();
         });
-        btnFill.addActionListener(ae -> { //Fyller fönstret med en färg som kan skiftas
+        btnFill.addActionListener(ae -> { //Fyller fï¿½nstret med en fï¿½rg som kan skiftas
         	updateColor(tickBig);
         	ctrl.showSameColor(color);
         	
@@ -244,11 +244,7 @@ public class ViewColor extends JPanel implements ViewImpl {
         colorDisplay.setDisplay(matrix);
         colorDisplay.updateDisplay();
 	}
-	@Override
-	public void updateBigView(Array7x7[] all) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public int getHorizontalPages() {
 		return colorDisplay.getHorizontalPages();
@@ -264,18 +260,16 @@ public class ViewColor extends JPanel implements ViewImpl {
 		
 	}
 	public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+        SwingUtilities.invokeLater(() -> {
 
-                ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
-                Array7x7 model = new Array7x7();
-                new Controller(model, view);
-                JFrame frame = new JFrame();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add((Component) view);
-                frame.pack();
-                frame.setVisible(true);
-            }
+            ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
+            Array7x7 model = new Array7x7();
+            new Controller(model, view);
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add((Component) view);
+            frame.pack();
+            frame.setVisible(true);
         });
     }
 

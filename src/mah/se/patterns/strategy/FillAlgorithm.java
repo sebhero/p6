@@ -19,20 +19,20 @@ public interface FillAlgorithm {
      * @param type tar ett nummer värde av nummer/färg/tecken
      * @return en fylld Array7x7
      */
-    public Array7x7 fillWithOneType(int type);
+    Array7x7 fillWithOneType(int type);
 
     /**
      * Fyller Array7x7 med slumpat nummer/färg/tecken
      * @return en fylld Array7x7 med slumpade värden
      */
-    public Array7x7 fillWithRandom();
+    Array7x7 fillWithRandom();
 
     /**
      * Fyller Array7x7 med ökande från 1-7 nummer
      * eller en färg från röd till blå
      * @return Array7x7 med ökande värden
      */
-    public Array7x7 fillWithInGaining();
+    Array7x7 fillWithInGaining();
 
 
 

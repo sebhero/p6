@@ -1,7 +1,6 @@
 package mah.se.mvc.view;
 
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.Array7x7;
 
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ public interface ViewImpl {
 
     void updateView(int[][] all);
 
-    void updateBigView(Array7x7[] all);
+//    void updateBigView(Array7x7[] all);
 
     int getHorizontalPages();
     int getVerticalPages();

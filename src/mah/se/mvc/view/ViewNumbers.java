@@ -1,14 +1,12 @@
 package mah.se.mvc.view;
 
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.Array7x7;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 /**
  *	En klass som tar imot info från en controller och skriver ut vilka nummer vi har
@@ -112,14 +110,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	}
 
-	/**
-	 * Används ej i denna klassen
-	 * @param all
-     */
-	@Override
-	public void updateBigView(Array7x7[] all) {
 
-	}
 
 	/**
 	 * Används ej i denna klassen

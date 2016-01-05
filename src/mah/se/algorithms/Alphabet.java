@@ -37,9 +37,9 @@ public class Alphabet {
 	 * @throws FontFormatException
 	 * @throws IOException
 	 */
-	public Font initFont() throws FontFormatException, IOException, URISyntaxException {
+	private Font initFont() throws FontFormatException, IOException, URISyntaxException {
         URL fontpath = this.getClass().getClassLoader().getResource("assets/00TT.ttf");
-		return Font.createFont(Font.TRUETYPE_FONT, new File(fontpath.toURI())).deriveFont(12f);
+		return Font.createFont(Font.TRUETYPE_FONT, new File(fontpath != null ? fontpath.toURI() : null)).deriveFont(12f);
 	}
 	
 	/**
@@ -86,7 +86,6 @@ public class Alphabet {
         //Om det inte är någon bokstav som returneras, kasta ett exception
         if(!isChar)
         	throw new RuntimeException();
-        Array7x7 array7x7 = new Array7x7(array);
-        return array7x7;
+		return new Array7x7(array);
     }
 }

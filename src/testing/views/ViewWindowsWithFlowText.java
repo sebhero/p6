@@ -1,7 +1,6 @@
 package testing.views;
 
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewImpl;
 import roffe.Color.ColorDisplay;
 
@@ -169,10 +168,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
         colorDisplay.updateDisplay();
 	}
 
-	@Override
-	public void updateBigView(Array7x7[] all) {
 
-	}
 
 	@Override
 	public int getHorizontalPages() {
