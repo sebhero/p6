@@ -1,18 +1,22 @@
 package mah.se;
 
+/**
+ * @author Anton
+ */
+
 import java.lang.reflect.Method;
 
 import javax.swing.JOptionPane;
 
 public class ViewAllTheWindowsNow {
 	
-	public int getInt(String menu) {
+	public int getInt(String txt) {
 		int choice = 0;
 		boolean inputOK = false;
 		
 		do{
 			try {
-				choice = Integer.parseInt(JOptionPane.showInputDialog(menu));
+				choice = Integer.parseInt(JOptionPane.showInputDialog(txt));
 				inputOK = true;
 			}catch(Exception e) {
 				
@@ -36,30 +40,30 @@ public class ViewAllTheWindowsNow {
 				+ "Ange ditt val";
 				
 		int choice = getInt(menu);
+		while(choice != 0){
 		try {
-		while(choice != 0) {
 			switch(choice) {
 				case 1:
-					runMain("mah.se.App");
+					App.main(new String[]{null}, 1);
 					break;
 				case 2:
-					
-				break;
+					App.main(new String[]{null}, 2);
+					break;
 				case 3:
-				break;
+					App.main(new String[]{null}, 3);
+					break;
 				case 4:
-				break;
+					App.main(new String[]{null}, 4);
+					break;
 				case 5:
-				break;
-				
-				
-				
+				break;		
 			}
-			choice = getInt(menu);
-		}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		choice = getInt(menu);
+	}
+		
 	}
 	
     public void runMain(String classname) throws Exception {
