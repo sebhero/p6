@@ -13,6 +13,9 @@ import java.util.ArrayList;
 /**
  * 
  * @author Johnatan Sona
+ * 
+ * Skapar ett Color fönster med UI. 
+ * 
  *	2016-01-03
  */
 @SuppressWarnings("serial")
@@ -31,7 +34,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	private JButton btnShiftLeft = new JButton("Shift left");
 	private JButton btnShiftUp = new JButton("Shift up");
 	private JButton btnShiftDown = new JButton("Shift down");
-	private JButton btnFillRandColor = new JButton("Fyll med slumpfÃ¤rger");
+	private JButton btnFillRandColor = new JButton("Fyll med slumpfärger");
 	private JButton btnFill = new JButton("Fyll med en färg");
 	private JButton btnChoose1 = new JButton("Välj färg");
 	private JButton btnChoose2 = new JButton("Välj färg");
