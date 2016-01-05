@@ -63,7 +63,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 		pnlFillBtn = new JPanel();
 		
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(horizontalPages*500, verticalPages*420));
+		this.setPreferredSize(new Dimension(horizontalPages*500, verticalPages*490));
 
 		colorDisplay.setPreferredSize(new Dimension(horizontalPages*315, verticalPages*315));
 		pnlSideBtn.add(btnChoose1);
@@ -98,6 +98,23 @@ public class ViewColor extends JPanel implements ViewImpl {
 		
         initButtons();
 	}
+
+	/**
+	 * Fixar problem med ändra storlek på vyn
+	 * @param dimension
+	 */
+	@Override
+	public void setSize(Dimension dimension) {
+		double newSize = dimension.getWidth()/this.getWidth();
+		//sätter storleken på coloroDispl 100 mindre för att den ska få plats
+		int newSizeW = (int) (newSize * this.getWidth()-100);
+		int newSizeH = (int) (newSize * this.getHeight()-100);
+		super.setSize(dimension);
+		colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
+		this.revalidate();
+		this.repaint();
+	}
+
 /**
  * Resetar f�rgskiftningen
  */

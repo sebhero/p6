@@ -25,7 +25,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		System.out.println(currentView.getClass().getName());
+		//extra to handle the resize of the view.
 		currentView.setSize(e.getComponent().getSize());
 
 	}
@@ -65,7 +65,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 		jtbExample.addTab("Shifting", shiftPanel);
 		jtbExample.addTab("Mr big flow", mrBigPanel);
 
-		jtbExample.setSelectedIndex(3);
+		jtbExample.setSelectedIndex(0);
 		currentView = (JPanel) jtbExample.getSelectedComponent();
 
 		ctrl = new Controller(model, (ViewImpl) jtbExample.getSelectedComponent());

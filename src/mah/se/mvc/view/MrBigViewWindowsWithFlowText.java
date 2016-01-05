@@ -35,7 +35,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
 	    this.revalidate();
 	    this.repaint();
-        System.out.println(colorDisplay.getWidth());
+//        System.out.println(colorDisplay.getWidth());
     }
 
     private STATE currentState = STATE.UNINITIATED;
