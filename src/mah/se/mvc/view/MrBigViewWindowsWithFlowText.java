@@ -204,7 +204,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                     controller.setDirection(Controller.DIRECTION.LEFT);
                     controller.loadFlowText(flowText);
                 } else
-                    JOptionPane.showMessageDialog(null, "Empty input");
+                    JOptionPane.showMessageDialog(null, "Empty inprutt");
             }
             else if(e.getSource() == simpleShiftLeft && currentState != STATE.UNINITIATED) {
                 controller.simpleShift(Controller.DIRECTION.LEFT);
