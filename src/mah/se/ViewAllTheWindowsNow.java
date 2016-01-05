@@ -39,7 +39,7 @@ public class ViewAllTheWindowsNow {
 				+ "0. För att avsluta \n"
 				+ "Ange ditt val";
 				
-		int choice = getInt(menu);
+		/*int choice = getInt(menu);
 		while(choice != 0){
 		try {
 			switch(choice) {
@@ -61,8 +61,7 @@ public class ViewAllTheWindowsNow {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		choice = getInt(menu);
-	}
+		choice = getInt(menu);*/
 		
 	}
 	

@@ -35,6 +35,7 @@ public class Controller{
 	//TODO remove use ShiftText instead
     //för flowtext håller koll på vilken kolumn vi är i tecknet
     private int shiftArrayIdx;
+	private int speed = 50;
 
 
 	//TODO remove use ShiftText instead
@@ -524,7 +525,13 @@ public class Controller{
 
 		//start timer
 		timer = new Timer();
-		timer.schedule(new shiftTextTimer(), 50, 50);
+		timer.schedule(new shiftTextTimer(), speed, speed);
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+		pause();
+		resume();
 	}
 
 	/**
@@ -557,7 +564,7 @@ public class Controller{
 	 */
 	public void resume() {
 		timer = new Timer();    //Då shiftcounter och shiftArrayIdx inte ändras kan man bara göra en ny timer
-		timer.schedule(new shiftTextTimer(), 50, 50);
+		timer.schedule(new shiftTextTimer(), speed, speed);
 
 	}
 }

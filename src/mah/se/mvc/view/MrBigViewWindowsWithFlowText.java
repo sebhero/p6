@@ -5,6 +5,8 @@ import mah.se.mvc.model.Array7x7;
 import roffe.Color.ColorDisplay;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +29,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     private int verticalPages, horizontalPages, backgroundColor, gridColor;
     private JTextField input;
     private JButton start, pause, displayText, simpleShiftRight, simpleShiftLeft, changeDirection;
+    private JSlider speedSlider;
 
     private String flowText;
 
@@ -71,6 +74,10 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         simpleShiftLeft = new JButton("Shift one step left");
         simpleShiftRight = new JButton("Shift one step right");
         changeDirection = new JButton("ChangeDirection");
+        speedSlider = new JSlider();
+        speedSlider.setMinimum(10);
+        speedSlider.setMaximum(100);
+        speedSlider.setValue(60);
 
         ButtonListener buttonListener = new ButtonListener();
         start.addActionListener(buttonListener);
@@ -79,6 +86,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         simpleShiftLeft.addActionListener(buttonListener);
         simpleShiftRight.addActionListener(buttonListener);
         changeDirection.addActionListener(buttonListener);
+        speedSlider.addChangeListener(e -> controller.setSpeed(110 - speedSlider.getValue()));
 
         panel.add(input);
         panel.add(displayText);
@@ -87,6 +95,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         panel.add(changeDirection);
         panel.add(simpleShiftLeft);
         panel.add(simpleShiftRight);
+        panel.add(speedSlider);
         return panel;
     }
 
@@ -99,6 +108,8 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 start.setEnabled(false);
                 pause.setEnabled(true);
                 changeDirection.setEnabled(true);
+                simpleShiftLeft.setEnabled(false);
+                simpleShiftRight.setEnabled(false);
                 break;
             case PAUSED:
                 start.setEnabled(true);
