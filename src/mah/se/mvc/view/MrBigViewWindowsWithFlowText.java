@@ -162,7 +162,23 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     @Override
     public void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir) {
-
+        for (int i = 0; i < all.size(); i++) {
+            switch (dir) {
+                case RIGHT:
+                    colorDisplay.setDisplay(all.get(i), 0, i);
+                    break;
+                case LEFT:
+                    colorDisplay.setDisplay(all.get(i), 0, i);
+                    break;
+                case UP:
+                    colorDisplay.setDisplay(all.get(i), i, 0);
+                    break;
+                case DOWN:
+                    colorDisplay.setDisplay(all.get(i), i, 0);
+                    break;
+            }
+        }
+        colorDisplay.updateDisplay();
     }
 
 
@@ -171,7 +187,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == start) {
-                controller.flowText(flowText);
+                controller.flowText();
                 currentState = STATE.RUNNING;
             }
             else if(e.getSource() == pause) {
@@ -185,9 +201,10 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             else if(e.getSource() == displayText) {
                 if((flowText = input.getText().toString()).length() != 0) {
                     currentState = STATE.PAUSED;
-                    runThisShit(flowText);
+                    controller.setDirection(Controller.DIRECTION.LEFT);
+                    controller.loadFlowText(flowText);
                 } else
-                    JOptionPane.showMessageDialog(null, "Empty input");
+                    JOptionPane.showMessageDialog(null, "Empty inprutt");
             }
             else if(e.getSource() == simpleShiftLeft && currentState != STATE.UNINITIATED) {
                 controller.simpleShift(Controller.DIRECTION.LEFT);

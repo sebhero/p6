@@ -1,25 +1,17 @@
 package mah.se.mvc.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.controller.Controller.DIRECTION;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import mah.se.patterns.strategy.FillNumbers;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ViewShiftTest extends JPanel implements ViewImpl {
 	
@@ -168,12 +160,12 @@ public class ViewShiftTest extends JPanel implements ViewImpl {
 		
 	}
 	
-//	public static void main (String args[]) {
-//		JFrame frame = new JFrame("Test");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.add(new ViewShiftTest());
-//		frame.pack();
-//		frame.setVisible(true);
-//	}
+	public static void main (String args[]) {
+		JFrame frame = new JFrame("Test");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(new ViewShiftTest());
+		frame.pack();
+		frame.setVisible(true);
+	}
 
 }

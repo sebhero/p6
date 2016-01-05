@@ -8,10 +8,7 @@ import javax.swing.SwingUtilities;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.MrBigViewWindowsWithFlowText;
-import mah.se.mvc.view.ViewColor;
 import mah.se.mvc.view.ViewImpl;
-import mah.se.mvc.view.ViewNumbers;
-import mah.se.mvc.view.ViewShiftTest;
 import roffe.Color.Color;
 
 /**
@@ -25,37 +22,15 @@ import roffe.Color.Color;
  */
 class App {
 
-	
-	
-    public static void main(String[] args, int choice) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-            	ViewImpl view;
-            	switch(choice){
-            		case 1:
-            			view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
-            			break;
-            		case 2:
-            			view = new ViewColor(1,1, Color.BLACK, Color.BLUE);
-            			break;
-            		case 3:
-            			view = new ViewNumbers();
-            			break;
-            		case 4:
-            			view = new ViewShiftTest();
-            			break;
-            		default:
-            			view = null;
-            			break;
-            	}
-           		
-
+           		ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
                 //with FlowText
                 //With numbers
 //                ViewImpl view = new ViewNumbers();
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
-                
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.add((Component) view);

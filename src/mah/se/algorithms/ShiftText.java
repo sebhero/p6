@@ -29,6 +29,7 @@ public class ShiftText {
 	private int stepps;
 	//total antal steg som finns.
 	private int doneStepping;
+	private Array7 temp;
 
 	/**
 	 * Tar ett steg i message och shiftar över det till messageView
@@ -41,8 +42,19 @@ public class ShiftText {
 
 			case LEFT:
 			case UP:
+				//System.out.println("ran step "+stepps);
 				for (int i = message.size()-1; i >= 0 ; i--) {
 					next= shifter.shift(message.get(i), next, dir);
+				}
+
+				//skapa mellan rum mellan bokstaverna. behovs inte eg i left right
+				if ((stepps) % 7 ==0) {
+					temp =	next;
+					next = new Array7(Color.BLACK);
+					for (int i = messageView.size()-1; i >= 0 ; i--) {
+						next= shifter.shift(messageView.get(i), next, dir);
+					}
+					next = temp;
 				}
 
 				for (int i = messageView.size()-1; i >= 0 ; i--) {
@@ -52,8 +64,19 @@ public class ShiftText {
 
 			case RIGHT:
 			case DOWN:
+
 				for (int i = 0; i <= message.size()-1 ; i++) {
 					next = shifter.shift(message.get(i), next,dir);
+				}
+
+				//skapa mellan rum mellan bokstaverna. behovs inte eg i left right
+				if ((stepps) % 7 ==0) {
+					temp =	next;
+					next = new Array7(Color.BLACK);
+					for (int i = 0; i <= messageView.size()-1 ; i++) {
+						next = shifter.shift(messageView.get(i), next,dir);
+					}
+					next = temp;
 				}
 
 				for (int i = 0; i <= messageView.size()-1 ; i++) {
