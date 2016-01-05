@@ -1,12 +1,8 @@
 package roffe.Color;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 
 public class ColorDisplay extends JComponent {
     private final int PAGE_SIZE = 7;
@@ -194,5 +190,26 @@ public class ColorDisplay extends JComponent {
 
 		JOptionPane.showMessageDialog(null,d);
 	//	JOptionPane.showMessageDialog(null, new ColorDisplay(Color.RED,Color.WHITE));
+	}
+
+	public void setNew7x7Size(int newVerticalPages, int newHorizontalPages) {
+		this.verticalPages = newVerticalPages;
+		this.horizontalPages = newHorizontalPages;
+//		this.sideSize = sideSize;
+		this.displayGrid = toColor(grid);
+
+		if(sideSize>0) {
+			setPreferredSize(new Dimension(horizontalPages*PAGE_SIZE * (sideSize+ gridStroke) + gridStroke,
+					verticalPages*PAGE_SIZE * (sideSize+ gridStroke) + gridStroke));
+		}
+		systemPaint = new java.awt.Color[verticalPages* PAGE_SIZE][horizontalPages* PAGE_SIZE];
+		userPaint = new int[verticalPages* PAGE_SIZE][horizontalPages* PAGE_SIZE];
+		for(int row = 0; row < systemPaint.length; row++) {
+			for(int col = 0; col < systemPaint[row].length; col++) {
+				systemPaint[row][col] = this.displayBackground;
+				userPaint[row][col] = background;
+			}
+		}
+		clearDisplay();
 	}
 }

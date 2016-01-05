@@ -9,8 +9,9 @@ import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
-import roffe.Color.Color;
+import testing.app.JTabbedPaneDemo;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,9 +26,22 @@ import java.util.TimerTask;
 public class Controller {
 
 
+	private final HashMap<String,Array7x7>  modelMap;
+	private JTabbedPaneDemo mainPanel;
+
 	public DIRECTION getDirection() {
 		return dir;
 	}
+
+	public void setMainPanel(JTabbedPaneDemo mainPanel) {
+		this.mainPanel = mainPanel;
+	}
+
+	public void clearAll() {
+		this.pause();
+		this.shiftText.resetMessage();
+	}
+
 
 	//håller koll på vilket håll vi shiftar
 	public enum DIRECTION {
@@ -53,7 +67,7 @@ public class Controller {
 	private final ShiftArray shifter;
 	private FillAlgorithm filler;
 	private Array7x7 model;
-	private final ViewImpl view;
+	private ViewImpl view;
 
 	private Timer timer;
 
@@ -64,15 +78,29 @@ public class Controller {
 	 * @param view  the view we are displaying the matrix on
 	 */
 	public Controller(Array7x7 model, ViewImpl view) {
-		this.model = model;
+
+		modelMap = new HashMap();
+		modelMap.put("mah.se.mvc.view.ViewColor",new Array7x7());
+		modelMap.put("mah.se.mvc.view.ViewNumbers",new Array7x7());
+		modelMap.put("mah.se.mvc.view.MrBigViewWindowsWithFlowText",new Array7x7());
+		modelMap.put("mah.se.mvc.view.ViewShiftTest",new Array7x7());
+
+		//TODO @Deprecated Use hashmap instead
+//		this.model = model;
 		this.view = view;
+		this.model = getViewsModel(view);
+
 		this.view.setCtrl(this);
-		Array7x7[] colorDisplay = new Array7x7[view.getHorizontalPages()];
-		filler = getFiller(FILLERTYPE.COLORS);
-		for (int n = 0; n < colorDisplay.length; n++)
-			colorDisplay[n] = filler.fillWithOneType(Color.BLACK);
+//		Array7x7[] colorDisplay = new Array7x7[view.getHorizontalPages()];
+//		filler = getFiller(FILLERTYPE.COLORS);
+//		for (int n = 0; n < colorDisplay.length; n++)
+//			colorDisplay[n] = filler.fillWithOneType(Color.BLACK);
 		shifter = new ShiftArray();
 		updateView();
+
+
+//		modelMap.put(new Array7x7(), "mah.se.mvc.view.ViewColor");
+
 	}
 
 
@@ -390,5 +418,26 @@ public class Controller {
 		timer = new Timer();    //Då shiftcounter och shiftArrayIdx inte ändras kan man bara göra en ny timer
 		timer.schedule(new shiftTextTimer(), speed, speed);
 
+	}
+
+	/**
+	 * Sätter vilken view som vi använder just nu. Används för att byta view
+	 * och sätter view till den vyn och ger den våran kontroller samt ställer in rätt model.
+	 * @param view nuvarnde view
+	 */
+	public void setView(ViewImpl view) {
+		this.view = view;
+		this.model = getViewsModel(view);
+		view.setCtrl(this);
+
+	}
+
+	/**
+	 * Tar reda på vilken model vi använder för just den viewn
+	 * @param view vilken view vi använder
+	 * @return modelen för just den viewn
+	 */
+	private Array7x7 getViewsModel(ViewImpl view) {
+		return this.modelMap.get(view.getClass().getName());
 	}
 }

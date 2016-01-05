@@ -15,6 +15,10 @@ import java.util.ArrayList;
  */
 public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
+
+    private TextField tfColorPanelHeight;
+    private TextField tfColorPanelWidth;
+
     public enum STATE {
         RUNNING,
         PAUSED,
@@ -23,21 +27,15 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     @Override
     public void setSize(Dimension dimension) {
-        super.setSize(dimension);
-        //colorDisplay.setSize((int)dimension.getWidth(), (int)dimension.getHeight() - 100);
-
-        double newSize = dimension.getWidth()/1300;
-        int newSizeW = (int) (newSize * 1200);
-        int newSizeH = (int) (newSize * 200);
-//        System.out.println("new size "+newSize+" dim"+dimension.getWidth());
-        System.out.println(colorDisplay.getWidth());
-//        colorDisplay.setSize(newSizeW, newSizeH);
+	    double newSize = dimension.getWidth()/this.getWidth();
+	    //sätter storleken på coloroDispl 100 mindre för att den ska få plats
+	    int newSizeW = (int) (newSize * this.getWidth()-100);
+	    int newSizeH = (int) (newSize * this.getHeight()-100);
+	    super.setSize(dimension);
         colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
-//        colorDisplay.revalidate();
-        colorDisplay.repaint();
+	    this.revalidate();
+	    this.repaint();
         System.out.println(colorDisplay.getWidth());
-        //1200x200
-        //1300x300
     }
 
     private STATE currentState = STATE.UNINITIATED;
@@ -63,7 +61,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         this.horizontalPages = horizontalPages;
         this.backgroundColor = backgroundColor;
         this.gridColor = gridColor;
-        this.setPreferredSize(new Dimension(1300,300));
+        this.setPreferredSize(new Dimension(1300,350));
         init();
     }
 
@@ -72,7 +70,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      */
     public void init() {
         colorDisplay = new ColorDisplay(verticalPages, horizontalPages, backgroundColor, gridColor);
-        colorDisplay.setPreferredSize(new Dimension(horizontalPages * 200, verticalPages * 200));
+//        colorDisplay.setPreferredSize(new Dimension(horizontalPages * 200, verticalPages * 200));
         JPanel buttonPanel = initButtons();
         JPanel buttonPanel2 = initButtons2();
         JPanel BigButtonsPanel = new JPanel(new GridLayout(2, 1));
@@ -86,8 +84,44 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     private JPanel initButtons2() {
         JPanel panel = new JPanel();
-        JButton newButton = new JButton("Test");
-        panel.add(newButton);
+        JButton btnChangeSize= new JButton("Change size");
+        JButton btnUpDir= new JButton("Up dir");
+        JButton btnStop= new JButton("Stop");
+        System.out.println("color "+colorDisplay.getHorizontalPages());
+        //ful fix
+        //// FIXME: 2016-01-05 ful fix need to set text better
+        tfColorPanelHeight = new TextField(""+colorDisplay.getHorizontalPages());
+        tfColorPanelWidth = new TextField(""+colorDisplay.getVerticalPages());
+
+        btnChangeSize.addActionListener(ae ->{
+            int verticalPages = Integer.parseInt(tfColorPanelWidth.getText());
+            int horizontalPages = Integer.parseInt(tfColorPanelHeight.getText());
+            colorDisplay.setNew7x7Size(verticalPages, horizontalPages);
+            colorDisplay.setPreferredSize(new Dimension(horizontalPages * 200, verticalPages * 200));
+//            colorDisplay.revalidate();
+//            colorDisplay.repaint();
+	        this.revalidate();
+	        this.repaint();
+	        System.out.println("new size"+colorDisplay.getWidth()+" h "+colorDisplay.getHeight());
+        });
+
+        btnUpDir.addActionListener(ae ->{
+
+            colorDisplay.clearDisplay();
+            controller.setDirection(Controller.DIRECTION.UP);
+            controller.loadFlowText(input.getText());
+            controller.flowText();
+        });
+
+        btnStop.addActionListener(ae ->{
+            controller.clearAll();
+        });
+
+        panel.add(tfColorPanelHeight);
+        panel.add(tfColorPanelWidth);
+        panel.add(btnChangeSize);
+        panel.add(btnUpDir);
+        panel.add(btnStop);
         return panel;
     }
 
@@ -185,13 +219,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     }
 
-//    @Override
-//    public void updateBigView(Array7x7[] all) {
-//        for(int n = 0; n < horizontalPages; n++)
-//            colorDisplay.setDisplay(all[n].getAll(), 0, n);
-//        colorDisplay.updateDisplay();
-//    }
-
     public void runThisShit(String texy) {
         controller.loadFlowText(texy);
         controller.flowText();
@@ -266,19 +293,21 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 switch (controller.getDirection()) {
                     case LEFT:
                         controller.setDirection(Controller.DIRECTION.RIGHT);
-                        dirText = "Left";
+                        dirText = "UP";
                         break;
                     case RIGHT:
                         controller.setDirection(Controller.DIRECTION.UP);
-                        dirText = "Rigt";
+                        dirText = "Down";
                         break;
                     case UP:
                         controller.setDirection(Controller.DIRECTION.DOWN);
-                        dirText = "Down";
+                        System.out.println(getParent().getParent().getParent().getParent().getClass().getName());
+                        dirText = "Left";
                         break;
                     case DOWN:
                         controller.setDirection(Controller.DIRECTION.LEFT);
-                        dirText = "Up";
+                        System.out.println(getParent().getParent().getParent().getParent().getParent().getClass().getName());
+                        dirText = "Right";
                         break;
                 }
                 changeDirection.setText("ChangeDirection: "+dirText);
