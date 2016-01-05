@@ -1,6 +1,8 @@
 package mah.se;
 
-import java.awt.Component;
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -20,10 +22,10 @@ import roffe.Color.Color;
  * FUCKFACE
  * Creates the model and controller and view
  */
-class App {
+class App extends JFrame{
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+        /*SwingUtilities.invokeLater(new Runnable() {
             public void run() {
            		ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
                 //with FlowText
@@ -31,15 +33,58 @@ class App {
 //                ViewImpl view = new ViewNumbers();
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
+                BorderLayout layout = new BorderLayout();
                 JFrame frame = new JFrame();
+                frame.setLayout(layout);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add((Component) view);
+                frame.add((Component) view, layout.CENTER);
                 frame.pack();
                 frame.setVisible(true);
-            	
+
+            }
+        });*/
+        new App(1);
+    }
+
+    public App(int choice) {
+        ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
+        //with FlowText
+        //With numbers
+//                ViewImpl view = new ViewNumbers();
+        Array7x7 model = new Array7x7();
+        new Controller(model, view);
+        BorderLayout layout = new BorderLayout();
+        JFrame frame = new JFrame();
+        frame.setLayout(layout);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add((Component) view, layout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
+        frame.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                if(choice == 1)
+                    ((Component) view).setSize(frame.getSize());
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
             }
         });
     }
+
+
 
 }
 
