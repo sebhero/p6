@@ -37,7 +37,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	private JTextField txtInput = new JTextField();
 
 	public ViewWindowsWithFlowText(int background, int grid) {
-		this(1,1, background, grid);
+		this(3,3, background, grid);
 	}
 
 	public ViewWindowsWithFlowText(int verticalPages, int horizontalPages, int background, int grid) {
