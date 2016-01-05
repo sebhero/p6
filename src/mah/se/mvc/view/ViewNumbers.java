@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author jonatan
  *
  */
@@ -40,7 +40,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		centerPanel.setPreferredSize(new Dimension(400, 400));
 		centerPanel.setLayout(new GridLayout(7, 7, 2, 2));
 		centerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+		//kommer att skapa ett label objekt med tillhörande funktion och lägga i en lista
 		for (int i = 0; i < array2D.length; i++) {
 			for (int j = 0; j < array2D[i].length; j++) {
 				array2D[i][j] = new JLabel("");
@@ -53,7 +53,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		westPanel.setLayout(new GridLayout(7, 0, 5, 0));
 		southPanel.setLayout(new GridLayout(0, 7, 0, 2));
 		westPanel.setSize(60, 600);
-
+		//skapar två listor som kommer att inehålla textFields
 		for (int i = 0; i < txtInputWest.length; i++) {
 			txtInputWest[i] = new JTextField();
 			txtInputSouth[i] = new JTextField();
@@ -85,13 +85,20 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		add(eastPanel, BorderLayout.EAST);
 	}
 
-	// TODO Kontrollera om det beh�vs mer metoder?
 
+	/**
+	 * Metoden kommer att ge den lokala controllern ett värde
+	 * @param ctrl
+     */
 	@Override
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
 	}
 
+	/**
+	 * Metoden kommer att uppdatera viewn
+	 * @param all
+     */
 	@Override
 	public void updateView(int[][] all) {
 		for (int i = 0; i < all.length; i++) {
@@ -172,13 +179,14 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		return arr;
 	}
 	/**
-	 *
+	 * Sätter ett värde på en textfield, värdet får vi från
+	 * en matrisen
 	 */
 	public void setElementText(int value){
 		txtElement.setText(String.valueOf(value));
 	}
 	/**
-	 *
+	 *Returnerar elemnetet i textfieldet
 	 */
 	public int getElement(){
 		int value = Integer.parseInt(txtElement.getText());
@@ -193,29 +201,44 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	 *
 	 */
 	private class ViewNumberListener implements ActionListener {
-
+		/**
+		 * Metoden tar imot en string som ska vara huvudtext och sedan kommer den
+		 * att returnera ett tal som användaren matar in
+		 * @param res Medelande till användare
+         * @return Ett int value som användaren matar in
+         */
 		public int getChoice(String res){
 			int choice = Integer.parseInt(JOptionPane.showInputDialog(res));
 			return choice;
 		}
 
+		/**
+		 * Metoden kommer att kontrollera om man trycker på knapparna och
+		 * sedan få något att hända i programmet
+		 * @param e där vi får händelsen
+         */
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			//Om man trycker på LäsCol
 			if (e.getSource() == btnColRead) {
 				setColumbText(ctrl.getCol(getChoice("Välj Col")));
 			}
+			//Om man trycker på Skriv Col
 			if (e.getSource() == btnColWrite) {
 				ctrl.setCol(getChoice("Välj Col"), getTextCol());
 			}
+			//Om man trycker på Läs Rad
 			if (e.getSource() == btnRowRead) {
 				setRowText(ctrl.getRow(getChoice("Välj Rad")));
 			}
+			//Om man trycker på Skriv Rad
 			if (e.getSource() == btnRowWrite) {
 				ctrl.setRow(getChoice("Välj Rad"),getTextRow());
 			}
+			//Om man trycker på Skriv Element
 			if(e.getSource() == btnElmWrite){
 				ctrl.setElement(getChoice("Välj Rad"),getChoice("Välj Col"),getElement());
 			}
+			//Om man trycker på Läs Element
 			if(e.getSource() == btnElmRead){
 				setElementText(ctrl.getElement(getChoice("Välj Rad"),getChoice("Välj Col")));
 			}
