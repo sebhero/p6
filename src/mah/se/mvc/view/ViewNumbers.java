@@ -8,9 +8,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 /**
- *
+ *	En klass som tar imot info från en controller och skriver ut vilka nummer vi har
+ * så att vi kan testa funktionen av hur det ska se ut.
  * @author jonatan
  *
  */
@@ -44,7 +46,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 		for (int i = 0; i < array2D.length; i++) {
 			for (int j = 0; j < array2D[i].length; j++) {
 				array2D[i][j] = new JLabel("");
-				array2D[i][j].setBackground(Color.BLUE);
+				array2D[i][j].setBackground(Color.CYAN);
 				array2D[i][j].setOpaque(true);
 				centerPanel.add(array2D[i][j]);
 			}
@@ -110,22 +112,40 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	}
 
+	/**
+	 * Används ej i denna klassen
+	 * @param all
+     */
 	@Override
 	public void updateBigView(Array7x7[] all) {
 
 	}
 
+	/**
+	 * Används ej i denna klassen
+	 * @return
+     */
 	@Override
 	public int getHorizontalPages() {
 //		return colorDisplay.getHorizontalPages();
 		return 0;
 	}
 
+	/**
+	 * Används ej i denna klassen
+	 * @return
+     */
 	@Override
 	public int getVerticalPages() {
 //		return colorDisplay.getVerticalPages();
 		return 0;
 	}
+
+	/**
+	 * Används ej i denna klassen
+	 * @param all
+	 * @param dir
+     */
 	@Override
 	public void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir) {
 
@@ -158,10 +178,16 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	 *
 	 * @return
 	 */
-	public int[] getTextRow() {
+	public int[] getTextRow(int[] old) {
 		int[] arr = new int[7];
 		for (int i = 0; i < txtInputSouth.length; i++) {
-			arr[i] = Integer.parseInt(txtInputSouth[i].getText());
+			try{
+				arr[i] = Integer.parseInt(txtInputSouth[i].getText());
+			}catch (Exception e){
+				JOptionPane.showMessageDialog(null,"Felaktigt värde på Rad:" + String.valueOf(i+1));
+				arr[i] = old[i];
+			}
+
 		}
 		return arr;
 	}
@@ -171,10 +197,16 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	 *
 	 * @return
 	 */
-	public int[] getTextCol() {
+	public int[] getTextCol(int[] old){
 		int[] arr = new int[7];
 		for (int i = 0; i < txtInputWest.length; i++) {
-			arr[i] = Integer.parseInt(txtInputWest[i].getText());
+			//kontrollerar om det är en int annars sparar den det gamla värdet
+			try {
+				arr[i] = Integer.parseInt(txtInputWest[i].getText());
+			}catch(Exception e){
+				JOptionPane.showMessageDialog(null,"Felaktigt värde på Columb: " + String.valueOf(i+1));
+				arr[i] = old[i];
+			}
 		}
 		return arr;
 	}
@@ -188,8 +220,16 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	/**
 	 *Returnerar elemnetet i textfieldet
 	 */
-	public int getElement(){
-		int value = Integer.parseInt(txtElement.getText());
+	public int getElement(int old){
+		int value = 0;
+		//Kontrollerar så att det är en int
+		try{
+			value = Integer.parseInt(String.valueOf(txtElement.getText()));
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null,"Felaktigt värde, Mata in en Int");
+			value = old;
+		}
+
 		return value;
 	}
 
@@ -208,7 +248,17 @@ public class ViewNumbers extends JPanel implements ViewImpl {
          * @return Ett int value som användaren matar in
          */
 		public int getChoice(String res){
-			int choice = Integer.parseInt(JOptionPane.showInputDialog(res));
+			int choice = 0;
+			boolean inputOk = false;
+			//Kontrollerar så att det är av typen int!
+			do{
+				try{
+					choice = Integer.parseInt(JOptionPane.showInputDialog(res));
+					inputOk = true;
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null,"Felaktigt värde!\nSka vara en int!");
+				}
+			}while(!inputOk);
 			return choice;
 		}
 
@@ -224,7 +274,8 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 			}
 			//Om man trycker på Skriv Col
 			if (e.getSource() == btnColWrite) {
-				ctrl.setCol(getChoice("Välj Col"), getTextCol());
+				int choice = getChoice("Välj Col");
+				ctrl.setCol(choice, getTextCol(ctrl.getCol(choice)));
 			}
 			//Om man trycker på Läs Rad
 			if (e.getSource() == btnRowRead) {
@@ -232,11 +283,14 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 			}
 			//Om man trycker på Skriv Rad
 			if (e.getSource() == btnRowWrite) {
-				ctrl.setRow(getChoice("Välj Rad"),getTextRow());
+				int choice = getChoice("Välj Rad");
+				ctrl.setRow(choice,getTextRow(ctrl.getRow(choice)));
 			}
 			//Om man trycker på Skriv Element
 			if(e.getSource() == btnElmWrite){
-				ctrl.setElement(getChoice("Välj Rad"),getChoice("Välj Col"),getElement());
+				int choiceRow = getChoice("Välj Rad");
+				int choiceCol = getChoice("Välj Col");
+				ctrl.setElement(choiceRow,choiceCol,getElement(ctrl.getElement(choiceRow,choiceRow)));
 			}
 			//Om man trycker på Läs Element
 			if(e.getSource() == btnElmRead){

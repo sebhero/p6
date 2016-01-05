@@ -43,7 +43,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         this.horizontalPages = horizontalPages;
         this.backgroundColor = backgroundColor;
         this.gridColor = gridColor;
-        this.setPreferredSize(new Dimension(1900,400));
+        this.setPreferredSize(new Dimension(1300,400));
         init();
     }
 
