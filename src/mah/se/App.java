@@ -1,14 +1,15 @@
 package mah.se;
 
+import java.awt.Component;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.*;
+import mah.se.mvc.view.MrBigViewWindowsWithFlowText;
+import mah.se.mvc.view.ViewImpl;
 import roffe.Color.Color;
-
-import java.awt.*;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -24,8 +25,8 @@ class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+           		ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
                 //with FlowText
-                ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
                 //With numbers
 //                ViewImpl view = new ViewNumbers();
                 Array7x7 model = new Array7x7();
@@ -35,6 +36,7 @@ class App {
                 frame.add((Component) view);
                 frame.pack();
                 frame.setVisible(true);
+            	
             }
         });
     }
