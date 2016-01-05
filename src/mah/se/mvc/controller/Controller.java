@@ -321,9 +321,13 @@ public class Controller{
 	 * @param dir vilket håll det ska skiftas åt
 	 */
 	public void simpleShift(DIRECTION dir) {
-		DIRECTION currentDir = this.dir;
+		DIRECTION currentDir;
+		if(this.dir == DIRECTION.LEFT)
+			currentDir = DIRECTION.LEFT;
+		else
+			currentDir = DIRECTION.RIGHT;
 		this.dir = dir;
-		shiftString();
+		showStepText();
 		this.dir = currentDir;
 	}
 
