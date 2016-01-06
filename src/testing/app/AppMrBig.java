@@ -25,7 +25,7 @@ class AppMrBig {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
+                ViewImpl view = new MrBigViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
                 JFrame frame = new JFrame();

@@ -5,7 +5,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
@@ -23,6 +22,8 @@ import roffe.Color.Color;
  * Creates the model and controller and view
  */
 class App extends JFrame{
+
+    JFrame frame;
 
     public static void main(String[] args) {
         /*SwingUtilities.invokeLater(new Runnable() {
@@ -47,20 +48,19 @@ class App extends JFrame{
     }
 
     public App(int choice) {
-        ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
+        ViewImpl view = new MrBigViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
         //with FlowText
         //With numbers
 //                ViewImpl view = new ViewNumbers();
         Array7x7 model = new Array7x7();
         new Controller(model, view);
         BorderLayout layout = new BorderLayout();
-        JFrame frame = new JFrame();
-        frame.setLayout(layout);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add((Component) view, layout.CENTER);
-        frame.pack();
-        frame.setVisible(true);
-        frame.addComponentListener(new ComponentListener() {
+        setLayout(layout);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add((Component) view, layout.CENTER);
+        pack();
+        setVisible(true);
+        addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
                 if(choice == 1) {
@@ -84,8 +84,5 @@ class App extends JFrame{
             }
         });
     }
-
-
-
 }
 

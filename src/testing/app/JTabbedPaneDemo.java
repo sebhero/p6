@@ -22,6 +22,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 
 	private final Controller ctrl;
 	private static JPanel currentView;
+	private JFrame frame;
 
 	@Override
 	public void componentResized(ComponentEvent e) {
@@ -46,7 +47,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 	}
 
 	public JTabbedPaneDemo(JFrame frame) {
-
+		this.frame = frame;
 		Array7x7 model = new Array7x7();
 
 //		new Controller(model, view);
@@ -57,7 +58,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 		JPanel numberPanel = new ViewNumbers();
 		JPanel colorPanel= new ViewColor(Color.BLACK,Color.GRAY);
 		JPanel shiftPanel= new ViewShiftTest();
-		JPanel mrBigPanel= new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
+		JPanel mrBigPanel= new MrBigViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
 
 
 		jtbExample.addTab("Numbers", numberPanel);
@@ -113,4 +114,9 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 	}
 
 
+	public void refreshFrame() {
+		frame.revalidate();
+		frame.pack();
+		frame.repaint();
+	}
 }

@@ -144,6 +144,7 @@ public class ShiftText {
 	public void resetMessage() {
 		clearMessage();
 		loadText(text);
+		messageView.clear();
 	}
 
 	/**
