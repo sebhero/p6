@@ -1,15 +1,22 @@
 package mah.se.mvc.view;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.controller.Controller.DIRECTION;
 import mah.se.mvc.model.Array7;
 import mah.se.mvc.model.Array7x7;
 import roffe.Color.Color;
 import roffe.Color.ColorDisplay;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 /**
  * 
  * @author Johnatan Sona
@@ -283,18 +290,18 @@ public class ViewColor extends JPanel implements ViewImpl {
 		// TODO Auto-generated method stub
 		
 	}
-//	public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//
-//            ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
-//            Array7x7 model = new Array7x7();
-//            new Controller(model, view);
-//            JFrame frame = new JFrame();
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.add((Component) view);
-//            frame.pack();
-//            frame.setVisible(true);
-//        });
-//    }
+	public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+
+            ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
+            Array7x7 model = new Array7x7();
+            new Controller(model, view);
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add((Component) view);
+            frame.pack();
+            frame.setVisible(true);
+        });
+    }
 
 }
