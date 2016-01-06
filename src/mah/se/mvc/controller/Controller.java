@@ -42,7 +42,10 @@ public class Controller {
 	}
 
 	public void clearAll() {
-		this.pause();
+		if (this.timer != null) {
+			this.pause();
+
+		}
 		//this.shiftText.clearMessageView();
 		//System.out.println(shiftText.getMessageView().size());
 		//this.shiftText.setupMessageView(this.shiftText.getMessageSize());
@@ -51,9 +54,6 @@ public class Controller {
 		this.shiftText.clearMessageView();
 		this.setupMessageView();
 		this.shiftText.setSteps(0);
-
-		System.out.println("hello");
-
 	}
 
 
@@ -350,6 +350,8 @@ public class Controller {
 	}
 
 	private void setupMessageView() {
+
+		System.out.println();
 		switch (dir) {
 			case RIGHT:
 			case LEFT:

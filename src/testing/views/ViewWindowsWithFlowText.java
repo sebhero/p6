@@ -91,10 +91,10 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	    });
 
 	    btnFlowUp.addActionListener(ae -> {
-		    //shifts everything to the left
+			colorDisplay.clearDisplay();
+			ctrl.clearAll();
 		    ctrl.setDirection(Controller.DIRECTION.UP);
 		    ctrl.loadFlowText(txtInput.getText());
-//		    ctrl.flowText(txtInput.getText());
 		    ctrl.flowText();
 	    });
 
@@ -109,12 +109,16 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
 
         btnFlowRight.addActionListener(ae -> {
+			colorDisplay.clearDisplay();
+			ctrl.clearAll();
             //shifts everything up
             ctrl.setDirection(Controller.DIRECTION.RIGHT);
 	        ctrl.loadFlowText(txtInput.getText());
 	        ctrl.flowText();
         });
         btnFlowDown.addActionListener(ae -> {
+			colorDisplay.clearDisplay();
+			ctrl.clearAll();
             //shifts everything downwards
             ctrl.setDirection(Controller.DIRECTION.DOWN);
 	        ctrl.loadFlowText(txtInput.getText());
@@ -132,7 +136,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
             ctrl.showRandomColor();
         });
 
-        btnFlowText.addActionListener(ae ->{
+        btnFlowText.addActionListener(ae -> {
 			colorDisplay.clearDisplay();
 			ctrl.clearAll();
         });
