@@ -34,15 +34,15 @@ public class ViewColor extends JPanel implements ViewImpl {
 	private JButton btnShiftLeft = new JButton("Shift left");
 	private JButton btnShiftUp = new JButton("Shift up");
 	private JButton btnShiftDown = new JButton("Shift down");
-	private JButton btnFillRandColor = new JButton("Fyll med slumpf�rger");
-	private JButton btnFill = new JButton("Fyll med en f�rg");
-	private JButton btnChoose1 = new JButton("V�lj f�rg");
-	private JButton btnChoose2 = new JButton("V�lj f�rg");
-	private JButton btnChoose3 = new JButton("V�lj f�rg");
-	private JButton btnChoose4 = new JButton("V�lj f�rg");
-	private JButton btnChoose5 = new JButton("V�lj f�rg");
-	private JButton btnChoose6 = new JButton("V�lj f�rg");
-	private JButton btnChoose7 = new JButton("V�lj f�rg");
+	private JButton btnFillRandColor = new JButton("Fyll med slumpfärger");
+	private JButton btnFill = new JButton("Fyll med en färg");
+	private JButton btnChoose1 = new JButton("Välj färg: Rad 1");
+	private JButton btnChoose2 = new JButton("Välj färg: Rad 2");
+	private JButton btnChoose3 = new JButton("Välj färg: Rad 3");
+	private JButton btnChoose4 = new JButton("Välj färg: Rad 4");
+	private JButton btnChoose5 = new JButton("Välj färg: Rad 5");
+	private JButton btnChoose6 = new JButton("Välj färg: Rad 6");
+	private JButton btnChoose7 = new JButton("Välj färg: Rad 7");
 	
 	public ViewColor(int background, int grid) {
 		this(1,1, background, grid);
@@ -111,6 +111,9 @@ public class ViewColor extends JPanel implements ViewImpl {
 		int newSizeH = (int) (newSize * this.getHeight()-100);
 		super.setSize(dimension);
 		colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
+		System.out.println("Old height: " + pnlSideBtn.getHeight());
+		pnlSideBtn.setPreferredSize(new Dimension(pnlSideBtn.getWidth(),newSizeH));
+		System.out.println("New height: " + pnlSideBtn.getHeight());
 		this.revalidate();
 		this.repaint();
 	}
@@ -276,18 +279,18 @@ public class ViewColor extends JPanel implements ViewImpl {
 		// TODO Auto-generated method stub
 		
 	}
-	public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-
-            ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
-            Array7x7 model = new Array7x7();
-            new Controller(model, view);
-            JFrame frame = new JFrame();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add((Component) view);
-            frame.pack();
-            frame.setVisible(true);
-        });
-    }
+//	public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//
+//            ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
+//            Array7x7 model = new Array7x7();
+//            new Controller(model, view);
+//            JFrame frame = new JFrame();
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            frame.add((Component) view);
+//            frame.pack();
+//            frame.setVisible(true);
+//        });
+//    }
 
 }
