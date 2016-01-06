@@ -57,7 +57,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 
 		JPanel numberPanel = new ViewNumbers();
 		JPanel colorPanel= new ViewColor(Color.BLACK,Color.GRAY);
-		JPanel shiftPanel= new ViewShiftTest();
+		JPanel shiftPanel= new Räserbajs2k16();
 		JPanel mrBigPanel= new MrBigViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
 
 
