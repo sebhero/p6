@@ -57,7 +57,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 
 		JPanel numberPanel = new ViewNumbers();
 		JPanel colorPanel= new ViewColor(Color.BLACK,Color.GRAY);
-		JPanel shiftPanel= new Räserbajs2k16();
+		JPanel shiftPanel= new ViewShift();
 		JPanel mrBigPanel= new MrBigViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
 
 
@@ -71,7 +71,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 		currentView = (JPanel) jtbExample.getSelectedComponent();
 
 		ctrl = new Controller(model, (ViewImpl) jtbExample.getSelectedComponent());
-		ctrl.setMainPanel(this);
+//		ctrl.setMainPanel(this);
 		// Add the tabbed pane to this panel.
 		setLayout(new GridLayout(1, 1));
 

@@ -3,8 +3,7 @@ package testing.app;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.ViewImpl;
-import mah.se.mvc.view.ViewNumbers;
-import mah.se.mvc.view.Räserbajs2k16;
+import mah.se.mvc.view.ViewShift;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +22,7 @@ class AppShift {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ViewImpl view = new Räserbajs2k16();
+                ViewImpl view = new ViewShift();
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
                 JFrame frame = new JFrame();

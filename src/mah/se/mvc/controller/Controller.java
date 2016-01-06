@@ -1,5 +1,6 @@
 package mah.se.mvc.controller;
 
+import mah.se.App;
 import mah.se.algorithms.ShiftArray;
 import mah.se.algorithms.ShiftText;
 import mah.se.mvc.model.Array7;
@@ -27,13 +28,13 @@ public class Controller {
 
 
 	private final HashMap<String,Array7x7>  modelMap;
-	private JTabbedPaneDemo mainPanel;
+	private App mainPanel;
 
 	public DIRECTION getDirection() {
 		return dir;
 	}
 
-	public void setMainPanel(JTabbedPaneDemo mainPanel) {
+	public void setMainPanel(App mainPanel) {
 		this.mainPanel = mainPanel;
 	}
 
