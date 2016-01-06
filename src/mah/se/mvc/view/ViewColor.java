@@ -241,8 +241,10 @@ public class ViewColor extends JPanel implements ViewImpl {
 
         btnFillRandColor.addActionListener(ae -> { //Fyller f�nstret med slumpade f�rger
             ctrl.showRandomColor();
+            resetTick();
         });
         btnFill.addActionListener(ae -> { //Fyller f�nstret med en f�rg som kan skiftas
+        	resetTick();
         	updateColor(tickBig);
         	ctrl.showSameColor(color);
         	
