@@ -57,12 +57,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      * @param gridColor         Färgen mellan varje ruta i ColorDisplay
      */
     public MrBigViewWindowsWithFlowText(int backgroundColor, int gridColor) {
-        this.parent = parent;
-        verticalPages = inputVerticalPages();
         this.backgroundColor = backgroundColor;
         this.gridColor = gridColor;
         this.setPreferredSize(new Dimension(1300,350));
-        init();
     }
 
     /**
@@ -88,6 +85,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      * initierar panelen med en colordisplay, knappar och en textfield
      */
     public void init() {
+        verticalPages = inputVerticalPages();
         colorDisplay = new ColorDisplay(1, verticalPages, backgroundColor, gridColor);
         JPanel buttonPanel = initButtons();
         JPanel BigButtonsPanel = new JPanel(new GridLayout(2, 1));
@@ -209,7 +207,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     public void clearDisplay() {
         colorDisplay.clearDisplay();
         controller.clearAll();
-        controller.resume();
+        controller.shiftOutAll();
     }
 
 
@@ -250,6 +248,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == start && currentState == STATE.INITIATED) {
+                colorDisplay.clearDisplay();
                 controller.flowText();
                 currentState = STATE.RUNNING;
             }
@@ -258,7 +257,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 currentState = STATE.PAUSED;
             }
             else if(e.getSource() == stop) {
-                controller.clearAll();
                 clearDisplay();
                 currentState = STATE.INITIATED;
             }
@@ -281,6 +279,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 controller.simpleShift(Controller.DIRECTION.RIGHT);
             }
             else if(e.getSource() == changeDirection) {
+                clearDisplay();
                 String dirText = "";
                 Controller.DIRECTION dir = controller.getDirection();
                 if(dir == Controller.DIRECTION.UP || dir == Controller.DIRECTION.DOWN) {
@@ -288,6 +287,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                     clearDisplay();
                     setSize(new Dimension(verticalPages * 200, 200));
                     controller.refreshMainPanel();
+                    controller.resume();
                 }
                 switch (dirLeftRight) {
                     case LEFT:
@@ -304,13 +304,16 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 changeDirection.setText("ChangeDirection: "+dirText);
             }
             else if(e.getSource() == changeDirectionUpDown) {
+                clearDisplay();
                 String dirText = "";
                 Controller.DIRECTION dir = controller.getDirection();
                 if(dir == Controller.DIRECTION.LEFT || dir == Controller.DIRECTION.RIGHT) {
                     colorDisplay.setNew7x7Size(verticalPages, 1);
                     clearDisplay();
+
                     setSize(new Dimension(200, verticalPages * 200));
                     controller.refreshMainPanel();
+                    controller.resume();
                 }
                 switch (dirUpDown) {
                     case UP:

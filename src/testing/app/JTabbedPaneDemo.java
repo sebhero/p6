@@ -66,7 +66,8 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 		jtbExample.addTab("Shifting", shiftPanel);
 		jtbExample.addTab("Mr big flow", mrBigPanel);
 
-		jtbExample.setSelectedIndex(0);
+		jtbExample.setSelectedIndex(3);
+		((MrBigViewWindowsWithFlowText)mrBigPanel).init();
 		currentView = (JPanel) jtbExample.getSelectedComponent();
 
 		ctrl = new Controller(model, (ViewImpl) jtbExample.getSelectedComponent());
@@ -77,6 +78,8 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 		jtbExample.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
+				if(jtbExample.getSelectedComponent() == mrBigPanel)
+					((MrBigViewWindowsWithFlowText)mrBigPanel).init();
 				ctrl.setView((ViewImpl) jtbExample.getSelectedComponent());
 				currentView = (JPanel) jtbExample.getSelectedComponent();
 

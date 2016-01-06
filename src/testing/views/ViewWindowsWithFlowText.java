@@ -31,7 +31,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	private JButton btnLoadString = new JButton("load string");
 
     private JButton btnFillColor = new JButton("Fyll med slumpfärger");
-    private JButton btnFlowText = new JButton("Rinnande Text");
+    private JButton btnFlowText = new JButton("stop");
 
 	private JTextField txtInput = new JTextField();
 
@@ -132,14 +132,8 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
         });
 
         btnFlowText.addActionListener(ae ->{
-            //visa rinnande text
-            String txt = txtInput.getText();
-            //inget skrivet i text fältet visa ?
-            if (txt.length() <= 0) {
-                txt = "?";
-            }
-//            ctrl.flowText(txt.toUpperCase());
-			ctrl.loadFlowText(txt);
+
+			ctrl.clearAll();
         });
 
 
