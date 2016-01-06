@@ -110,7 +110,7 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 		frame.getContentPane().add(new JTabbedPaneDemo(frame),
 				BorderLayout.CENTER);
 		frame.addComponentListener(tabpanel);
-		frame.setSize(400, 300);
+		frame.setSize(1300, 400);
 		frame.setVisible(true);
 
 

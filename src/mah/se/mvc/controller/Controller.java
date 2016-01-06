@@ -350,8 +350,6 @@ public class Controller {
 	}
 
 	private void setupMessageView() {
-
-		System.out.println();
 		switch (dir) {
 			case RIGHT:
 			case LEFT:
@@ -393,11 +391,9 @@ public class Controller {
 	/**
 	 * Rullande text av strängen vi har laddat in
 	 */
+
+
 	public void flowText() {
-
-		setupMessageView();
-
-
 		//start timer
 		timer = new Timer();
 		timer.schedule(new shiftTextTimer(), speed, speed);

@@ -136,8 +136,6 @@ public class ShiftText {
 			Array7x7 character = filler.fillWithOneType((int) texy.charAt(n));
 			message.add(character);
 		}
-		testMesssage = message;
-
 	}
 
 	/**
@@ -209,6 +207,5 @@ public class ShiftText {
 	public void clearMessageView() {
 		int size = messageView.size();
 		messageView.clear();
-		messageView = new ArrayList<>(size);
 	}
 }
