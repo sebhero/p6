@@ -37,6 +37,10 @@ public class Controller {
 		this.mainPanel = mainPanel;
 	}
 
+	public void refreshMainPanel() {
+		mainPanel.refreshFrame();
+	}
+
 	public void clearAll() {
 		this.pause();
 		this.shiftText.resetMessage();

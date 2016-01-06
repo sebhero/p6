@@ -4,7 +4,7 @@ import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.MrBigViewWindowsWithFlowText;
 import mah.se.mvc.view.ViewImpl;
-import mah.se.mvc.view.ViewShiftTest;
+import mah.se.mvc.view.Räserbajs2k16;
 import roffe.Color.*;
 import roffe.Color.Color;
 
@@ -25,7 +25,7 @@ class AppMrBig {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ViewImpl view = new MrBigViewWindowsWithFlowText(1, 6, Color.BLACK, Color.GRAY);
+                ViewImpl view = new MrBigViewWindowsWithFlowText(Color.BLACK, Color.GRAY);
                 Array7x7 model = new Array7x7();
                 new Controller(model, view);
                 JFrame frame = new JFrame();

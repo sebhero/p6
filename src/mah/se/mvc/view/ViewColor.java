@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * 
  * @author Johnatan Sona
  * 
- * Skapar ett Color f�nster med UI. 
+ * Skapar ett Color fönster med UI. 
  * 
  *	2016-01-03
  */
@@ -119,7 +119,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	}
 
 /**
- * Resetar f�rgskiftningen
+ * Resetar färgskiftningen
  */
 	public void resetTick(){
 		tick1 = 0; 
@@ -132,6 +132,8 @@ public class ViewColor extends JPanel implements ViewImpl {
 	}
 /**
  * Skiftar mellan olika f�rger
+ * 
+ * Tar emot "tick" som håller kolla på räkningen av knapptryck.
  * 
  * @param tick
  */
@@ -239,10 +241,12 @@ public class ViewColor extends JPanel implements ViewImpl {
 	        ctrl.showShift(arr);
         });
 
-        btnFillRandColor.addActionListener(ae -> { //Fyller f�nstret med slumpade f�rger
+        btnFillRandColor.addActionListener(ae -> { //Fyller fönstret med slumpade färger
             ctrl.showRandomColor();
+            resetTick();
         });
-        btnFill.addActionListener(ae -> { //Fyller f�nstret med en f�rg som kan skiftas
+        btnFill.addActionListener(ae -> { //Fyller fönstret med en färg som kan skiftas
+        	resetTick();
         	updateColor(tickBig);
         	ctrl.showSameColor(color);
         	
