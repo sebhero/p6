@@ -15,11 +15,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.controller.Controller.DIRECTION;
 import mah.se.mvc.model.Array7;
@@ -27,13 +27,16 @@ import mah.se.mvc.model.Array7x7;
 
 /**
  * Klass skapad för att kunna Shifta Höger och Vänster.
- * @author Anton 
+ * 
+ * @author Anton
  * 
  */
 
 public class Räserbajs2k16 extends JPanel implements ViewImpl {
 
 	private Controller ctrl;
+	private ShiftArray shiftar;
+	private Array7 overflow;
 	private JPanel eastPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
 	private JPanel westPanel = new JPanel();
@@ -45,14 +48,16 @@ public class Räserbajs2k16 extends JPanel implements ViewImpl {
 	private JButton btnShiftLeft = new JButton("ShiftLeft");
 	private JButton btnShiftRight = new JButton("ShitRight");
 	Font font = new Font("Serif", Font.BOLD, 20);
-	
+
 	/**
-	 * Konstruktor som skapar ett fönster med 2st input kolumner vardera 7 JTextField.
-	 * I mitten har vi en 7x7 JLabelArray som ska representera ett array7x7 objekt. Detta fylls sedan med slumpsiffror.
-	 * Sedan har vi 3st knappar ShiftLeft, ShiftRight och RandomInput. 
+	 * Konstruktor som skapar ett fönster med 2st input kolumner vardera 7
+	 * JTextField. I mitten har vi en 7x7 JLabelArray som ska representera ett
+	 * array7x7 objekt. Detta fylls sedan med slumpsiffror. Sedan har vi 3st
+	 * knappar ShiftLeft, ShiftRight och RandomInput.
 	 */
 
 	public Räserbajs2k16() {
+		shiftar = new ShiftArray();
 		ButtonListener listener = new ButtonListener();
 		setPreferredSize(new Dimension(550, 500));
 		setLayout(new BorderLayout());
@@ -70,30 +75,29 @@ public class Räserbajs2k16 extends JPanel implements ViewImpl {
 				arrd2d[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				arrd2d[i][j].setVerticalAlignment(SwingConstants.CENTER);
 				centerPanel.add(arrd2d[i][j]);
-				
+
 			}
 		}
 
 		westPanel.setLayout(new GridLayout(7, 0, 5, 0));
 		eastPanel.setLayout(new GridLayout(7, 0, 5, 0));
-		westPanel.setSize(60, 600);
-		eastPanel.setSize(60, 600);
+		westPanel.setPreferredSize(new Dimension(60, 600));
+		eastPanel.setPreferredSize(new Dimension(60, 600));
+		westPanel.setBackground(Color.GREEN);
+		eastPanel.setBackground(Color.GREEN);
 
 		for (int i = 0; i < westInput.length; i++) {
-			westInput[i] = new JTextField();
-			eastInput[i] = new JTextField();
-			westInput[i].setColumns(5);
-			eastInput[i].setColumns(5);
+			westInput[i] = new JTextField("");
+			eastInput[i] = new JTextField("");
 			eastInput[i].setFont(font);
 			westInput[i].setFont(font);
+			eastInput[i].setColumns(5);
+			westInput[i].setColumns(5);
 			westPanel.add(westInput[i]);
 			eastPanel.add(eastInput[i]);
-			westInput[i].setBackground(Color.GREEN);
-			eastInput[i].setBackground(Color.GREEN);
 
 		}
 		southPanel.setLayout(new GridLayout(1, 0, 3, 0));
-		btnShiftLeft.setSize(100, 100);
 		southPanel.add(btnShiftLeft);
 		southPanel.add(btnRandomInput);
 		southPanel.add(btnShiftRight);
@@ -106,7 +110,10 @@ public class Räserbajs2k16 extends JPanel implements ViewImpl {
 		btnShiftLeft.addActionListener(listener);
 		btnShiftRight.addActionListener(listener);
 		btnRandomInput.addActionListener(listener);
+
+		setRandomInput();
 	}
+
 	/**
 	 * Fyller våra inputfält med slumpade siffror(0-9)
 	 */
@@ -117,9 +124,12 @@ public class Räserbajs2k16 extends JPanel implements ViewImpl {
 			eastInput[i].setText(String.valueOf(rand.nextInt(10)));
 		}
 	}
+
 	/**
 	 * Sätter controllern och fyller JLabelarrayen med slumpade siffror.
-	 * @param ctrl controllern 
+	 * 
+	 * @param ctrl
+	 *            controllern
 	 */
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
@@ -168,8 +178,19 @@ public class Räserbajs2k16 extends JPanel implements ViewImpl {
 	/**
 	 * Sätter text på JLabel Array med hjälp av Array7x7 objekt
 	 * 
-	 * @param arr Array7x7 skickas in och sätts på JLabel Array
+	 * @param arr
+	 *            Array7x7 skickas in och sätts på JLabel Array
 	 */
+
+	public Array7x7 getText() {
+		Array7x7 arr = new Array7x7();
+		for (int i = 0; i < arrd2d.length; i++) {
+			for (int j = 0; j < arrd2d[i].length; j++) {
+				arr.setElement(i, j, Integer.parseInt(arrd2d[i][j].getText()));
+			}
+		}
+		return arr;
+	}
 
 	public void setText(Array7x7 arr) {
 		for (int i = 0; i < arrd2d.length; i++) {
@@ -179,57 +200,32 @@ public class Räserbajs2k16 extends JPanel implements ViewImpl {
 		}
 	}
 
-	/**
-	 * Gör om JTextField input till Int och sätter in i Array7 objekt.
-	 * Felhantering finns om man försöker mata in annat än int eller om man inte
-	 * matar in något överhuvudtaget
-	 * 
-	 * @return Array 7 arr
-	 * 
-	 */
-	public Array7 getInputWest() {
-		Array7 arr = new Array7();
-		String error = "Fel på ruta: ";
-		boolean hasError = false;
+	public void setWest(Array7 arr) {
 		for (int i = 0; i < arr.getLength(); i++) {
-			try {
-				arr.setElement(i, Integer.parseInt(westInput[i].getText()));
-
-			} catch (Exception e) {
-				// TODO: handle exception
-				error += String.valueOf(i + 1) + " ";
-				hasError = true;
-			}
+			westInput[i].setText(String.valueOf(arr.getElement(i)));
 		}
-		if (hasError) {
-			JOptionPane.showMessageDialog(null, error);
-			arr = null;
+
+	}
+
+	public Array7 getWest() {
+		Array7 arr = new Array7();
+		for (int i = 0; i < arr.getLength(); i++) {
+			arr.setElement(i, Integer.parseInt(westInput[i].getText()));
 		}
 		return arr;
 	}
 
-	/**
-	 * Gör om JTextField input till Int och sätter in i Array7 objekt.
-	 * Felhantering finns om man försöker mata in annat än int eller om man inte
-	 * matar in något överhuvudtaget
-	 * 
-	 * @return Array 7 arr
-	 */
-	public Array7 getInputEast() {
-		Array7 arr = new Array7();
-		String error = "Fel på ruta: ";
-		boolean hasError = false;
+	public void setEast(Array7 arr) {
 		for (int i = 0; i < arr.getLength(); i++) {
-			try {
-				arr.setElement(i, Integer.parseInt(eastInput[i].getText()));
-			} catch (Exception e) {
-				error += String.valueOf(i + 1) + " ";
-				hasError = true;
-			}
+			eastInput[i].setText(String.valueOf(arr.getElement(i)));
 		}
-		if (hasError) {
-			JOptionPane.showMessageDialog(null, error);
-			arr = null;
+
+	}
+
+	public Array7 getEast() {
+		Array7 arr = new Array7();
+		for (int i = 0; i < arr.getLength(); i++) {
+			arr.setElement(i, Integer.parseInt(eastInput[i].getText()));
 		}
 		return arr;
 	}
@@ -241,24 +237,35 @@ public class Räserbajs2k16 extends JPanel implements ViewImpl {
 	 *
 	 */
 
+	public void shiftLeft() {
+		ctrl.setDirection(DIRECTION.LEFT);
+		Array7x7 arr = new Array7x7();
+		arr = getText();
+		setWest(shiftar.shiftLeft(arr, getEast()));
+		setText(arr);
+		Array7 arr2 = new Array7();
+		setEast(arr2);
+	}
+
+	public void shiftRight() {
+		ctrl.setDirection(DIRECTION.RIGHT);
+		Array7x7 arr = new Array7x7();
+		arr = getText();
+		setEast(shiftar.shiftRight(arr, getWest()));
+		setText(arr);
+		Array7 arr2 = new Array7();
+		setWest(arr2);
+	}
+
 	private class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnShiftLeft) {
-				ctrl.setDirection(DIRECTION.LEFT);
-				Array7 result = getInputEast();
-				if (result != null) {
-					ctrl.showShift(getInputEast());
-				}
+				shiftLeft();
 
 			}
 			if (e.getSource() == btnShiftRight) {
-
-				ctrl.setDirection(DIRECTION.RIGHT);
-				Array7 result = getInputWest();
-				if (result != null) {
-					ctrl.showShift(result);
-				}
+				shiftRight();
 
 			}
 			if (e.getSource() == btnRandomInput) {
