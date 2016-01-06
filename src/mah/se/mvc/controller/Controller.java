@@ -48,7 +48,11 @@ public class Controller {
 		//this.shiftText.setupMessageView(this.shiftText.getMessageSize());
 		//this.shiftText.setSteps(0);
 		this.shiftText.resetMessage();
+		this.shiftText.clearMessageView();
+		this.setupMessageView();
+		this.shiftText.setSteps(0);
 
+		System.out.println("hello");
 
 	}
 
@@ -342,6 +346,35 @@ public class Controller {
 	 */
 	public void loadFlowText(String texy) {
 		shiftText.loadText(texy);
+		this.setupMessageView();
+	}
+
+	private void setupMessageView() {
+		switch (dir) {
+			case RIGHT:
+			case LEFT:
+				//setup messageView size
+				shiftText.setupMessageView(view.getHorizontalPages());
+				//setup max steps how many Columns/rows
+				if (view.getHorizontalPages() > shiftText.getMessageSize()) {
+					shiftText.setMaxSteps(7+view.getHorizontalPages() * 7);
+
+				} else {
+					shiftText.setMaxSteps(7+shiftText.getMessageSize() * 7);
+				}
+				break;
+			case UP:
+			case DOWN:
+				//setup messageView size
+				shiftText.setupMessageView(view.getVerticalPages());
+				//setup max steps how many Columns/rows
+				if (view.getVerticalPages() > shiftText.getMessageSize()) {
+					shiftText.setMaxSteps(view.getVerticalPages() * 7);
+				} else {
+					shiftText.setMaxSteps(shiftText.getMessageSize() * 7);
+				}
+				break;
+		}
 	}
 
 	/**
@@ -350,6 +383,7 @@ public class Controller {
 	public void showStepText() {
 
 		shiftText.stepText(dir);
+
 		updateViewMessage();
 	}
 
@@ -359,31 +393,8 @@ public class Controller {
 	 */
 	public void flowText() {
 
-		switch (dir) {
-			case RIGHT:
-			case LEFT:
-				//setup messageView size
-				shiftText.setupMessageView(view.getHorizontalPages());
-				//setup max steps how many Columns/rows
-				if (view.getHorizontalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getHorizontalPages() * 14);
+		setupMessageView();
 
-				} else {
-					shiftText.setMaxSteps(shiftText.getMessageSize() * 14);
-				}
-				break;
-			case UP:
-			case DOWN:
-				//setup messageView size
-				shiftText.setupMessageView(view.getVerticalPages());
-				//setup max steps how many Columns/rows
-				if (view.getVerticalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getVerticalPages() * 14);
-				} else {
-					shiftText.setMaxSteps(shiftText.getMessageSize() * 14);
-				}
-				break;
-		}
 
 		//start timer
 		timer = new Timer();

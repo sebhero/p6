@@ -20,9 +20,9 @@ class Controller {
 			{Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT},
 			{Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT,Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT,Color.TRANSPARENT},
 			{Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT}};
-	private int[][] stamp = new int[7][7];
+	private final int[][] stamp = new int[7][7];
 	
-	public Controller(ColorDisplayDemo demo) {
+	private Controller(ColorDisplayDemo demo) {
 		this.demo = demo;
 		demo.setController(this);
 	}
@@ -65,16 +65,14 @@ class Controller {
 	}
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ColorDisplayDemo demo = new ColorDisplayDemo(Color.BLACK, Color.GRAY);
-				new Controller(demo);
-				JFrame frame = new JFrame();
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.add(demo);
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            ColorDisplayDemo demo1 = new ColorDisplayDemo(Color.BLACK, Color.GRAY);
+            new Controller(demo1);
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(demo1);
+            frame.pack();
+            frame.setVisible(true);
+        });
 	}
 }

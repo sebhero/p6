@@ -28,7 +28,6 @@ public class ShiftText {
 	private int stepps;
 	//total antal steg som finns.
 	private int doneStepping;
-	private int steps;
 	private ArrayList<Array7x7> testMesssage;
 
 	/**
@@ -203,8 +202,8 @@ public class ShiftText {
 		return temp;
 	}
 
-	public void setSteps(int steps) {
-		this.steps = steps;
+	public void setSteps(int stepps) {
+		this.stepps = stepps;
 	}
 
 	public void clearMessageView() {

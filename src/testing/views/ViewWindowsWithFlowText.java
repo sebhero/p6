@@ -100,8 +100,9 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
 	    btnFlowLeft.addActionListener(ae -> {
             ctrl.setDirection(Controller.DIRECTION.LEFT);
-		    ctrl.loadFlowText(txtInput.getText());
-		    ctrl.flowText();
+//		    ctrl.loadFlowText(txtInput.getText());
+			ctrl.showStepText();
+//		    ctrl.flowText();
 
 //            ctrl.flowText(txtInput.getText());
         });
@@ -132,7 +133,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
         });
 
         btnFlowText.addActionListener(ae ->{
-
+			colorDisplay.clearDisplay();
 			ctrl.clearAll();
         });
 
