@@ -43,7 +43,13 @@ public class Controller {
 
 	public void clearAll() {
 		this.pause();
+		//this.shiftText.clearMessageView();
+		//System.out.println(shiftText.getMessageView().size());
+		//this.shiftText.setupMessageView(this.shiftText.getMessageSize());
+		//this.shiftText.setSteps(0);
 		this.shiftText.resetMessage();
+
+
 	}
 
 
@@ -100,7 +106,7 @@ public class Controller {
 //		for (int n = 0; n < colorDisplay.length; n++)
 //			colorDisplay[n] = filler.fillWithOneType(Color.BLACK);
 		shifter = new ShiftArray();
-		updateView();
+//		updateView();
 
 
 //		modelMap.put(new Array7x7(), "mah.se.mvc.view.ViewColor");
@@ -360,10 +366,10 @@ public class Controller {
 				shiftText.setupMessageView(view.getHorizontalPages());
 				//setup max steps how many Columns/rows
 				if (view.getHorizontalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getHorizontalPages() * 7 + 7);
+					shiftText.setMaxSteps(view.getHorizontalPages() * 14);
 
 				} else {
-					shiftText.setMaxSteps(shiftText.getMessageSize() * 7 + 7);
+					shiftText.setMaxSteps(shiftText.getMessageSize() * 14);
 				}
 				break;
 			case UP:
@@ -372,9 +378,9 @@ public class Controller {
 				shiftText.setupMessageView(view.getVerticalPages());
 				//setup max steps how many Columns/rows
 				if (view.getVerticalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getVerticalPages() * 7 + 7);
+					shiftText.setMaxSteps(view.getVerticalPages() * 14);
 				} else {
-					shiftText.setMaxSteps(shiftText.getMessageSize() * 7 + 7);
+					shiftText.setMaxSteps(shiftText.getMessageSize() * 14);
 				}
 				break;
 		}
@@ -402,9 +408,17 @@ public class Controller {
 
 				return;
 			}
+
 			shiftText.stepText(dir);
 			shiftText.increaseSteps();
 			updateViewMessage();
+		}
+	}
+
+	public void shiftOutAll() {
+		while(shiftText.checkIfDoneStepping()) {
+			shiftText.stepText(dir);
+			shiftText.increaseSteps();
 		}
 	}
 
