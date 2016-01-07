@@ -234,6 +234,7 @@ public class Controller {
 		filler = getFiller(FILLERTYPE.COLORS);
 		System.out.println("same color "+ modelMap.get(view.getClass().getName()));
 		model = filler.fillWithOneType(color);
+		modelMap.replace(view.getClass().getName(),model);
 		updateView();
 	}
 
