@@ -10,7 +10,6 @@ import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
-import testing.app.JTabbedPaneDemo;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -52,7 +51,7 @@ public class Controller {
 		this.shiftText.resetMessage();
 		this.shiftText.clearMessageView();
 		this.setupMessageView();
-		this.shiftText.setSteps(0);
+		this.shiftText.setStepps(0);
 	}
 
 
