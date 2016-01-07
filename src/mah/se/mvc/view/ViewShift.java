@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import mah.se.algorithms.ShiftArray;
 import mah.se.mvc.controller.Controller;
@@ -47,6 +48,7 @@ public class ViewShift extends JPanel implements ViewImpl {
 	private JButton btnRandomInput = new JButton("Random Input");
 	private JButton btnShiftLeft = new JButton("ShiftLeft");
 	private JButton btnShiftRight = new JButton("ShitRight");
+	private JButton btnNewBoard = new JButton("New numbers");
 	Font font = new Font("Serif", Font.BOLD, 20);
 
 	/**
@@ -59,7 +61,7 @@ public class ViewShift extends JPanel implements ViewImpl {
 	public ViewShift() {
 		shiftar = new ShiftArray();
 		ButtonListener listener = new ButtonListener();
-		setPreferredSize(new Dimension(550, 500));
+		setPreferredSize(new Dimension(550, 600));
 		setLayout(new BorderLayout());
 
 		centerPanel.setPreferredSize(new Dimension(350, 300));
@@ -75,7 +77,6 @@ public class ViewShift extends JPanel implements ViewImpl {
 				arrd2d[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				arrd2d[i][j].setVerticalAlignment(SwingConstants.CENTER);
 				centerPanel.add(arrd2d[i][j]);
-
 			}
 		}
 
@@ -97,11 +98,14 @@ public class ViewShift extends JPanel implements ViewImpl {
 			eastPanel.add(eastInput[i]);
 
 		}
-		southPanel.setLayout(new GridLayout(1, 0, 3, 0));
+		
+		southPanel.setSize(new Dimension(600,200));
+		southPanel.setLayout(new GridLayout(1, 0, 4, 0));
 		southPanel.add(btnShiftLeft);
 		southPanel.add(btnRandomInput);
 		southPanel.add(btnShiftRight);
-
+		southPanel.add(btnNewBoard);
+		
 		add(centerPanel, BorderLayout.CENTER);
 		add(westPanel, BorderLayout.WEST);
 		add(southPanel, BorderLayout.SOUTH);
@@ -110,8 +114,8 @@ public class ViewShift extends JPanel implements ViewImpl {
 		btnShiftLeft.addActionListener(listener);
 		btnShiftRight.addActionListener(listener);
 		btnRandomInput.addActionListener(listener);
+		btnNewBoard.addActionListener(listener);
 
-		setRandomInput();
 	}
 
 	/**
@@ -290,23 +294,24 @@ public class ViewShift extends JPanel implements ViewImpl {
 			if (e.getSource() == btnRandomInput) {
 				setRandomInput();
 			}
+			
+			if(e.getSource()== btnNewBoard) {
+				ctrl.showRandom();
+			}
 		}
 	}
 
-	public static void main(String args[]) {
-		JFrame frame = new JFrame("Test");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ViewImpl view = new ViewShift();
-		frame.pack();
-		frame.setVisible(true);
-		Array7x7 model = new Array7x7();
-		new Controller(model, view);
-		BorderLayout layout = new BorderLayout();
-		frame.setLayout(layout);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add((Component) view);
-		frame.pack();
-		frame.setVisible(true);
-	}
+	public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
 
+            ViewImpl view = new ViewShift();
+            Array7x7 model = new Array7x7();
+            new Controller(model, view);
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add((Component) view);
+            frame.pack();
+            frame.setVisible(true);
+        });
+    }
 }
