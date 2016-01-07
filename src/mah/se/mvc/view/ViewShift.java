@@ -27,9 +27,9 @@ import mah.se.mvc.model.Array7x7;
 
 /**
  * Klass skapad för att kunna Shifta Höger och Vänster.
- * 
+ *
  * @author Anton
- * 
+ *
  */
 
 public class ViewShift extends JPanel implements ViewImpl {
@@ -127,7 +127,7 @@ public class ViewShift extends JPanel implements ViewImpl {
 
 	/**
 	 * Sätter controllern och fyller JLabelarrayen med slumpade siffror.
-	 * 
+	 *
 	 * @param ctrl
 	 *            controllern
 	 */
@@ -199,7 +199,7 @@ public class ViewShift extends JPanel implements ViewImpl {
 			}
 		}
 	}
-	
+
 	/**
 	 * Set metod för JTextField i den separata kolumnen till vänster, tar emot ett array7 objekt som sedan skrivs ut
 	 * @param arr array7 objekt som skrivs ut i kolumnen
@@ -222,7 +222,7 @@ public class ViewShift extends JPanel implements ViewImpl {
 		}
 		return arr;
 	}
-	
+
 	/**
 	 * Samma funktion som setWest, fast för den separata högra kolumnen
 	 * @param arr array7 objekt
@@ -234,7 +234,7 @@ public class ViewShift extends JPanel implements ViewImpl {
 		}
 
 	}
-	
+
 	/**
 	 * Samma som getWest
 	 * @return arr array7 objekt
@@ -247,10 +247,10 @@ public class ViewShift extends JPanel implements ViewImpl {
 		}
 		return arr;
 	}
-	
+
 	/**
 	 * Metod som shiftar vyn ett steg åt vänster
-	 * 
+	 *
 	 */
 	public void shiftLeft() {
 		ctrl.setDirection(DIRECTION.LEFT);
@@ -269,10 +269,10 @@ public class ViewShift extends JPanel implements ViewImpl {
 		setWest(new Array7());
 		ctrl.updateView();
 	}
-	
+
 	/**
 	 * Lyssnarklass för ShiftRight - ShiftLeft - RandomInputknapparna
-	 * 
+	 *
 	 * @author Anton
 	 *
 	 */
