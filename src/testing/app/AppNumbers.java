@@ -2,10 +2,8 @@ package testing.app;
 
 import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
-import mah.se.mvc.view.MrBigViewWindowsWithFlowText;
 import mah.se.mvc.view.ViewImpl;
 import mah.se.mvc.view.ViewNumbers;
-import roffe.Color.Color;
 
 import javax.swing.*;
 import java.awt.*;

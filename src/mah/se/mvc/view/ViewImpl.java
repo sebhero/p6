@@ -13,18 +13,10 @@ public interface ViewImpl {
 
     void updateView(int[][] all);
 
-//    void updateBigView(Array7x7[] all);
-
     int getHorizontalPages();
     int getVerticalPages();
 
 
     void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir);
 
-
-    /**
-     * @deprecated will be replaced by updateView
-     * @param all
-     */
-//    void updateViewColor(int[][] all);
 }

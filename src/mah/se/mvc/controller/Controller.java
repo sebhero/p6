@@ -1,5 +1,6 @@
 package mah.se.mvc.controller;
 
+import mah.se.App;
 import mah.se.algorithms.ShiftArray;
 import mah.se.algorithms.ShiftText;
 import mah.se.mvc.model.Array7;
@@ -9,7 +10,6 @@ import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
-import testing.app.JTabbedPaneDemo;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -27,13 +27,13 @@ public class Controller {
 
 
 	private final HashMap<String,Array7x7>  modelMap;
-	private JTabbedPaneDemo mainPanel;
+	private App mainPanel;
 
 	public DIRECTION getDirection() {
 		return dir;
 	}
 
-	public void setMainPanel(JTabbedPaneDemo mainPanel) {
+	public void setMainPanel(App mainPanel) {
 		this.mainPanel = mainPanel;
 	}
 
@@ -42,8 +42,16 @@ public class Controller {
 	}
 
 	public void clearAll() {
-		this.pause();
+
+		if (this.timer != null) {
+			this.pause();
+			//TODO removes timer need to be check if still works with rest
+			this.timer =null;
+		}
 		this.shiftText.resetMessage();
+		this.shiftText.clearMessageView();
+		this.setupMessageView();
+		this.shiftText.setStepps(0);
 	}
 
 
@@ -100,7 +108,7 @@ public class Controller {
 //		for (int n = 0; n < colorDisplay.length; n++)
 //			colorDisplay[n] = filler.fillWithOneType(Color.BLACK);
 		shifter = new ShiftArray();
-		updateView();
+//		updateView();
 
 
 //		modelMap.put(new Array7x7(), "mah.se.mvc.view.ViewColor");
@@ -111,7 +119,7 @@ public class Controller {
 	/**
 	 * Update the view med Array7x7 av nummer
 	 */
-	private void updateView() {
+	public void updateView() {
 		view.updateView(model.getAll());
 	}
 
@@ -313,10 +321,16 @@ public class Controller {
 		DIRECTION currentDir;
 		if (this.dir == DIRECTION.LEFT)
 			currentDir = DIRECTION.LEFT;
-		else
+		else if (this.dir == DIRECTION.RIGHT)
 			currentDir = DIRECTION.RIGHT;
+		else if(this.dir == DIRECTION.UP)
+			currentDir = DIRECTION.UP;
+		else
+			currentDir = DIRECTION.DOWN;
+
 		this.dir = dir;
 		showStepText();
+		shiftText.increaseSteps();
 		this.dir = currentDir;
 	}
 
@@ -336,23 +350,10 @@ public class Controller {
 	 */
 	public void loadFlowText(String texy) {
 		shiftText.loadText(texy);
+		this.setupMessageView();
 	}
 
-	/**
-	 * btn click för att steppa genom strängen vi har laddat in
-	 */
-	public void showStepText() {
-
-		shiftText.stepText(dir);
-		updateViewMessage();
-	}
-
-
-	/**
-	 * Rullande text av strängen vi har laddat in
-	 */
-	public void flowText() {
-
+	private void setupMessageView() {
 		switch (dir) {
 			case RIGHT:
 			case LEFT:
@@ -360,10 +361,10 @@ public class Controller {
 				shiftText.setupMessageView(view.getHorizontalPages());
 				//setup max steps how many Columns/rows
 				if (view.getHorizontalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getHorizontalPages() * 7 + 7);
+					shiftText.setMaxSteps(7+view.getHorizontalPages() * 7);
 
 				} else {
-					shiftText.setMaxSteps(shiftText.getMessageSize() * 7 + 7);
+					shiftText.setMaxSteps(7+shiftText.getMessageSize() * 7);
 				}
 				break;
 			case UP:
@@ -372,13 +373,31 @@ public class Controller {
 				shiftText.setupMessageView(view.getVerticalPages());
 				//setup max steps how many Columns/rows
 				if (view.getVerticalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(view.getVerticalPages() * 7 + 7);
+					shiftText.setMaxSteps(view.getVerticalPages() * 7);
 				} else {
-					shiftText.setMaxSteps(shiftText.getMessageSize() * 7 + 7);
+					shiftText.setMaxSteps(shiftText.getMessageSize() * 7);
 				}
 				break;
 		}
+	}
 
+	/**
+	 * btn click för att steppa genom strängen vi har laddat in
+	 */
+	public void showStepText() {
+
+		shiftText.stepText(dir);
+
+		updateViewMessage();
+	}
+
+
+	/**
+	 * Rullande text av strängen vi har laddat in
+	 */
+
+
+	public void flowText() {
 		//start timer
 		timer = new Timer();
 		timer.schedule(new shiftTextTimer(), speed, speed);
@@ -402,9 +421,17 @@ public class Controller {
 
 				return;
 			}
+
 			shiftText.stepText(dir);
 			shiftText.increaseSteps();
 			updateViewMessage();
+		}
+	}
+
+	public void shiftOutAll() {
+		while(shiftText.checkIfDoneStepping()) {
+			shiftText.stepText(dir);
+			shiftText.increaseSteps();
 		}
 	}
 

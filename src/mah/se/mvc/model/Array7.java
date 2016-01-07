@@ -1,7 +1,7 @@
 package mah.se.mvc.model;
 
 /**
- * Klassen kommer att inneh�lla en lista med sju int variabler
+ * Klassen kommer att innehålla en lista med sju int variabler
  * 
  * @author Jonatan Fridsten
  * testar

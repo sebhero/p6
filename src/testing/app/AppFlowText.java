@@ -24,7 +24,10 @@ class AppFlowText {
             public void run() {
                 ViewImpl view = new ViewWindowsWithFlowText(Color.BLACK, Color.YELLOW);
                 Array7x7 model = new Array7x7();
-                new Controller(model, view);
+                Controller ctrl = new Controller(model, view);
+
+                ctrl.setView(view);
+
                 JFrame frame = new JFrame();
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.add((Component) view);

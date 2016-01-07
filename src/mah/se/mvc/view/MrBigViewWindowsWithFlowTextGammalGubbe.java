@@ -4,7 +4,6 @@ import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import roffe.Color.ColorDisplay;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +13,11 @@ import java.util.ArrayList;
 /**
  * Created by Gustaf on 18/12/2015.
  */
-public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
+public class MrBigViewWindowsWithFlowTextGammalGubbe extends JPanel implements ViewImpl {
 
 
+    private TextField tfColorPanelHeight;
+    private TextField tfColorPanelWidth;
 
     public enum STATE {
         RUNNING,
@@ -27,21 +28,26 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     @Override
     public void setSize(Dimension dimension) {
 	    double newSize = dimension.getWidth()/this.getWidth();
+	    //sätter storleken på coloroDispl 100 mindre för att den ska få plats
 	    int newSizeW = (int) (newSize * this.getWidth()-100);
 	    int newSizeH = (int) (newSize * this.getHeight()-100);
 	    super.setSize(dimension);
         colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
 	    this.revalidate();
 	    this.repaint();
+//        System.out.println(colorDisplay.getWidth());
     }
 
     private STATE currentState = STATE.UNINITIATED;
     private Controller controller;
     private ColorDisplay colorDisplay;
-    private int verticalPages, backgroundColor, gridColor;
+    private int verticalPages, horizontalPages, backgroundColor, gridColor;
     private JTextField input;
-    private JButton start, pause, displayText, simpleShiftRight, simpleShiftLeft, simpleShiftUp, simpleShiftDown, changeDirectionLeft, changeDirectionRight, changeDirectionUp, changeDirectionDown, stop;
+    private JButton start, pause, displayText, simpleShiftRight, simpleShiftLeft, changeDirection, changeDirectionUpDown, stop;
     private JSlider speedSlider;
+    private Controller.DIRECTION dirUpDown = Controller.DIRECTION.DOWN, dirLeftRight = Controller.DIRECTION.LEFT;
+    private JFrame parent;
+
     private String flowText;
 
 
@@ -50,12 +56,10 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      * @param backgroundColor   Bakgroundsfärgen på ColorDisplay
      * @param gridColor         Färgen mellan varje ruta i ColorDisplay
      */
-    public MrBigViewWindowsWithFlowText(int backgroundColor, int gridColor) {
+    public MrBigViewWindowsWithFlowTextGammalGubbe(int backgroundColor, int gridColor) {
         this.backgroundColor = backgroundColor;
         this.gridColor = gridColor;
         this.setPreferredSize(new Dimension(1300,350));
-        //fixme------------------------
-        this.setBackground(Color.PINK);
     }
 
     /**
@@ -89,7 +93,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         setButtonsActive();
         add(colorDisplay, BorderLayout.CENTER);
         add(BigButtonsPanel, BorderLayout.SOUTH);
-        MrBigTest test = new MrBigTest(this);//fixme--------------------
+
     }
 
     /**
@@ -97,21 +101,15 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      * @return panel med knapparna och textfielden
      */
     public JPanel initButtons() {
-        JPanel panel = new JPanel(new GridLayout(2,1));
-        JPanel panel1 = new JPanel();
-        JPanel panel2 = new JPanel();
+        JPanel panel = new JPanel();
         input = new JTextField(10);
         start = new JButton("Start");
         pause = new JButton("Pause");
         displayText = new JButton("Load in text");
         simpleShiftLeft = new JButton("Shift one step left");
         simpleShiftRight = new JButton("Shift one step right");
-        simpleShiftUp = new JButton("Shift one step up");
-        simpleShiftDown = new JButton("Shift one step down");
-        changeDirectionRight = new JButton("RIGHT");
-        changeDirectionLeft = new JButton("LEFT");
-        changeDirectionDown = new JButton("DOWN");
-        changeDirectionUp = new JButton("UP");
+        changeDirection = new JButton("ChangeDirection: RIGHT");
+        changeDirectionUpDown = new JButton("ChangeDirection: UP");
         stop = new JButton("Stop");
         speedSlider = new JSlider();
         speedSlider.setMinimum(10);
@@ -124,31 +122,21 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         displayText.addActionListener(buttonListener);
         simpleShiftLeft.addActionListener(buttonListener);
         simpleShiftRight.addActionListener(buttonListener);
-        simpleShiftDown.addActionListener(buttonListener);
-        simpleShiftUp.addActionListener(buttonListener);
-        changeDirectionRight.addActionListener(buttonListener);
-        changeDirectionLeft.addActionListener(buttonListener);
-        changeDirectionDown.addActionListener(buttonListener);
-        changeDirectionUp.addActionListener(buttonListener);
+        changeDirection.addActionListener(buttonListener);
+        changeDirectionUpDown.addActionListener(buttonListener);
         stop.addActionListener(buttonListener);
         speedSlider.addChangeListener(e -> controller.setSpeed(110 - speedSlider.getValue()));
 
-        panel1.add(input);
-        panel1.add(displayText);
-        panel1.add(start);
-        panel1.add(pause);
-        panel1.add(stop);
-        panel1.add(changeDirectionLeft);
-        panel1.add(changeDirectionRight);
-        panel1.add(changeDirectionUp);
-        panel1.add(changeDirectionDown);
-        panel2.add(simpleShiftLeft);
-        panel2.add(simpleShiftRight);
-        panel2.add(simpleShiftUp);
-        panel2.add(simpleShiftDown);
-        panel2.add(speedSlider);
-        panel.add(panel1);
-        panel.add(panel2);
+        panel.add(input);
+        panel.add(displayText);
+        panel.add(start);
+        panel.add(pause);
+        panel.add(stop);
+        panel.add(changeDirection);
+        panel.add(changeDirectionUpDown);
+        panel.add(simpleShiftLeft);
+        panel.add(simpleShiftRight);
+        panel.add(speedSlider);
         return panel;
     }
 
@@ -158,83 +146,39 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     public void setButtonsActive() {
         switch (currentState) {
             case RUNNING:
-                displayText.setEnabled(false);
                 start.setEnabled(false);
                 pause.setEnabled(true);
-                changeDirectionRight.setEnabled(true);
-                changeDirectionLeft.setEnabled(true);
-                changeDirectionDown.setEnabled(true);
-                changeDirectionUp.setEnabled(true);
+                changeDirection.setEnabled(true);
+                changeDirectionUpDown.setEnabled(true);
                 simpleShiftLeft.setEnabled(false);
                 simpleShiftRight.setEnabled(false);
-                simpleShiftUp.setEnabled(false);
-                simpleShiftDown.setEnabled(false);
                 stop.setEnabled(true);
                 break;
             case PAUSED:
-                displayText.setEnabled(false);
                 start.setEnabled(true);
                 pause.setEnabled(false);
-                switch (controller.getDirection()) {
-                    case LEFT:
-                    case RIGHT:
-                        simpleShiftLeft.setEnabled(true);
-                        simpleShiftRight.setEnabled(true);
-                        simpleShiftUp.setEnabled(false);
-                        simpleShiftDown.setEnabled(false);
-                        break;
-                    case UP:
-                    case DOWN:
-                        simpleShiftLeft.setEnabled(false);
-                        simpleShiftRight.setEnabled(false);
-                        simpleShiftUp.setEnabled(true);
-                        simpleShiftDown.setEnabled(true);
-                        break;
-                }
-                changeDirectionRight.setEnabled(false);
-                changeDirectionLeft.setEnabled(false);
-                changeDirectionDown.setEnabled(false);
-                changeDirectionUp.setEnabled(false);
+                simpleShiftLeft.setEnabled(true);
+                simpleShiftRight.setEnabled(true);
+                changeDirection.setEnabled(false);
+                changeDirectionUpDown.setEnabled(false);
                 stop.setEnabled(true);
                 break;
             case UNINITIATED:
-                displayText.setEnabled(true);
                 start.setEnabled(false);
                 pause.setEnabled(false);
                 simpleShiftLeft.setEnabled(false);
                 simpleShiftRight.setEnabled(false);
-                simpleShiftDown.setEnabled(false);
-                simpleShiftUp.setEnabled(false);
-                changeDirectionRight.setEnabled(false);
-                changeDirectionLeft.setEnabled(false);
-                changeDirectionDown.setEnabled(false);
-                changeDirectionUp.setEnabled(false);
+                changeDirection.setEnabled(false);
+                changeDirectionUpDown.setEnabled(false);
                 stop.setEnabled(false);
                 break;
             case INITIATED:
-                displayText.setEnabled(true);
                 start.setEnabled(true);
                 pause.setEnabled(false);
-                switch (controller.getDirection()) {
-                    case LEFT:
-                    case RIGHT:
-                        simpleShiftLeft.setEnabled(true);
-                        simpleShiftRight.setEnabled(true);
-                        simpleShiftUp.setEnabled(false);
-                        simpleShiftDown.setEnabled(false);
-                        break;
-                    case UP:
-                    case DOWN:
-                        simpleShiftLeft.setEnabled(false);
-                        simpleShiftRight.setEnabled(false);
-                        simpleShiftUp.setEnabled(true);
-                        simpleShiftDown.setEnabled(true);
-                        break;
-                }
-                changeDirectionRight.setEnabled(false);
-                changeDirectionLeft.setEnabled(false);
-                changeDirectionDown.setEnabled(false);
-                changeDirectionUp.setEnabled(false);
+                simpleShiftLeft.setEnabled(true);
+                simpleShiftRight.setEnabled(true);
+                changeDirection.setEnabled(false);
+                changeDirectionUpDown.setEnabled(false);
                 stop.setEnabled(false);
                 break;
         }
@@ -247,6 +191,12 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     @Override
     public void setCtrl(Controller ctrl) {
         controller = ctrl;
+    }
+
+   // @Override kommentera bort detta när det finns metod för att skicka in Array7x7[] ist för int[][]
+    // En int[][] räcker inte då vi har flera Array7x7 objekt som visas
+    public void updateAllViews(Array7x7[] all) {
+        for(int n = 0; n < horizontalPages; n++) colorDisplay.setDisplay(all[n].getAll(), 0, n);
     }
 
     @Override
@@ -297,7 +247,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
             if(e.getSource() == start && currentState == STATE.INITIATED) {
                 colorDisplay.clearDisplay();
                 controller.flowText();
@@ -318,6 +267,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             else if(e.getSource() == displayText) {
                 if((flowText = input.getText().toString()).length() != 0) {
                     currentState = STATE.INITIATED;
+                    controller.setDirection(Controller.DIRECTION.LEFT);
                     controller.loadFlowText(flowText);
                 } else
                     JOptionPane.showMessageDialog(null, "Empty inprutt");
@@ -328,47 +278,113 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             else if(e.getSource() == simpleShiftRight && currentState != STATE.UNINITIATED) {
                 controller.simpleShift(Controller.DIRECTION.RIGHT);
             }
-            else if(e.getSource() == simpleShiftUp && currentState != STATE.UNINITIATED) {
-                controller.simpleShift(Controller.DIRECTION.UP);
+//fixme------------------------------------------------------------------------------------------------------------------------------------------
+
+            else if(e.getSource() == changeDirection) {
+
+                String dirText = "";
+                Controller.DIRECTION dir = controller.getDirection();
+                if(dir == Controller.DIRECTION.UP || dir == Controller.DIRECTION.DOWN) {
+                    colorDisplay.setNew7x7Size(1, verticalPages);
+                    setSize(new Dimension(verticalPages * 200, 200));
+                    colorDisplay.clearDisplay();
+                    controller.clearAll();
+                    controller.refreshMainPanel();
+                    controller.loadFlowText(flowText);
+                    controller.flowText();
+                }
+                switch (dirLeftRight) {
+                    case LEFT:
+                        controller.setDirection(Controller.DIRECTION.RIGHT);
+                        dirLeftRight = Controller.DIRECTION.RIGHT;
+                        dirText = "LEFT";
+                        break;
+                    case RIGHT:
+                        controller.setDirection(Controller.DIRECTION.LEFT);
+                        dirLeftRight = Controller.DIRECTION.LEFT;
+                        dirText = "RIGHT";
+                        break;
+                }
+                changeDirection.setText("ChangeDirection: "+dirText);
             }
-            else if(e.getSource() == simpleShiftDown && currentState != STATE.UNINITIATED) {
-                controller.simpleShift(Controller.DIRECTION.DOWN);
-            }
-            else if(e.getSource() == changeDirectionRight) {
-                colorDisplay.setNew7x7Size(verticalPages, 1);
-                controller.setDirection(Controller.DIRECTION.RIGHT);
-                colorDisplay.clearDisplay();
-                controller.clearAll();
-                controller.refreshMainPanel();
-                controller.loadFlowText(flowText);
-                controller.flowText();
-            }
-            else if(e.getSource() == changeDirectionLeft) {
-                colorDisplay.setNew7x7Size(verticalPages, 1);
-                controller.setDirection(Controller.DIRECTION.LEFT);
-                colorDisplay.clearDisplay();
-                controller.clearAll();
-                controller.refreshMainPanel();
-                controller.loadFlowText(flowText);
-                controller.flowText();
-            }
-            else if(e.getSource() == changeDirectionUp) {
-                colorDisplay.setNew7x7Size(1, verticalPages);
-                controller.setDirection(Controller.DIRECTION.UP);
-                colorDisplay.clearDisplay();
-                controller.clearAll();
-                controller.refreshMainPanel();
-                controller.loadFlowText(flowText);
-                controller.flowText();
-            }
-            else if(e.getSource() == changeDirectionDown) {
-                colorDisplay.setNew7x7Size(1, verticalPages);
-                controller.setDirection(Controller.DIRECTION.DOWN);
-                colorDisplay.clearDisplay();
-                controller.clearAll();
-                controller.refreshMainPanel();
-                controller.loadFlowText(flowText);
-                controller.flowText();
+            else if(e.getSource() == changeDirectionUpDown) {
+                String dirText = "";
+                Controller.DIRECTION dir = controller.getDirection();
+                if(dir == Controller.DIRECTION.LEFT || dir == Controller.DIRECTION.RIGHT) {
+                    colorDisplay.setNew7x7Size(verticalPages, 1);
+                    setSize(new Dimension(200, verticalPages * 200));
+                    colorDisplay.clearDisplay();
+                    controller.clearAll();
+                    controller.refreshMainPanel();
+                    //controller.loadFlowText(flowText);
+                    controller.pause();
+                    currentState = STATE.INITIATED;
+                    setButtonsActive();
+
+                }
+                switch (dirUpDown) {
+                    case UP:
+                        controller.setDirection(Controller.DIRECTION.DOWN);
+                        dirUpDown = Controller.DIRECTION.DOWN;
+                        dirText = "UP";
+                        break;
+                    case DOWN:
+                        controller.setDirection(Controller.DIRECTION.UP);
+                        dirUpDown = Controller.DIRECTION.UP;
+                        dirText = "DOWN";
+                        break;
+                }
+                //controller.flowText();
+
+
+            /*else if(e.getSource() == changeDirection) {
+                String dirText = "";
+                Controller.DIRECTION dir = controller.getDirection();
+                if(dir == Controller.DIRECTION.UP || dir == Controller.DIRECTION.DOWN) {
+                    colorDisplay.setNew7x7Size(1, verticalPages);
+                    clearDisplay();
+                    setSize(new Dimension(verticalPages * 200, 200));
+                    controller.refreshMainPanel();
+                    controller.resume();
+                }
+                switch (dirLeftRight) {
+                    case LEFT:
+                        controller.setDirection(Controller.DIRECTION.RIGHT);
+                        dirLeftRight = Controller.DIRECTION.RIGHT;
+                        dirText = "LEFT";
+                        break;
+                    case RIGHT:
+                        controller.setDirection(Controller.DIRECTION.LEFT);
+                        dirLeftRight = Controller.DIRECTION.LEFT;
+                        dirText = "RIGHT";
+                        break;
+                }
+                changeDirection.setText("ChangeDirection: "+dirText);
+            }*/
+            /*else if(e.getSource() == changeDirectionUpDown) {
+                String dirText = "";
+                Controller.DIRECTION dir = controller.getDirection();
+                if(dir == Controller.DIRECTION.LEFT || dir == Controller.DIRECTION.RIGHT) {
+                    colorDisplay.setNew7x7Size(verticalPages, 1);
+                    clearDisplay();
+
+                    setSize(new Dimension(200, verticalPages * 200));
+                    controller.refreshMainPanel();
+                    controller.resume();
+                }
+                switch (dirUpDown) {
+                    case UP:
+                        controller.setDirection(Controller.DIRECTION.DOWN);
+                        dirUpDown = Controller.DIRECTION.DOWN;
+                        dirText = "UP";
+                        break;
+                    case DOWN:
+                        controller.setDirection(Controller.DIRECTION.UP);
+                        dirUpDown = Controller.DIRECTION.UP;
+                        dirText = "DOWN";
+                        break;
+                }*/
+                changeDirectionUpDown.setText("ChangeDirection: " + dirText);
             }
             setButtonsActive();
         }

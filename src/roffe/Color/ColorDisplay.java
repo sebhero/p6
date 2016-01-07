@@ -192,7 +192,7 @@ public class ColorDisplay extends JComponent {
 	//	JOptionPane.showMessageDialog(null, new ColorDisplay(Color.RED,Color.WHITE));
 	}
 
-	public void setNew7x7Size(int newVerticalPages, int newHorizontalPages) {
+	public void setNew7x7Size(int newHorizontalPages, int newVerticalPages) {
 		this.verticalPages = newVerticalPages;
 		this.horizontalPages = newHorizontalPages;
 //		this.sideSize = sideSize;

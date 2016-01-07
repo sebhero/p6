@@ -31,7 +31,7 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	private JButton btnLoadString = new JButton("load string");
 
     private JButton btnFillColor = new JButton("Fyll med slumpfärger");
-    private JButton btnFlowText = new JButton("Rinnande Text");
+    private JButton btnFlowText = new JButton("stop");
 
 	private JTextField txtInput = new JTextField();
 
@@ -91,29 +91,34 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
 	    });
 
 	    btnFlowUp.addActionListener(ae -> {
-		    //shifts everything to the left
+			colorDisplay.clearDisplay();
+			ctrl.clearAll();
 		    ctrl.setDirection(Controller.DIRECTION.UP);
 		    ctrl.loadFlowText(txtInput.getText());
-//		    ctrl.flowText(txtInput.getText());
 		    ctrl.flowText();
 	    });
 
 	    btnFlowLeft.addActionListener(ae -> {
             ctrl.setDirection(Controller.DIRECTION.LEFT);
-		    ctrl.loadFlowText(txtInput.getText());
-		    ctrl.flowText();
+//		    ctrl.loadFlowText(txtInput.getText());
+			ctrl.showStepText();
+//		    ctrl.flowText();
 
 //            ctrl.flowText(txtInput.getText());
         });
 
 
         btnFlowRight.addActionListener(ae -> {
+			colorDisplay.clearDisplay();
+			ctrl.clearAll();
             //shifts everything up
             ctrl.setDirection(Controller.DIRECTION.RIGHT);
 	        ctrl.loadFlowText(txtInput.getText());
 	        ctrl.flowText();
         });
         btnFlowDown.addActionListener(ae -> {
+			colorDisplay.clearDisplay();
+			ctrl.clearAll();
             //shifts everything downwards
             ctrl.setDirection(Controller.DIRECTION.DOWN);
 	        ctrl.loadFlowText(txtInput.getText());
@@ -131,15 +136,9 @@ public class ViewWindowsWithFlowText extends JPanel implements ViewImpl {
             ctrl.showRandomColor();
         });
 
-        btnFlowText.addActionListener(ae ->{
-            //visa rinnande text
-            String txt = txtInput.getText();
-            //inget skrivet i text fältet visa ?
-            if (txt.length() <= 0) {
-                txt = "?";
-            }
-//            ctrl.flowText(txt.toUpperCase());
-			ctrl.loadFlowText(txt);
+        btnFlowText.addActionListener(ae -> {
+			colorDisplay.clearDisplay();
+			ctrl.clearAll();
         });
 
 

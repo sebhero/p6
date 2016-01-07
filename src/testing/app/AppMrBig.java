@@ -4,8 +4,6 @@ import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import mah.se.mvc.view.MrBigViewWindowsWithFlowText;
 import mah.se.mvc.view.ViewImpl;
-import mah.se.mvc.view.Räserbajs2k16;
-import roffe.Color.*;
 import roffe.Color.Color;
 
 import javax.swing.*;

@@ -28,6 +28,7 @@ public class ShiftText {
 	private int stepps;
 	//total antal steg som finns.
 	private int doneStepping;
+	private ArrayList<Array7x7> testMesssage;
 
 	/**
 	 * Tar ett steg i message och shiftar över det till messageView
@@ -39,6 +40,13 @@ public class ShiftText {
 		switch (dir) {
 
 			case LEFT:
+				for (int i = message.size()-1; i >= 0 ; i--) {
+					next= shifter.shift(message.get(i), next, dir);
+				}
+				for (int i = messageView.size()-1; i >= 0 ; i--) {
+					next= shifter.shift(messageView.get(i), next, dir);
+				}
+				break;
 			case UP:
 				//System.out.println("ran step "+stepps);
 				for (int i = message.size()-1; i >= 0 ; i--) {
@@ -62,6 +70,13 @@ public class ShiftText {
 				break;
 
 			case RIGHT:
+				for (int i = 0; i <= message.size()-1 ; i++) {
+					next = shifter.shift(message.get(i), next,dir);
+				}
+				for (int i = 0; i <= messageView.size()-1 ; i++) {
+					next = shifter.shift(messageView.get(i), next,dir);
+				}
+				break;
 			case DOWN:
 
 				for (int i = 0; i <= message.size()-1 ; i++) {
@@ -143,8 +158,8 @@ public class ShiftText {
 	 */
 	public void resetMessage() {
 		clearMessage();
+		//messageView.clear();
 		loadText(text);
-		messageView.clear();
 	}
 
 	/**
@@ -175,13 +190,13 @@ public class ShiftText {
 		stepps++;
 	}
 
-	//TODO only for making the mrBig work. remove
-	public Array7x7[] getMessageView7x7() {
 
-		Array7x7[] temp= new Array7x7[messageView.size()];
-		for (int i = 0; i < messageView.size(); i++) {
-			temp[i] = messageView.get(i);
-		}
-		return temp;
+	public void setStepps(int stepps) {
+		this.stepps = stepps;
+	}
+
+	public void clearMessageView() {
+		int size = messageView.size();
+		messageView.clear();
 	}
 }

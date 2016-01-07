@@ -14,7 +14,8 @@ import javax.swing.JComponent;
  * Created by tsroax on 2014-11-27.
  */
 public class IntDisplay extends JComponent {
-	public enum Mode {SHOW_INT, SHOW_BYTES};
+	public enum Mode {SHOW_INT, SHOW_BYTES}
+
     private final int PAGE_SIZE = 7;
     private int[][] systemValues;
     private int[][] userValues;
