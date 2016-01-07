@@ -84,12 +84,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         verticalPages = inputVerticalPages();
         colorDisplay = new ColorDisplay(1, verticalPages, backgroundColor, gridColor);
         JPanel buttonPanel = initButtons();
-        JPanel BigButtonsPanel = new JPanel(new GridLayout(2, 1));
-        BigButtonsPanel.add(buttonPanel);
         setButtonsActive();
         add(colorDisplay, BorderLayout.CENTER);
-        add(BigButtonsPanel, BorderLayout.SOUTH);
-        MrBigTest test = new MrBigTest(this);//fixme--------------------
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     /**
