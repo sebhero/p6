@@ -321,10 +321,16 @@ public class Controller {
 		DIRECTION currentDir;
 		if (this.dir == DIRECTION.LEFT)
 			currentDir = DIRECTION.LEFT;
-		else
+		else if (this.dir == DIRECTION.RIGHT)
 			currentDir = DIRECTION.RIGHT;
+		else if(this.dir == DIRECTION.UP)
+			currentDir = DIRECTION.UP;
+		else
+			currentDir = DIRECTION.DOWN;
+
 		this.dir = dir;
 		showStepText();
+		shiftText.increaseSteps();
 		this.dir = currentDir;
 	}
 

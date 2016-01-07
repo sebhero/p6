@@ -26,26 +26,21 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     @Override
     public void setSize(Dimension dimension) {
 	    double newSize = dimension.getWidth()/this.getWidth();
-	    //sätter storleken på coloroDispl 100 mindre för att den ska få plats
 	    int newSizeW = (int) (newSize * this.getWidth()-100);
 	    int newSizeH = (int) (newSize * this.getHeight()-100);
 	    super.setSize(dimension);
         colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
 	    this.revalidate();
 	    this.repaint();
-//        System.out.println(colorDisplay.getWidth());
     }
 
     private STATE currentState = STATE.UNINITIATED;
     private Controller controller;
     private ColorDisplay colorDisplay;
-    private int verticalPages, horizontalPages, backgroundColor, gridColor;
+    private int verticalPages, backgroundColor, gridColor;
     private JTextField input;
-    private JButton start, pause, displayText, simpleShiftRight, simpleShiftLeft, simpleShiftUp, simpleShiftDown, changeDirectionLeft, changeDirectionRight, changeDirectionUp, changeDirectionDown, stop, setVertical, setHorizontal;
+    private JButton start, pause, displayText, simpleShiftRight, simpleShiftLeft, simpleShiftUp, simpleShiftDown, changeDirectionLeft, changeDirectionRight, changeDirectionUp, changeDirectionDown, stop;
     private JSlider speedSlider;
-    private Controller.DIRECTION dirUpDown = Controller.DIRECTION.DOWN, dirLeftRight = Controller.DIRECTION.LEFT;
-    private JFrame parent;
-
     private String flowText;
 
 
@@ -83,8 +78,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      * initierar panelen med en colordisplay, knappar och en textfield
      */
     public void init() {
-        //verticalPages = inputVerticalPages();
-        verticalPages = 7;
+        verticalPages = inputVerticalPages();
         colorDisplay = new ColorDisplay(1, verticalPages, backgroundColor, gridColor);
         JPanel buttonPanel = initButtons();
         JPanel BigButtonsPanel = new JPanel(new GridLayout(2, 1));
@@ -113,8 +107,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         changeDirectionLeft = new JButton("LEFT");
         changeDirectionDown = new JButton("DOWN");
         changeDirectionUp = new JButton("UP");
-        setVertical = new JButton("Vertical");
-        setHorizontal = new JButton("Horizontal");
         stop = new JButton("Stop");
         speedSlider = new JSlider();
         speedSlider.setMinimum(10);
@@ -133,8 +125,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         changeDirectionLeft.addActionListener(buttonListener);
         changeDirectionDown.addActionListener(buttonListener);
         changeDirectionUp.addActionListener(buttonListener);
-        setVertical.addActionListener(buttonListener);
-        setHorizontal.addActionListener(buttonListener);
         stop.addActionListener(buttonListener);
         speedSlider.addChangeListener(e -> controller.setSpeed(110 - speedSlider.getValue()));
 
@@ -152,8 +142,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         panel.add(simpleShiftUp);
         panel.add(simpleShiftDown);
         panel.add(speedSlider);
-        panel.add(setHorizontal);
-        panel.add(setVertical);
         return panel;
     }
 
@@ -163,6 +151,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     public void setButtonsActive() {
         switch (currentState) {
             case RUNNING:
+                displayText.setEnabled(false);
                 start.setEnabled(false);
                 pause.setEnabled(true);
                 changeDirectionRight.setEnabled(true);
@@ -176,12 +165,25 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 stop.setEnabled(true);
                 break;
             case PAUSED:
+                displayText.setEnabled(false);
                 start.setEnabled(true);
                 pause.setEnabled(false);
-                simpleShiftLeft.setEnabled(true);
-                simpleShiftRight.setEnabled(true);
-                simpleShiftUp.setEnabled(true);
-                simpleShiftDown.setEnabled(true);
+                switch (controller.getDirection()) {
+                    case LEFT:
+                    case RIGHT:
+                        simpleShiftLeft.setEnabled(true);
+                        simpleShiftRight.setEnabled(true);
+                        simpleShiftUp.setEnabled(false);
+                        simpleShiftDown.setEnabled(false);
+                        break;
+                    case UP:
+                    case DOWN:
+                        simpleShiftLeft.setEnabled(false);
+                        simpleShiftRight.setEnabled(false);
+                        simpleShiftUp.setEnabled(true);
+                        simpleShiftDown.setEnabled(true);
+                        break;
+                }
                 changeDirectionRight.setEnabled(false);
                 changeDirectionLeft.setEnabled(false);
                 changeDirectionDown.setEnabled(false);
@@ -189,6 +191,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 stop.setEnabled(true);
                 break;
             case UNINITIATED:
+                displayText.setEnabled(true);
                 start.setEnabled(false);
                 pause.setEnabled(false);
                 simpleShiftLeft.setEnabled(false);
@@ -202,12 +205,25 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 stop.setEnabled(false);
                 break;
             case INITIATED:
+                displayText.setEnabled(true);
                 start.setEnabled(true);
                 pause.setEnabled(false);
-                simpleShiftLeft.setEnabled(true);
-                simpleShiftRight.setEnabled(true);
-                simpleShiftUp.setEnabled(true);
-                simpleShiftDown.setEnabled(true);
+                switch (controller.getDirection()) {
+                    case LEFT:
+                    case RIGHT:
+                        simpleShiftLeft.setEnabled(true);
+                        simpleShiftRight.setEnabled(true);
+                        simpleShiftUp.setEnabled(false);
+                        simpleShiftDown.setEnabled(false);
+                        break;
+                    case UP:
+                    case DOWN:
+                        simpleShiftLeft.setEnabled(false);
+                        simpleShiftRight.setEnabled(false);
+                        simpleShiftUp.setEnabled(true);
+                        simpleShiftDown.setEnabled(true);
+                        break;
+                }
                 changeDirectionRight.setEnabled(false);
                 changeDirectionLeft.setEnabled(false);
                 changeDirectionDown.setEnabled(false);
@@ -224,12 +240,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     @Override
     public void setCtrl(Controller ctrl) {
         controller = ctrl;
-    }
-
-   // @Override kommentera bort detta när det finns metod för att skicka in Array7x7[] ist för int[][]
-    // En int[][] räcker inte då vi har flera Array7x7 objekt som visas
-    public void updateAllViews(Array7x7[] all) {
-        for(int n = 0; n < horizontalPages; n++) colorDisplay.setDisplay(all[n].getAll(), 0, n);
     }
 
     @Override
@@ -301,7 +311,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             else if(e.getSource() == displayText) {
                 if((flowText = input.getText().toString()).length() != 0) {
                     currentState = STATE.INITIATED;
-                    controller.setDirection(Controller.DIRECTION.LEFT);
                     controller.loadFlowText(flowText);
                 } else
                     JOptionPane.showMessageDialog(null, "Empty inprutt");
@@ -313,19 +322,13 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 controller.simpleShift(Controller.DIRECTION.RIGHT);
             }
             else if(e.getSource() == simpleShiftUp && currentState != STATE.UNINITIATED) {
-                //TODO mellanslag mellan varje bokstav
                 controller.simpleShift(Controller.DIRECTION.UP);
             }
             else if(e.getSource() == simpleShiftDown && currentState != STATE.UNINITIATED) {
-                //TODO mellanslag mellan varje bokstav
                 controller.simpleShift(Controller.DIRECTION.DOWN);
             }
-//fixme------------------------------------------------------------------------------------------------------------------------------------------
-
             else if(e.getSource() == changeDirectionRight) {
                 colorDisplay.setNew7x7Size(verticalPages, 1);
-                //setSize(new Dimension(verticalPages * 200, 200));
-               //colorDisplay.revalidate();
                 controller.setDirection(Controller.DIRECTION.RIGHT);
                 colorDisplay.clearDisplay();
                 controller.clearAll();
@@ -335,8 +338,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             }
             else if(e.getSource() == changeDirectionLeft) {
                 colorDisplay.setNew7x7Size(verticalPages, 1);
-                //setSize(new Dimension(verticalPages * 200, 200));
-                //colorDisplay.revalidate();
                 controller.setDirection(Controller.DIRECTION.LEFT);
                 colorDisplay.clearDisplay();
                 controller.clearAll();
@@ -346,8 +347,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             }
             else if(e.getSource() == changeDirectionUp) {
                 colorDisplay.setNew7x7Size(1, verticalPages);
-                //setSize(new Dimension(200, verticalPages * 200));
-                //colorDisplay.revalidate();
                 controller.setDirection(Controller.DIRECTION.UP);
                 colorDisplay.clearDisplay();
                 controller.clearAll();
@@ -357,8 +356,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
             }
             else if(e.getSource() == changeDirectionDown) {
                 colorDisplay.setNew7x7Size(1, verticalPages);
-                //setSize(new Dimension(200, verticalPages * 200));
-                //colorDisplay.revalidate();
                 controller.setDirection(Controller.DIRECTION.DOWN);
                 colorDisplay.clearDisplay();
                 controller.clearAll();
