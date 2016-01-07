@@ -107,7 +107,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Fixar problem med ändra storlek på vyn
+	 * Fixar problem med ändra storlek på vyn.
 	 * @param dimension
 	 */
 	@Override
