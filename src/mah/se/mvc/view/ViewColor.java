@@ -118,9 +118,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 		int newSizeH = (int) (newSize * this.getHeight()-100);
 		super.setSize(dimension);
 		colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
-		System.out.println("Old height: " + pnlSideBtn.getHeight());
 		pnlSideBtn.setPreferredSize(new Dimension(pnlSideBtn.getWidth(),newSizeH));
-		System.out.println("New height: " + pnlSideBtn.getHeight());
 		this.revalidate();
 		this.repaint();
 	}
