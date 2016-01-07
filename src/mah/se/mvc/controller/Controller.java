@@ -1,5 +1,10 @@
 package mah.se.mvc.controller;
 
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import mah.se.App;
 import mah.se.algorithms.ShiftArray;
 import mah.se.algorithms.ShiftText;
@@ -10,12 +15,6 @@ import mah.se.patterns.strategy.FillAlgorithm;
 import mah.se.patterns.strategy.FillCharacter;
 import mah.se.patterns.strategy.FillColor;
 import mah.se.patterns.strategy.FillNumbers;
-import testing.app.JTabbedPaneDemo;
-
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
@@ -52,7 +51,7 @@ public class Controller {
 		this.shiftText.resetMessage();
 		this.shiftText.clearMessageView();
 		this.setupMessageView();
-		this.shiftText.setSteps(0);
+		this.shiftText.setStepps(0);
 	}
 
 
@@ -120,7 +119,7 @@ public class Controller {
 	/**
 	 * Update the view med Array7x7 av nummer
 	 */
-	private void updateView() {
+	public void updateView() {
 		view.updateView(model.getAll());
 	}
 
@@ -322,10 +321,16 @@ public class Controller {
 		DIRECTION currentDir;
 		if (this.dir == DIRECTION.LEFT)
 			currentDir = DIRECTION.LEFT;
-		else
+		else if (this.dir == DIRECTION.RIGHT)
 			currentDir = DIRECTION.RIGHT;
+		else if(this.dir == DIRECTION.UP)
+			currentDir = DIRECTION.UP;
+		else
+			currentDir = DIRECTION.DOWN;
+
 		this.dir = dir;
 		showStepText();
+		shiftText.increaseSteps();
 		this.dir = currentDir;
 	}
 
