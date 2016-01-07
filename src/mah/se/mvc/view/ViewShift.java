@@ -27,9 +27,9 @@ import mah.se.mvc.model.Array7x7;
 
 /**
  * Klass skapad för att kunna Shifta Höger och Vänster.
- * 
+ *
  * @author Anton
- * 
+ *
  */
 
 public class ViewShift extends JPanel implements ViewImpl {
@@ -127,7 +127,7 @@ public class ViewShift extends JPanel implements ViewImpl {
 
 	/**
 	 * Sätter controllern och fyller JLabelarrayen med slumpade siffror.
-	 * 
+	 *
 	 * @param ctrl
 	 *            controllern
 	 */
@@ -176,12 +176,9 @@ public class ViewShift extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Sätter text på JLabel Array med hjälp av Array7x7 objekt
-	 * 
-	 * @param arr
-	 *            Array7x7 skickas in och sätts på JLabel Array
+	 * Hämtar allt från JLabel Array och lägger i ett array7x7 objekt 
+	 * @return arr array7x7 objekt
 	 */
-
 	public Array7x7 getText() {
 		Array7x7 arr = new Array7x7();
 		for (int i = 0; i < arrd2d.length; i++) {
@@ -191,7 +188,10 @@ public class ViewShift extends JPanel implements ViewImpl {
 		}
 		return arr;
 	}
-
+	/**
+	 * Uppdaterar text I JLabel array med hjälp av ett Array7x7 objekt
+	 * @param arr array7x7 objekt som sedan skrivs ut på JLabel arrayen
+	 */
 	public void setText(Array7x7 arr) {
 		for (int i = 0; i < arrd2d.length; i++) {
 			for (int j = 0; j < arrd2d[i].length; j++) {
@@ -200,13 +200,21 @@ public class ViewShift extends JPanel implements ViewImpl {
 		}
 	}
 
+	/**
+	 * Set metod för JTextField i den separata kolumnen till vänster, tar emot ett array7 objekt som sedan skrivs ut
+	 * @param arr array7 objekt som skrivs ut i kolumnen
+	 */
+
 	public void setWest(Array7 arr) {
 		for (int i = 0; i < arr.getLength(); i++) {
 			westInput[i].setText(String.valueOf(arr.getElement(i)));
 		}
 
 	}
-
+	/**
+	 * Get metod för JTextField i den vänstra kolumnen, samlar alla siffror och sedan lägger i ett array7 objekt som returneras
+	 * @return arr array7 objekt
+	 */
 	public Array7 getWest() {
 		Array7 arr = new Array7();
 		for (int i = 0; i < arr.getLength(); i++) {
@@ -215,12 +223,22 @@ public class ViewShift extends JPanel implements ViewImpl {
 		return arr;
 	}
 
+	/**
+	 * Samma funktion som setWest, fast för den separata högra kolumnen
+	 * @param arr array7 objekt
+	 */
+
 	public void setEast(Array7 arr) {
 		for (int i = 0; i < arr.getLength(); i++) {
 			eastInput[i].setText(String.valueOf(arr.getElement(i)));
 		}
 
 	}
+
+	/**
+	 * Samma som getWest
+	 * @return arr array7 objekt
+	 */
 
 	public Array7 getEast() {
 		Array7 arr = new Array7();
@@ -231,32 +249,33 @@ public class ViewShift extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Lyssnarklass för ShiftRight - ShiftLeft - RandomInputknapparna
-	 * 
-	 * @author Anton
+	 * Metod som shiftar vyn ett steg åt vänster
 	 *
 	 */
-
 	public void shiftLeft() {
 		ctrl.setDirection(DIRECTION.LEFT);
-		Array7x7 arr = new Array7x7();
-		arr = getText();
-		setWest(shiftar.shiftLeft(arr, getEast()));
-		setText(arr);
-		Array7 arr2 = new Array7();
-		setEast(arr2);
+		Array7 returnarr = new Array7();
+		returnarr = ctrl.shift(getEast());
+		setWest(returnarr);
+		setEast(new Array7());
+		ctrl.updateView();
 	}
 
 	public void shiftRight() {
 		ctrl.setDirection(DIRECTION.RIGHT);
-		Array7x7 arr = new Array7x7();
-		arr = getText();
-		setEast(shiftar.shiftRight(arr, getWest()));
-		setText(arr);
-		Array7 arr2 = new Array7();
-		setWest(arr2);
+		Array7 returnarr = new Array7();
+		returnarr = ctrl.shift(getWest());
+		setEast(returnarr);
+		setWest(new Array7());
+		ctrl.updateView();
 	}
 
+	/**
+	 * Lyssnarklass för ShiftRight - ShiftLeft - RandomInputknapparna
+	 *
+	 * @author Anton
+	 *
+	 */
 	private class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {

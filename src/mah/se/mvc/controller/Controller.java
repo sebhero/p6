@@ -119,7 +119,7 @@ public class Controller {
 	/**
 	 * Update the view med Array7x7 av nummer
 	 */
-	private void updateView() {
+	public void updateView() {
 		view.updateView(model.getAll());
 	}
 
