@@ -56,6 +56,12 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         this.setPreferredSize(new Dimension(1300,350));
         //fixme------------------------
         this.setBackground(Color.PINK);
+        colorDisplay = new ColorDisplay(1, 1, backgroundColor, gridColor);
+
+        JPanel buttonPanel = initButtons();
+        setButtonsActive();
+        add(colorDisplay, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     /**
@@ -82,11 +88,8 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      */
     public void init() {
         verticalPages = inputVerticalPages();
-        colorDisplay = new ColorDisplay(1, verticalPages, backgroundColor, gridColor);
-        JPanel buttonPanel = initButtons();
-        setButtonsActive();
-        add(colorDisplay, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        colorDisplay.setNew7x7Size(verticalPages, 1);
+
     }
 
     /**

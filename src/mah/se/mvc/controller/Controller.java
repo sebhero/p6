@@ -38,6 +38,7 @@ public class Controller {
 	}
 
 	public void refreshMainPanel() {
+		System.out.println("refreash main");
 		mainPanel.refreshFrame();
 	}
 
@@ -100,7 +101,7 @@ public class Controller {
 		//TODO @Deprecated Use hashmap instead
 //		this.model = model;
 		this.view = view;
-		this.model = getViewsModel(view);
+		//this.model = getViewsModel(view);
 
 		this.view.setCtrl(this);
 //		Array7x7[] colorDisplay = new Array7x7[view.getHorizontalPages()];
@@ -209,7 +210,11 @@ public class Controller {
 	 */
 	public void showRandomColor() {
 		filler = getFiller(FILLERTYPE.COLORS);
+
+		System.out.println("randomcolor "+ modelMap.get(view.getClass().getName()));
 		model = filler.fillWithRandom();
+		modelMap.replace(view.getClass().getName(),model);
+
 		updateView();
 	}
 
@@ -227,28 +232,29 @@ public class Controller {
 	 */
 	public void showSameColor(int color) {
 		filler = getFiller(FILLERTYPE.COLORS);
+		System.out.println("same color "+ modelMap.get(view.getClass().getName()));
 		model = filler.fillWithOneType(color);
 		updateView();
 	}
 
-	/**
-	 * Visar en graident färg mellan 2 färger
-	 * i vyn
-	 */
-	public void showGradiantColor() {
-		filler = getFiller(FILLERTYPE.COLORS);
-		model = filler.fillWithInGaining();
-		updateView();
-	}
+//	/**
+//	 * Visar en graident färg mellan 2 färger
+//	 * i vyn
+//	 */
+//	public void showGradiantColor() {
+//		filler = getFiller(FILLERTYPE.COLORS);
+//		model = filler.fillWithInGaining();
+//		updateView();
+//	}
 
-	/**
-	 * Visar en slumpad bokstav i vyn
-	 */
-	public void showRanomChar() {
-		filler = getFiller(FILLERTYPE.CHARACTERS);
-		model = filler.fillWithRandom();
-		updateView();
-	}
+//	/**
+//	 * Visar en slumpad bokstav i vyn
+//	 */
+//	public void showRanomChar() {
+//		filler = getFiller(FILLERTYPE.CHARACTERS);
+//		model = filler.fillWithRandom();
+//		updateView();
+//	}
 
 
 	/**
@@ -275,8 +281,9 @@ public class Controller {
 	 * Satter ett nytt element i modelen.
 	 */
 	public void setElement(int rowPos, int colPos, int value) {
-
+		model = modelMap.get(view.getClass().getName());
 		model.setElement(rowPos, colPos, value);
+		System.out.println("setele " + modelMap.get(view.getClass().getName()));
 		updateView();
 	}
 
@@ -395,8 +402,6 @@ public class Controller {
 	/**
 	 * Rullande text av strängen vi har laddat in
 	 */
-
-
 	public void flowText() {
 		//start timer
 		timer = new Timer();
