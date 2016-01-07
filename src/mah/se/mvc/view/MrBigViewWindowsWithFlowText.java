@@ -4,6 +4,7 @@ import mah.se.mvc.controller.Controller;
 import mah.se.mvc.model.Array7x7;
 import roffe.Color.ColorDisplay;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -53,6 +54,8 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         this.backgroundColor = backgroundColor;
         this.gridColor = gridColor;
         this.setPreferredSize(new Dimension(1300,350));
+        //fixme------------------------
+        this.setBackground(Color.PINK);
     }
 
     /**
@@ -86,7 +89,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         setButtonsActive();
         add(colorDisplay, BorderLayout.CENTER);
         add(BigButtonsPanel, BorderLayout.SOUTH);
-
+        MrBigTest test = new MrBigTest(this);//fixme--------------------
     }
 
     /**
@@ -94,7 +97,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      * @return panel med knapparna och textfielden
      */
     public JPanel initButtons() {
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new GridLayout(2,1));
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
         input = new JTextField(10);
         start = new JButton("Start");
         pause = new JButton("Pause");
@@ -128,20 +133,22 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         stop.addActionListener(buttonListener);
         speedSlider.addChangeListener(e -> controller.setSpeed(110 - speedSlider.getValue()));
 
-        panel.add(input);
-        panel.add(displayText);
-        panel.add(start);
-        panel.add(pause);
-        panel.add(stop);
-        panel.add(changeDirectionLeft);
-        panel.add(changeDirectionRight);
-        panel.add(changeDirectionUp);
-        panel.add(changeDirectionDown);
-        panel.add(simpleShiftLeft);
-        panel.add(simpleShiftRight);
-        panel.add(simpleShiftUp);
-        panel.add(simpleShiftDown);
-        panel.add(speedSlider);
+        panel1.add(input);
+        panel1.add(displayText);
+        panel1.add(start);
+        panel1.add(pause);
+        panel1.add(stop);
+        panel1.add(changeDirectionLeft);
+        panel1.add(changeDirectionRight);
+        panel1.add(changeDirectionUp);
+        panel1.add(changeDirectionDown);
+        panel2.add(simpleShiftLeft);
+        panel2.add(simpleShiftRight);
+        panel2.add(simpleShiftUp);
+        panel2.add(simpleShiftDown);
+        panel2.add(speedSlider);
+        panel.add(panel1);
+        panel.add(panel2);
         return panel;
     }
 
