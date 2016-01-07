@@ -43,14 +43,12 @@ public class Controller {
 	}
 
 	public void clearAll() {
+
 		if (this.timer != null) {
 			this.pause();
-
+			//TODO removes timer need to be check if still works with rest
+			this.timer =null;
 		}
-		//this.shiftText.clearMessageView();
-		//System.out.println(shiftText.getMessageView().size());
-		//this.shiftText.setupMessageView(this.shiftText.getMessageSize());
-		//this.shiftText.setSteps(0);
 		this.shiftText.resetMessage();
 		this.shiftText.clearMessageView();
 		this.setupMessageView();
