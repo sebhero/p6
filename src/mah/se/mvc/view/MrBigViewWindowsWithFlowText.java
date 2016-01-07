@@ -33,6 +33,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
 	    this.revalidate();
 	    this.repaint();
+        System.out.println(getWidth());
+        System.out.println(getHeight());
+
     }
 
     private STATE currentState = STATE.UNINITIATED;
@@ -53,15 +56,8 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     public MrBigViewWindowsWithFlowText(int backgroundColor, int gridColor) {
         this.backgroundColor = backgroundColor;
         this.gridColor = gridColor;
-        this.setPreferredSize(new Dimension(1300,350));
-        //fixme------------------------
-        this.setBackground(Color.PINK);
-        colorDisplay = new ColorDisplay(1, 1, backgroundColor, gridColor);
-
-        JPanel buttonPanel = initButtons();
-        setButtonsActive();
-        add(colorDisplay, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        this.setPreferredSize(new Dimension(1321, 617));
+        this.setBackground(new Color(136, 136, 136));
     }
 
     /**
@@ -88,8 +84,11 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      */
     public void init() {
         verticalPages = inputVerticalPages();
-        colorDisplay.setNew7x7Size(verticalPages, 1);
-
+        colorDisplay = new ColorDisplay(1, verticalPages, backgroundColor, gridColor);
+        JPanel buttonPanel = initButtons();
+        setButtonsActive();
+        add(colorDisplay, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     /**
@@ -98,8 +97,11 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
      */
     public JPanel initButtons() {
         JPanel panel = new JPanel(new GridLayout(2,1));
+        panel.setBackground(new Color(136, 136, 136));
         JPanel panel1 = new JPanel();
+        panel1.setBackground(new Color(136, 136, 136));
         JPanel panel2 = new JPanel();
+        panel2.setBackground(new Color(136, 136, 136));
         input = new JTextField(10);
         start = new JButton("Start");
         pause = new JButton("Pause");
@@ -358,7 +360,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 colorDisplay.clearDisplay();
                 controller.clearAll();
                 controller.refreshMainPanel();
-                controller.loadFlowText(flowText);
+                controller.loadFlowText(flowText + " ");
                 controller.flowText();
             }
             else if(e.getSource() == changeDirectionDown) {
@@ -367,7 +369,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 colorDisplay.clearDisplay();
                 controller.clearAll();
                 controller.refreshMainPanel();
-                controller.loadFlowText(flowText);
+                controller.loadFlowText(flowText + " ");
                 controller.flowText();
             }
             setButtonsActive();
