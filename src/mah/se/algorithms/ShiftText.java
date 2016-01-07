@@ -190,17 +190,8 @@ public class ShiftText {
 		stepps++;
 	}
 
-	//TODO only for making the mrBig work. remove
-	public Array7x7[] getMessageView7x7() {
 
-		Array7x7[] temp= new Array7x7[messageView.size()];
-		for (int i = 0; i < messageView.size(); i++) {
-			temp[i] = messageView.get(i);
-		}
-		return temp;
-	}
-
-	public void setSteps(int stepps) {
+	public void setStepps(int stepps) {
 		this.stepps = stepps;
 	}
 

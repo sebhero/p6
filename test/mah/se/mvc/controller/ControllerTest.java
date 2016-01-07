@@ -13,6 +13,7 @@ import roffe.Color.Color;
 import testHelpers.TestHelper;
 import testing.views.ViewWindowsWithFlowText;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 
@@ -161,12 +162,19 @@ public class ControllerTest {
         ShiftText shiftText = TestHelper.getPrivateField("shiftText", testCtrl);
         Timer timer =TestHelper.getPrivateField("timer", testCtrl);
 
+
         //ladda in bara en string och kor inget. Darefter testa
         testCtrl.loadFlowText("hej");
+
+        ArrayList<Array7x7> message = TestHelper.getPrivateField("message", shiftText);
+        System.out.println(message);
         
-        
+        shiftText.getMessageView();
+
         testCtrl.clearAll();
         assertNull(timer);
+
+
         
 
         //testCtrl.clearAll();
@@ -179,7 +187,7 @@ public class ControllerTest {
 //        this.shiftText.resetMessage();
 //        this.shiftText.clearMessageView();
 //        this.setupMessageView();
-//        this.shiftText.setSteps(0);
+//        this.shiftText.setStepps(0);
 
     }
 
