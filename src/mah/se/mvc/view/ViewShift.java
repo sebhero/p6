@@ -99,12 +99,13 @@ public class ViewShift extends JPanel implements ViewImpl {
 
 		}
 		
-		southPanel.setSize(new Dimension(600,200));
+		southPanel.setPreferredSize(new Dimension(600,50));
 		southPanel.setLayout(new GridLayout(1, 0, 4, 0));
 		southPanel.add(btnShiftLeft);
-		//southPanel.add(btnRandomInput);
+		southPanel.add(btnRandomInput);
 		southPanel.add(btnShiftRight);
 		southPanel.add(btnNewBoard);
+		
 		
 		add(centerPanel, BorderLayout.CENTER);
 		add(westPanel, BorderLayout.WEST);
