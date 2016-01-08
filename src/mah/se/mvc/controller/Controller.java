@@ -65,7 +65,7 @@ public class Controller {
 		this.shiftText.resetMessage();
 		this.shiftText.clearMessageView();
 		this.setupMessageView();
-		this.shiftText.setStepps(0);
+		this.shiftText.setSteps(0);
 	}
 
 
