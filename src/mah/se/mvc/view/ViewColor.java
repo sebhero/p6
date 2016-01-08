@@ -65,6 +65,11 @@ public class ViewColor extends JPanel implements ViewImpl {
 	 * Konstruktor som skapar fönster med display och knappar
 	 * Man kan välja antalet horisontella och vertikala sidor
 	 * 
+	 * tar emot antalet vertikala sidor av typen int
+	 * tar emot antalet horisontella sidor av typen int
+	 * tar emot bakgrundsfärgen av typen int
+	 * tar emot gridfärg av typen int
+	 * 
 	 * @param verticalPages
 	 * @param horizontalPages
 	 * @param background
@@ -117,6 +122,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	/**
 	 * Fixar problem med ändra storlek på vyn.
 	 * 
+	 * Tar emot ett Dimension objekt "dimension"
 	 * @param dimension
 	 */
 	@Override
@@ -288,12 +294,15 @@ public class ViewColor extends JPanel implements ViewImpl {
 	
 	/**
 	 *Sätter Controller till variabeln ctrl
+	 *tar emot ett controller objekt "ctrl"
+	 *@param ctrl
 	 */
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
 	}
 	/**
 	 * Updaterar displayen
+	 * Tar emot en 7x7 array "matrix"
 	 * @param matrix
 	 */
 	@Override
