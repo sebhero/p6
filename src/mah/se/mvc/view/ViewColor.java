@@ -317,6 +317,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	}
 	/**
 	 * Används ej
+	 * @deprecated använd inte. är inte implementerad
 	 */
 	@Override
 	public void updateView(ArrayList<int[][]> all, DIRECTION dir) {
