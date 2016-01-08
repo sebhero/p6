@@ -332,18 +332,4 @@ public class ViewColor extends JPanel implements ViewImpl {
 	public void updateView(ArrayList<int[][]> all, DIRECTION dir) {
 	}
 
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(() -> {
-//
-//			ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
-//			Array7x7 model = new Array7x7();
-//			new Controller(model, view);
-//			JFrame frame = new JFrame();
-//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//			frame.add((Component) view);
-//			frame.pack();
-//			frame.setVisible(true);
-//		});
-//	}
-
 }
