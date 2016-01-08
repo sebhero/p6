@@ -24,6 +24,10 @@ public class App extends JPanel implements ComponentListener {
     private static JPanel currentView;
     private JFrame frame;
 
+    /**
+     * Uppdatera size på currentview. så att colorDisplay blir uppdaterad.
+     * @param e
+     */
     @Override
     public void componentResized(ComponentEvent e) {
         //extra to handle the resize of the view.
@@ -46,6 +50,10 @@ public class App extends JPanel implements ComponentListener {
 
     }
 
+    /**
+     * Main vyn som hanterar byta vyer
+     * @param frame
+     */
     public App(JFrame frame) {
         this.frame = frame;
         Array7x7 model = new Array7x7();
@@ -75,6 +83,10 @@ public class App extends JPanel implements ComponentListener {
         setLayout(new GridLayout(1, 1));
 
         jtbMain.addChangeListener(new ChangeListener() {
+            /**
+             * Bytar vy. och fixar så att framen storlek passar med panelens storlek.
+             * @param e
+             */
             @Override
             public void stateChanged(ChangeEvent e) {
                 if (jtbMain.getSelectedComponent() == mrBigPanel)
@@ -94,6 +106,10 @@ public class App extends JPanel implements ComponentListener {
 
     }
 
+    /**
+     * Main för att starta Appen.
+     * @param args
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Kirbys Hjältar");
 

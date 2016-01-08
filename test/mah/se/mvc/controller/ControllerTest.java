@@ -4,14 +4,17 @@
 //import mah.se.algorithms.ShiftText;
 //import mah.se.mvc.model.Array7;
 //import mah.se.mvc.model.Array7x7;
+//import mah.se.mvc.view.ViewImpl;
+//import mah.se.mvc.view.ViewNumbers;
 //import mah.se.patterns.strategy.FillAlgorithm;
 //import mah.se.patterns.strategy.FillNumbers;
 //
+//import org.junit.Before;
 //import org.junit.Test;
 //
 //import roffe.Color.Color;
 //import testHelpers.TestHelper;
-//import testing.views.ViewWindowsWithFlowText;
+////import testing.views.ViewWindowsWithFlowText;
 //
 //import java.util.ArrayList;
 //import java.util.Arrays;
@@ -25,7 +28,8 @@
 //    Array7x7 model;
 //    FillAlgorithm filler;
 //    private ShiftArray shifter;
-//
+//    private Controller ctrl;
+//    private ViewImpl view;
 //
 //
 //    private void initTest() {
@@ -34,6 +38,15 @@
 //        model = filler.fillWithOneType(3);
 //        shifter = new ShiftArray();
 //    }
+//
+//    @Before
+//    public void setUp() throws Exception {
+//        view = new ViewNumbers();
+//        ctrl = new Controller(new Array7x7(), view);
+//
+//
+//    }
+//
 //
 //    /**
 //     * Testar shifter att den fyller i ratt
@@ -192,8 +205,32 @@
 //    }
 //
 //
+//    /**
+//     * Testar att hamta riktning fungerar.
+//     *
+//     * @throws Exception
+//     */
 //    @Test
 //    public void testGetDirection() throws Exception {
+//        //hamtar sparade dir
+//        Controller.DIRECTION dir = ctrl.getDirection();
+//        //kollar att dir ar left som ar start riktningen vi satter
+//        assertEquals(dir, Controller.DIRECTION.LEFT);
+//    }
+//
+//
+//    @Test
+//    public void testRefreshMainPanel() throws Exception {
+////        ctrl.refreshMainPanel();
+//    }
+//
+//    @Test
+//    public void testClearAll1() throws Exception {
+//
+//    }
+//
+//    @Test
+//    public void testGetDirection1() throws Exception {
 //
 //    }
 //
@@ -203,7 +240,22 @@
 //    }
 //
 //    @Test
-//    public void testRefreshMainPanel() throws Exception {
+//    public void testRefreshMainPanel1() throws Exception {
+//
+//    }
+//
+//    @Test
+//    public void testClearAll2() throws Exception {
+//
+//    }
+//
+//    @Test
+//    public void testUpdateView() throws Exception {
+//
+//    }
+//
+//    @Test
+//    public void testShift1() throws Exception {
 //
 //    }
 //
@@ -218,12 +270,22 @@
 //    }
 //
 //    @Test
+//    public void testShowNumbers1_71() throws Exception {
+//
+//    }
+//
+//    @Test
 //    public void testShowRandomSame() throws Exception {
 //
 //    }
 //
 //    @Test
 //    public void testShowRandomColor() throws Exception {
+//
+//    }
+//
+//    @Test
+//    public void testShowSameColor1() throws Exception {
 //
 //    }
 //
@@ -244,6 +306,14 @@
 //
 //    @Test
 //    public void testSetCol() throws Exception {
+//
+////        ctrl.setView(view);
+////        Array7x7 model= TestHelper.getPrivateField("model", ctrl);
+//        ctrl.setCol(1, new Array7(2).getAll());
+//        int[] result = ctrl.getCol(1);
+//
+//        int[] expected = {2,2,2,2,2,2,2};
+//        assertArrayEquals(expected,result);
 //
 //    }
 //

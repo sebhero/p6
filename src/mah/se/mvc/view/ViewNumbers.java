@@ -93,6 +93,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	@Override
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
+		ctrl.showRandom();
 	}
 
 	/**

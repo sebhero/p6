@@ -25,7 +25,7 @@ public class ShiftText {
 	//för att kunna shifta
 	private final ShiftArray shifter = new ShiftArray();
 	//antal steg alltså kolumner/rader som har gått
-	private int stepps;
+	private int steps;
 	//total antal steg som finns.
 	private int doneStepping;
 	private ArrayList<Array7x7> testMesssage;
@@ -55,7 +55,7 @@ public class ShiftText {
 
 				//skapa mellan rum mellan bokstaverna. behovs inte eg i left right
 				Array7 temp;
-				if ((stepps) % 7 ==0) {
+				if ((steps) % 7 ==0) {
 					temp =	next;
 					next = new Array7(Color.BLACK);
 					for (int i = messageView.size()-1; i >= 0 ; i--) {
@@ -84,7 +84,7 @@ public class ShiftText {
 				}
 
 				//skapa mellan rum mellan bokstaverna. behovs inte eg i left right
-				if ((stepps) % 7 ==0) {
+				if ((steps) % 7 ==0) {
 					temp =	next;
 					next = new Array7(Color.BLACK);
 					for (int i = 0; i <= messageView.size()-1 ; i++) {
@@ -167,8 +167,8 @@ public class ShiftText {
 	 * @return true om man har gått alla steg och nollställer stegen
 	 */
 	public boolean checkIfDoneStepping() {
-			if (stepps == doneStepping) {
-				stepps=0;
+			if (steps == doneStepping) {
+				steps=0;
 				resetMessage();
 				return true;
 			}
@@ -187,13 +187,11 @@ public class ShiftText {
 	 * Ökar antal steg
 	 */
 	public void increaseSteps() {
-		stepps++;
+		steps++;
 	}
 
 
-	public void setStepps(int stepps) {
-		this.stepps = stepps;
-	}
+	public void setSteps(int steps) { this.steps = steps; }
 
 	public void clearMessageView() {
 		int size = messageView.size();

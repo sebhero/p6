@@ -14,6 +14,12 @@ import java.util.Random;
  * Med hjälp av Strategypattern
  */
 public class FillNumbers implements FillAlgorithm {
+
+    /**
+     * Fyller Array7x7 med en typ av nummer/färg/tecken
+     * @param type tar ett nummer värde av nummer/färg/tecken
+     * @return en fylld Array7x7
+     */
     @Override
     public Array7x7 fillWithOneType(int type) {
         Array7x7 theMatrix = new Array7x7();
@@ -24,7 +30,10 @@ public class FillNumbers implements FillAlgorithm {
         }
         return theMatrix;
     }
-
+    /**
+     * Fyller Array7x7 med slumpat nummer/färg/tecken
+     * @return en fylld Array7x7 med slumpade värden
+     */
     @Override
     public Array7x7 fillWithRandom() {
         Array7x7 theMatrix = new Array7x7();
@@ -37,6 +46,11 @@ public class FillNumbers implements FillAlgorithm {
         return theMatrix;
     }
 
+    /**
+     * Fyller Array7x7 med ökande från 1-7 nummer
+     * eller en färg från röd till blå
+     * @return Array7x7 med ökande värden
+     */
     @Override
     public Array7x7 fillWithInGaining() {
         Array7x7 theMatrix = new Array7x7();

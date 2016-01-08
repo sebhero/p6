@@ -19,7 +19,6 @@ import java.awt.event.WindowEvent;
  */
 public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 
-
 	private final Controller ctrl;
 	private static JPanel currentView;
 	private JFrame frame;
@@ -97,7 +96,6 @@ public class JTabbedPaneDemo extends JPanel implements ComponentListener {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Kirbys Hjältar");
-
 
 
 		frame.addWindowListener(new WindowAdapter() {

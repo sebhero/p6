@@ -29,18 +29,32 @@ public class Controller {
 	private final HashMap<String,Array7x7>  modelMap;
 	private App mainPanel;
 
+	/**
+	 * Hämtar vilken riktning som gäller just nu
+	 * @return nuvarande riktningen
+	 */
 	public DIRECTION getDirection() {
 		return dir;
 	}
 
+	/**
+	 * ger controllern mainPanel för att kunna uppdatera framen.
+	 * @param mainPanel
+	 */
 	public void setMainPanel(App mainPanel) {
 		this.mainPanel = mainPanel;
 	}
 
+	/**
+	 * uppdatera framen från mrBig.
+	 */
 	public void refreshMainPanel() {
 		mainPanel.refreshFrame();
 	}
 
+	/**
+	 * Rensa allt i mrBig
+	 */
 	public void clearAll() {
 
 		if (this.timer != null) {
@@ -51,11 +65,13 @@ public class Controller {
 		this.shiftText.resetMessage();
 		this.shiftText.clearMessageView();
 		this.setupMessageView();
-		this.shiftText.setStepps(0);
+		this.shiftText.setSteps(0);
 	}
 
 
-	//håller koll på vilket håll vi shiftar
+	/**
+	 * håller koll på vilket håll vi shiftar
+	 */
 	public enum DIRECTION {
 		RIGHT,
 		LEFT,
@@ -84,8 +100,7 @@ public class Controller {
 	private Timer timer;
 
 	/**
-	 * A controller to handles communication with the Array7x7 model and diffrent strategies for filling it.
-	 *
+	 * En kontroller som hanterar all kommunikation med Array7x7 modelerna och olika algoritmer för ändringar av 7x7.
 	 * @param model the Array7x7 model
 	 * @param view  the view we are displaying the matrix on
 	 */
@@ -97,27 +112,15 @@ public class Controller {
 		modelMap.put("mah.se.mvc.view.MrBigViewWindowsWithFlowText",new Array7x7());
 		modelMap.put("mah.se.mvc.view.ViewShiftTest",new Array7x7());
 
-		//TODO @Deprecated Use hashmap instead
-//		this.model = model;
 		this.view = view;
-		this.model = getViewsModel(view);
-
 		this.view.setCtrl(this);
-//		Array7x7[] colorDisplay = new Array7x7[view.getHorizontalPages()];
-//		filler = getFiller(FILLERTYPE.COLORS);
-//		for (int n = 0; n < colorDisplay.length; n++)
-//			colorDisplay[n] = filler.fillWithOneType(Color.BLACK);
 		shifter = new ShiftArray();
-//		updateView();
-
-
-//		modelMap.put(new Array7x7(), "mah.se.mvc.view.ViewColor");
 
 	}
 
 
 	/**
-	 * Update the view med Array7x7 av nummer
+	 * Uppdatear vyn med Array7x7 av nummer
 	 */
 	public void updateView() {
 		view.updateView(model.getAll());
@@ -125,8 +128,8 @@ public class Controller {
 
 
 	/**
-	 * Btn call from view
-	 * Shift right the matrix
+	 * Knapp tryck från vyn
+	 * Shifta höger på modelen
 	 */
 	public Array7 shift(Array7 newArray) {
 
@@ -144,7 +147,7 @@ public class Controller {
 	}
 
 	/**
-	 * btn click
+	 * knapp tryck
 	 * Slumpar antal siffror och ritar ut den i vyn
 	 */
 	public void showRandom() {
@@ -154,7 +157,7 @@ public class Controller {
 	}
 
 	/**
-	 * btn click
+	 * knapp tryck
 	 * Ritar ut 1-7 i vyn
 	 * 1234567
 	 * 1234567
@@ -171,7 +174,7 @@ public class Controller {
 	}
 
 	/**
-	 * btn click from view
+	 * knapp tryck
 	 * Slumpar ett tal och fyller Array7x7 med detta tal
 	 * därefter visar den i vyn
 	 */
@@ -204,55 +207,33 @@ public class Controller {
 	}
 
 	/**
-	 * btn click
+	 * knapp tryck
 	 * Visa slumpade färger i vyn
 	 */
 	public void showRandomColor() {
 		filler = getFiller(FILLERTYPE.COLORS);
+
+		System.out.println("randomcolor "+ modelMap.get(view.getClass().getName()));
 		model = filler.fillWithRandom();
+		modelMap.replace(view.getClass().getName(),model);
+
 		updateView();
 	}
 
-	/**
-	 * @deprecated use updateView()
-	 * uppdatera vyn med nya Array7x7
-	 * av typen färger
-	 */
-//    private void updateViewColor() {
-//        view.updateViewColor(model.getAll());
-//    }
 
 	/**
 	 * Visa en färg i på hela Array7x7 i vyn
 	 */
 	public void showSameColor(int color) {
 		filler = getFiller(FILLERTYPE.COLORS);
+		System.out.println("same color "+ modelMap.get(view.getClass().getName()));
 		model = filler.fillWithOneType(color);
+		modelMap.replace(view.getClass().getName(),model);
 		updateView();
 	}
 
 	/**
-	 * Visar en graident färg mellan 2 färger
-	 * i vyn
-	 */
-	public void showGradiantColor() {
-		filler = getFiller(FILLERTYPE.COLORS);
-		model = filler.fillWithInGaining();
-		updateView();
-	}
-
-	/**
-	 * Visar en slumpad bokstav i vyn
-	 */
-	public void showRanomChar() {
-		filler = getFiller(FILLERTYPE.CHARACTERS);
-		model = filler.fillWithRandom();
-		updateView();
-	}
-
-
-	/**
-	 * Btn click
+	 * Knapp tryck
 	 * Satter en ny rad i modelen.
 	 */
 	public void setRow(int rowPos, int[] newRow) {
@@ -261,7 +242,7 @@ public class Controller {
 	}
 
 	/**
-	 * Btn click
+	 * Knapp tryck
 	 * Satter en ny kolumn i modelen.
 	 */
 	public void setCol(int colPos, int[] newCol) {
@@ -271,17 +252,18 @@ public class Controller {
 
 
 	/**
-	 * Btn click
+	 * knapp tryck
 	 * Satter ett nytt element i modelen.
 	 */
 	public void setElement(int rowPos, int colPos, int value) {
-
+		model = modelMap.get(view.getClass().getName());
 		model.setElement(rowPos, colPos, value);
+		System.out.println("setele " + modelMap.get(view.getClass().getName()));
 		updateView();
 	}
 
 	/**
-	 * Btn click
+	 * knapp tryck
 	 * Hamtar rad i modelen.
 	 */
 	public int[] getRow(int rowPos) {
@@ -289,7 +271,7 @@ public class Controller {
 	}
 
 	/**
-	 * Btn click
+	 * knapp tryck
 	 * Hamtar kolumn i modelen.
 	 */
 	public int[] getCol(int colPos) {
@@ -297,7 +279,7 @@ public class Controller {
 	}
 
 	/**
-	 * Btn click
+	 * knapp tryck från ViewColor
 	 * Hamtar element i modelen.
 	 */
 	public int getElement(int rowPos, int colPos) {
@@ -305,6 +287,11 @@ public class Controller {
 	}
 
 
+	/**
+	 * Knapptryck
+	 * shiftar
+	 * @param input
+	 */
 	public void showShift(Array7 input) {
 		shift(input);
 		updateView();
@@ -334,8 +321,6 @@ public class Controller {
 		this.dir = currentDir;
 	}
 
-	// TODO new FlowText using the shiftText that works in all directions
-
 	/**
 	 * Uppdaterar vyn med den nya message list<7x7>
 	 */
@@ -353,6 +338,9 @@ public class Controller {
 		this.setupMessageView();
 	}
 
+	/**
+	 * Initar Messageview efter ändring av storlek på mrBig
+	 */
 	private void setupMessageView() {
 		switch (dir) {
 			case RIGHT:
@@ -382,7 +370,7 @@ public class Controller {
 	}
 
 	/**
-	 * btn click för att steppa genom strängen vi har laddat in
+	 * knapp tryck för att steppa genom strängen vi har laddat in
 	 */
 	public void showStepText() {
 
@@ -395,8 +383,6 @@ public class Controller {
 	/**
 	 * Rullande text av strängen vi har laddat in
 	 */
-
-
 	public void flowText() {
 		//start timer
 		timer = new Timer();
@@ -428,6 +414,10 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Mr big knapp tryck.
+	 * shiftar klart MessageView
+	 */
 	public void shiftOutAll() {
 		while(shiftText.checkIfDoneStepping()) {
 			shiftText.stepText(dir);

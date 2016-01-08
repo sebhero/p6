@@ -337,53 +337,7 @@ public class MrBigViewWindowsWithFlowTextGammalGubbe extends JPanel implements V
                 //controller.flowText();
 
 
-            /*else if(e.getSource() == changeDirection) {
-                String dirText = "";
-                Controller.DIRECTION dir = controller.getDirection();
-                if(dir == Controller.DIRECTION.UP || dir == Controller.DIRECTION.DOWN) {
-                    colorDisplay.setNew7x7Size(1, verticalPages);
-                    clearDisplay();
-                    setSize(new Dimension(verticalPages * 200, 200));
-                    controller.refreshMainPanel();
-                    controller.resume();
-                }
-                switch (dirLeftRight) {
-                    case LEFT:
-                        controller.setDirection(Controller.DIRECTION.RIGHT);
-                        dirLeftRight = Controller.DIRECTION.RIGHT;
-                        dirText = "LEFT";
-                        break;
-                    case RIGHT:
-                        controller.setDirection(Controller.DIRECTION.LEFT);
-                        dirLeftRight = Controller.DIRECTION.LEFT;
-                        dirText = "RIGHT";
-                        break;
-                }
-                changeDirection.setText("ChangeDirection: "+dirText);
-            }*/
-            /*else if(e.getSource() == changeDirectionUpDown) {
-                String dirText = "";
-                Controller.DIRECTION dir = controller.getDirection();
-                if(dir == Controller.DIRECTION.LEFT || dir == Controller.DIRECTION.RIGHT) {
-                    colorDisplay.setNew7x7Size(verticalPages, 1);
-                    clearDisplay();
 
-                    setSize(new Dimension(200, verticalPages * 200));
-                    controller.refreshMainPanel();
-                    controller.resume();
-                }
-                switch (dirUpDown) {
-                    case UP:
-                        controller.setDirection(Controller.DIRECTION.DOWN);
-                        dirUpDown = Controller.DIRECTION.DOWN;
-                        dirText = "UP";
-                        break;
-                    case DOWN:
-                        controller.setDirection(Controller.DIRECTION.UP);
-                        dirUpDown = Controller.DIRECTION.UP;
-                        dirText = "DOWN";
-                        break;
-                }*/
                 changeDirectionUpDown.setText("ChangeDirection: " + dirText);
             }
             setButtonsActive();
