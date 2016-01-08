@@ -22,7 +22,7 @@ import roffe.Color.ColorDisplay;
  * 
  * @author Johnatan Sona
  * 
- *         Skapar ett Color fönster med UI
+ *         Skapar ett Color fönster med UI.
  * 
  *         2016-01-03
  */
