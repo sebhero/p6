@@ -1,7 +1,6 @@
 package mah.se.mvc.view;
 
 import mah.se.mvc.controller.Controller;
-import mah.se.mvc.model.Array7x7;
 import roffe.Color.ColorDisplay;
 
 
@@ -13,17 +12,23 @@ import java.util.ArrayList;
 
 /**
  * Created by Gustaf on 18/12/2015.
+ * Contains A ColorDisplay object, and buttons to control it
  */
 public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
-
-
+    /**
+     * An enum containing the different states of the program
+     */
     public enum STATE {
         RUNNING,
         PAUSED,
         INITIATED, UNINITIATED
     }
 
+    /**
+     * Sets the size of the panel and the ColorDisplay object depending on the dimension passed in
+     * @param dimension the dimension of the panel
+     */
     @Override
     public void setSize(Dimension dimension) {
 	    double newSize = dimension.getWidth()/this.getWidth();
@@ -80,7 +85,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     }
 
     /**
-     * initierar panelen med en colordisplay, knappar och en textfield
+     * initierar panelen med en colordisplay, knappar, en textfield och en slider
      */
     public void init() {
         verticalPages = inputVerticalPages();
@@ -92,7 +97,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     }
 
     /**
-     * skapar knapparna, initierar dom och lägger till actionlisteners
+     * skapar knapparna, lägger till actionlisteners och lägger till de i panelen
      * @return panel med knapparna och textfielden
      */
     public JPanel initButtons() {
@@ -252,10 +257,14 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     }
 
     @Override
+    @Deprecated //method is not used
     public void updateView(int[][] all) {
 
     }
 
+    /**
+     * Tömmer displayen och nollställer alla värden som bestämmer vad som ska visas i ColorDisplayen
+     */
     public void clearDisplay() {
         colorDisplay.clearDisplay();
         controller.clearAll();
@@ -263,16 +272,29 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
     }
 
 
+    /**
+     * Returnerar ColorDisplayens antal horisontella sidor
+     * @return horisontella sidor
+     */
     @Override
     public int getHorizontalPages() {
         return colorDisplay.getHorizontalPages();
     }
 
+    /**
+     * Returnerar ColorDisplayens antal vertikala sidor
+     * @return vertikala sidor
+     */
     @Override
     public int getVerticalPages() {
         return colorDisplay.getVerticalPages();
     }
 
+    /**
+     * Uppdaterar hela ColorDisplayen
+     * @param all vad som ska visas i ColorDisplayen
+     * @param dir vilken riktning det ska visas i
+     */
     @Override
     public void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir) {
         for (int i = 0; i < all.size(); i++) {
@@ -294,29 +316,49 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         colorDisplay.updateDisplay();
     }
 
-
+    /**
+     * Klassen sköter alla knapptryck
+     */
     private class ButtonListener implements ActionListener {
 
+        /**
+         * Utför en sekvens kd beroende på vilken knapp som blev tryckt och ändrar vilken state programmet är i
+         * @param e knappen som blev nedtryckts actionEvent
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            /*
+             * Tömmer ColorDisplayen och startar rinnande text om
+             */
             if(e.getSource() == start && currentState == STATE.INITIATED) {
                 colorDisplay.clearDisplay();
                 controller.flowText();
                 currentState = STATE.RUNNING;
             }
+            /*
+             * Pausar timern
+             */
             else if(e.getSource() == pause) {
                 controller.pause();
                 currentState = STATE.PAUSED;
             }
+            /*
+             * Tömmer displayen och nollställer värdena
+             */
             else if(e.getSource() == stop) {
                 clearDisplay();
                 currentState = STATE.INITIATED;
             }
+            /*
+             * startar timern
+             */
             else if(e.getSource() == start && currentState == STATE.PAUSED) {
                 controller.resume();
                 currentState = STATE.RUNNING;
             }
+            /*
+             * laddar texten som ska visas
+             */
             else if(e.getSource() == displayText) {
                 if((flowText = input.getText().toString()).length() != 0) {
                     currentState = STATE.INITIATED;
@@ -324,18 +366,33 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 } else
                     JOptionPane.showMessageDialog(null, "Empty inprutt");
             }
+            /*
+             * skiftar ett steg år vänster
+             */
             else if(e.getSource() == simpleShiftLeft && currentState != STATE.UNINITIATED) {
                 controller.simpleShift(Controller.DIRECTION.LEFT);
             }
+            /*
+             * skiftar ett steg åt höger
+             */
             else if(e.getSource() == simpleShiftRight && currentState != STATE.UNINITIATED) {
                 controller.simpleShift(Controller.DIRECTION.RIGHT);
             }
+            /*
+             * skiftar ett steg upp
+             */
             else if(e.getSource() == simpleShiftUp && currentState != STATE.UNINITIATED) {
                 controller.simpleShift(Controller.DIRECTION.UP);
             }
+            /*
+             * skiftar ett steg ner
+             */
             else if(e.getSource() == simpleShiftDown && currentState != STATE.UNINITIATED) {
                 controller.simpleShift(Controller.DIRECTION.DOWN);
             }
+            /*
+             * sätter colorDisplayen till horisontell, tömmer den och sätter direction till right
+             */
             else if(e.getSource() == changeDirectionRight) {
                 colorDisplay.setNew7x7Size(verticalPages, 1);
                 controller.setDirection(Controller.DIRECTION.RIGHT);
@@ -345,6 +402,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 controller.loadFlowText(flowText);
                 controller.flowText();
             }
+            /*
+             * sätter colorDisplayen till horisontell, tömmer den och sätter direction till left
+             */
             else if(e.getSource() == changeDirectionLeft) {
                 colorDisplay.setNew7x7Size(verticalPages, 1);
                 controller.setDirection(Controller.DIRECTION.LEFT);
@@ -354,6 +414,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 controller.loadFlowText(flowText);
                 controller.flowText();
             }
+            /*
+             * sätter colorDisplayen till vertikal, tömmer den och sätter direction till upp
+             */
             else if(e.getSource() == changeDirectionUp) {
                 colorDisplay.setNew7x7Size(1, verticalPages);
                 controller.setDirection(Controller.DIRECTION.UP);
@@ -363,6 +426,9 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 controller.loadFlowText(flowText + " ");
                 controller.flowText();
             }
+            /*
+             * sätter colorDisplayen till vertikal, tömmer den och sätter direction till ner
+             */
             else if(e.getSource() == changeDirectionDown) {
                 colorDisplay.setNew7x7Size(1, verticalPages);
                 controller.setDirection(Controller.DIRECTION.DOWN);
@@ -372,6 +438,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
                 controller.loadFlowText(flowText + " ");
                 controller.flowText();
             }
+            //sätter rätt knappar aktiva
             setButtonsActive();
         }
     }

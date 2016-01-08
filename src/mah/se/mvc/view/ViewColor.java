@@ -51,13 +51,24 @@ public class ViewColor extends JPanel implements ViewImpl {
 	private JButton btnChoose5 = new JButton("Välj färg: Rad 5");
 	private JButton btnChoose6 = new JButton("Välj färg: Rad 6");
 	private JButton btnChoose7 = new JButton("Välj färg: Rad 7");
-
+	
+	/**
+	 * Konstruktor som skapar 1 x 1 fönster med display och knappar
+	 * @param background
+	 * @param grid
+	 */
 	public ViewColor(int background, int grid) {
 		this(1, 1, background, grid);
 	}
 
 	/**
-	 * Konstruktor som skapar f�nster med display och knappar
+	 * Konstruktor som skapar fönster med display och knappar
+	 * Man kan välja antalet horisontella och vertikala sidor
+	 * 
+	 * tar emot antalet vertikala sidor av typen int
+	 * tar emot antalet horisontella sidor av typen int
+	 * tar emot bakgrundsfärgen av typen int
+	 * tar emot gridfärg av typen int
 	 * 
 	 * @param verticalPages
 	 * @param horizontalPages
@@ -111,6 +122,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	/**
 	 * Fixar problem med ändra storlek på vyn.
 	 * 
+	 * Tar emot ett Dimension objekt "dimension"
 	 * @param dimension
 	 */
 	@Override
@@ -140,7 +152,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Skiftar mellan olika f�rger
+	 * Skiftar mellan olika färger
 	 * 
 	 * Tar emot "tick" som håller kolla på räkningen av knapptryck.
 	 * 
@@ -279,50 +291,59 @@ public class ViewColor extends JPanel implements ViewImpl {
 				tickBig = 0;
 		});
 	}
-
-	public void updateViewColor(int[][] matrix) {
-		colorDisplay.setDisplay(matrix);
-		colorDisplay.updateDisplay();
-	}
-
+	
+	/**
+	 *Sätter Controller till variabeln ctrl
+	 *tar emot ett controller objekt "ctrl"
+	 *@param ctrl
+	 */
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
 	}
-
+	/**
+	 * Updaterar displayen
+	 * Tar emot en 7x7 array "matrix"
+	 * @param matrix
+	 */
 	@Override
 	public void updateView(int[][] matrix) {
 		colorDisplay.setDisplay(matrix);
 		colorDisplay.updateDisplay();
 	}
-
+	/**
+	 * Retunerar antalet horisontella sidor
+	 */
 	@Override
 	public int getHorizontalPages() {
 		return colorDisplay.getHorizontalPages();
 	}
-
+	/**
+	 * Retunerar antalen vertikala sidor
+	 */
 	@Override
 	public int getVerticalPages() {
 		return colorDisplay.getVerticalPages();
 	}
-
+	/**
+	 * Används ej
+	 * @deprecated använd inte. är inte implementerad
+	 */
 	@Override
 	public void updateView(ArrayList<int[][]> all, DIRECTION dir) {
-		// TODO Auto-generated method stub
-
 	}
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
-
-			ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
-			Array7x7 model = new Array7x7();
-			new Controller(model, view);
-			JFrame frame = new JFrame();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.add((Component) view);
-			frame.pack();
-			frame.setVisible(true);
-		});
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(() -> {
+//
+//			ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
+//			Array7x7 model = new Array7x7();
+//			new Controller(model, view);
+//			JFrame frame = new JFrame();
+//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//			frame.add((Component) view);
+//			frame.pack();
+//			frame.setVisible(true);
+//		});
+//	}
 
 }
