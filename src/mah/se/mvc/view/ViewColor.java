@@ -285,14 +285,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 				tickBig = 0;
 		});
 	}
-	/**
-	 * Updaterar displayen för ViewColor
-	 * @param matrix
-	 */
-	public void updateViewColor(int[][] matrix) {
-		colorDisplay.setDisplay(matrix);
-		colorDisplay.updateDisplay();
-	}
+	
 	/**
 	 *Sätter Controller till variabeln ctrl
 	 */
