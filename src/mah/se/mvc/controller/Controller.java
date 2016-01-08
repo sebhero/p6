@@ -215,7 +215,6 @@ public class Controller {
 	public void showRandomColor() {
 		filler = getFiller(FILLERTYPE.COLORS);
 
-		System.out.println("randomcolor "+ modelMap.get(view.getClass().getName()));
 		model = filler.fillWithRandom();
 		modelMap.replace(view.getClass().getName(),model);
 
@@ -229,7 +228,6 @@ public class Controller {
 	 */
 	public void showSameColor(int color) {
 		filler = getFiller(FILLERTYPE.COLORS);
-		System.out.println("same color "+ modelMap.get(view.getClass().getName()));
 		model = filler.fillWithOneType(color);
 		modelMap.replace(view.getClass().getName(),model);
 		updateView();
@@ -268,7 +266,6 @@ public class Controller {
 	public void setElement(int rowPos, int colPos, int value) {
 		model = modelMap.get(view.getClass().getName());
 		model.setElement(rowPos, colPos, value);
-		System.out.println("setele " + modelMap.get(view.getClass().getName()));
 		updateView();
 	}
 
