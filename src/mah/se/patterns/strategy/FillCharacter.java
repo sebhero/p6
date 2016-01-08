@@ -18,6 +18,10 @@ public class FillCharacter implements FillAlgorithm {
     private final Alphabet alphabet = new Alphabet();
     private final Random rnd = new Random();
 
+    /**
+     * Fyller Array7x7 med slumpat nummer/färg/tecken
+     * @return en fylld Array7x7 med slumpade värden
+     */
     @Override
     public Array7x7 fillWithRandom() {
         int randomChar = rnd.nextInt('Z' - 'A') + 'A';	//ascii värde 65 - 90 A-Z
@@ -32,6 +36,11 @@ public class FillCharacter implements FillAlgorithm {
         return null;
     }
 
+    /**
+     * Fyller Array7x7 med en typ av nummer/färg/tecken
+     * @param type tar ett nummer värde av nummer/färg/tecken
+     * @return en fylld Array7x7
+     */
     @Override
     public Array7x7 fillWithOneType(int charValue) {
         return alphabet.getLetter((char) charValue);

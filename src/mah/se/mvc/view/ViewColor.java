@@ -51,13 +51,19 @@ public class ViewColor extends JPanel implements ViewImpl {
 	private JButton btnChoose5 = new JButton("Välj färg: Rad 5");
 	private JButton btnChoose6 = new JButton("Välj färg: Rad 6");
 	private JButton btnChoose7 = new JButton("Välj färg: Rad 7");
-
+	
+	/**
+	 * Konstruktor som skapar 1 x 1 fönster med display och knappar
+	 * @param background
+	 * @param grid
+	 */
 	public ViewColor(int background, int grid) {
 		this(1, 1, background, grid);
 	}
 
 	/**
-	 * Konstruktor som skapar f�nster med display och knappar
+	 * Konstruktor som skapar fönster med display och knappar
+	 * Man kan välja antalet horisontella och vertikala sidor
 	 * 
 	 * @param verticalPages
 	 * @param horizontalPages
@@ -140,7 +146,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Skiftar mellan olika f�rger
+	 * Skiftar mellan olika färger
 	 * 
 	 * Tar emot "tick" som håller kolla på räkningen av knapptryck.
 	 * 
@@ -279,50 +285,55 @@ public class ViewColor extends JPanel implements ViewImpl {
 				tickBig = 0;
 		});
 	}
-
-	public void updateViewColor(int[][] matrix) {
-		colorDisplay.setDisplay(matrix);
-		colorDisplay.updateDisplay();
-	}
-
+	
+	/**
+	 *Sätter Controller till variabeln ctrl
+	 */
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
 	}
-
+	/**
+	 * Updaterar displayen
+	 * @param matrix
+	 */
 	@Override
 	public void updateView(int[][] matrix) {
 		colorDisplay.setDisplay(matrix);
 		colorDisplay.updateDisplay();
 	}
-
+	/**
+	 * Retunerar antalet horisontella sidor
+	 */
 	@Override
 	public int getHorizontalPages() {
 		return colorDisplay.getHorizontalPages();
 	}
-
+	/**
+	 * Retunerar antalen vertikala sidor
+	 */
 	@Override
 	public int getVerticalPages() {
 		return colorDisplay.getVerticalPages();
 	}
-
+	/**
+	 * Används ej
+	 */
 	@Override
 	public void updateView(ArrayList<int[][]> all, DIRECTION dir) {
-		// TODO Auto-generated method stub
-
 	}
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
-
-			ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
-			Array7x7 model = new Array7x7();
-			new Controller(model, view);
-			JFrame frame = new JFrame();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.add((Component) view);
-			frame.pack();
-			frame.setVisible(true);
-		});
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(() -> {
+//
+//			ViewImpl view = new ViewColor(1, 1, Color.BLACK, Color.GRAY);
+//			Array7x7 model = new Array7x7();
+//			new Controller(model, view);
+//			JFrame frame = new JFrame();
+//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//			frame.add((Component) view);
+//			frame.pack();
+//			frame.setVisible(true);
+//		});
+//	}
 
 }

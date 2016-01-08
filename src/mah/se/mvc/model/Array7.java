@@ -35,23 +35,23 @@ public class Array7 {
     }
 
     /**
-	 * S�tt ett v�rde i en specifik position
+	 * Sätt ett värde i en specifik position
 	 * 
 	 * @param pos:
-	 *            vilken position man ska l�gga i v�rdet
+	 *            vilken position man ska lägga värdet i.
 	 * @param value:
-	 *            v�rdet som man vill stoppa in
+	 *            värdet som man vill stoppa in
 	 */
 	public void setElement(int pos, int value) {
 		array[pos] = value;
 	}
 
 	/**
-	 * Returnerar ett v�rde p� en specifik position
+	 * Returnerar ett värde på en specifik position
 	 * 
 	 * @param pos:
-	 *            vilken position man vill veta v�rdet i
-	 * @return : v�rdet man vill veta
+	 *            vilken position man vill veta värdet i
+	 * @return : värdet man vill veta
 	 */
 	public int getElement(int pos) {
 		return array[pos];

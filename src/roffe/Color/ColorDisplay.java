@@ -192,10 +192,15 @@ public class ColorDisplay extends JComponent {
 	//	JOptionPane.showMessageDialog(null, new ColorDisplay(Color.RED,Color.WHITE));
 	}
 
+	/**
+	 * Ifall man vill uppdatera Colordisplay med en ny storlek.
+	 * Kallar man på denna metoden med de nya storlekarna.
+	 * @param newHorizontalPages nya HoriziontalPages
+	 * @param newVerticalPages nya VerticalPages
+	 */
 	public void setNew7x7Size(int newHorizontalPages, int newVerticalPages) {
 		this.verticalPages = newVerticalPages;
 		this.horizontalPages = newHorizontalPages;
-//		this.sideSize = sideSize;
 		this.displayGrid = toColor(grid);
 
 		if(sideSize>0) {
