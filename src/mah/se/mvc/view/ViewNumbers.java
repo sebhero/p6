@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  *	En klass som tar imot info från en controller och skriver ut vilka nummer vi har
  * så att vi kan testa funktionen av hur det ska se ut.
- * @author jonatan
+ * @author Jonatan Fridsten
  *
  */
 public class ViewNumbers extends JPanel implements ViewImpl {
@@ -88,7 +88,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	/**
 	 * Metoden kommer att ge den lokala controllern ett värde
-	 * @param ctrl
+	 * @param ctrl inkommande kontroller
      */
 	@Override
 	public void setCtrl(Controller ctrl) {
@@ -98,7 +98,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	/**
 	 * Metoden kommer att uppdatera viewn
-	 * @param all
+	 * @param all nya värdena av viewn
      */
 	@Override
 	public void updateView(int[][] all) {
@@ -116,6 +116,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	/**
 	 * Används ej i denna klassen
 	 * @return
+	 * @deprecated
      */
 	@Override
 	public int getHorizontalPages() {
@@ -126,6 +127,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	/**
 	 * Används ej i denna klassen
 	 * @return
+	 * @deprecated
      */
 	@Override
 	public int getVerticalPages() {
@@ -137,6 +139,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	 * Används ej i denna klassen
 	 * @param all
 	 * @param dir
+	 * @deprecated
      */
 	@Override
 	public void updateView(ArrayList<int[][]> all, Controller.DIRECTION dir) {
@@ -146,7 +149,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	/**
 	 * Uppdaterar från matris till text i Columb listan
 	 *
-	 * @param arr
+	 * @param arr Det nya värdena
 	 */
 	public void setColumbText(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
@@ -157,7 +160,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	/**
 	 * Uppdaterar från matris till text i Row listan
 	 *
-	 * @param arr
+	 * @param arr De nya värdena
 	 */
 	public void setRowText(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
@@ -168,7 +171,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	/**
 	 * Returnerar vad det står i den södra radeninputen
 	 *
-	 * @return
+	 * @return lista med värdena på södra radinputen
 	 */
 	public int[] getTextRow(int[] old) {
 		int[] arr = new int[7];
@@ -185,9 +188,9 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Retunerar en array med columb input
+	 * Retunerar en array med columb input till vänster
 	 *
-	 * @return
+	 * @return lista med värdena på den västra inputen
 	 */
 	public int[] getTextCol(int[] old){
 		int[] arr = new int[7];
@@ -211,6 +214,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	}
 	/**
 	 *Returnerar elemnetet i textfieldet
+	 *
 	 */
 	public int getElement(int old){
 		int value = 0;
@@ -226,11 +230,9 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Inre klass f�r att det ska h�nda n�got n�r man trycker p�
+	 * Inre klass för att det ska hända något när man trycker på
 	 * knapparna
-	 * 
-	 * @author jonatan
-	 *
+	 * @author Jonatan Fridsten
 	 */
 	private class ViewNumberListener implements ActionListener {
 		/**

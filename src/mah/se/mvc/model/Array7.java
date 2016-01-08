@@ -28,6 +28,10 @@ public class Array7 {
 		}
 	}
 
+	/**
+	 * Fyller med inmatade nummer
+	 * @param number
+     */
     public Array7(int number) {
         for (int i = 0; i < array.length; i++) {
             array[i] = number;

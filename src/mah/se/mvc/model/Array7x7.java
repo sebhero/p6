@@ -51,7 +51,6 @@ public class Array7x7 {
 	 * @param theRow
 	 *            en rad med siffror som läggs in i array7x7
 	 */
-
 	public void setRow(int row, Array7 theRow) {
 		for (int i = 0; i < array.length; i++) {
 			array[row][i] = theRow.getElement(i);
@@ -67,7 +66,6 @@ public class Array7x7 {
 	 *            vilken rad
 	 * @return arr array7 objekt fylld med siffrorna från raden
 	 */
-
 	public Array7 getRow(int row) {
 		Array7 arr = new Array7();
 		for (int i = 0; i < array.length; i++) {
