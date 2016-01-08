@@ -51,10 +51,19 @@ public class ViewColor extends JPanel implements ViewImpl {
 	private JButton btnChoose5 = new JButton("Välj färg: Rad 5");
 	private JButton btnChoose6 = new JButton("Välj färg: Rad 6");
 	private JButton btnChoose7 = new JButton("Välj färg: Rad 7");
-
+	
+	/**
+	 * Konstruktor som skapar 1 x 1 fönster med display och knappar
+	 * @param background
+	 * @param grid
+	 */
+	public ViewColor(int background, int grid) {
+		this(1, 1, background, grid);
+	}
 
 	/**
-	 * Konstruktor som skapar f�nster med display och knappar
+	 * Konstruktor som skapar fönster med display och knappar
+	 * Man kan välja antalet horisontella och vertikala sidor
 	 * 
 	 * @param verticalPages
 	 * @param horizontalPages
