@@ -54,8 +54,8 @@ public class ViewColor extends JPanel implements ViewImpl {
 	
 	/**
 	 * Konstruktor som skapar 1 x 1 fönster med display och knappar
-	 * @param background
-	 * @param grid
+	 * @param background, bakgrundsfärgen
+	 * @param grid, gridfärgen
 	 */
 	public ViewColor(int background, int grid) {
 		this(1, 1, background, grid);
@@ -65,15 +65,10 @@ public class ViewColor extends JPanel implements ViewImpl {
 	 * Konstruktor som skapar fönster med display och knappar
 	 * Man kan välja antalet horisontella och vertikala sidor
 	 * 
-	 * tar emot antalet vertikala sidor av typen int
-	 * tar emot antalet horisontella sidor av typen int
-	 * tar emot bakgrundsfärgen av typen int
-	 * tar emot gridfärg av typen int
-	 * 
-	 * @param verticalPages
-	 * @param horizontalPages
-	 * @param background
-	 * @param grid
+	 * @param verticalPages, antalet vertikala sidor
+	 * @param horizontalPages, antalet horisontella sidor
+	 * @param background, bakgrundsfärgen
+	 * @param grid, gridfärgen
 	 */
 	public ViewColor(int verticalPages, int horizontalPages, int background, int grid) {
 		colorDisplay = new ColorDisplay(verticalPages, horizontalPages, background, grid);
@@ -121,9 +116,8 @@ public class ViewColor extends JPanel implements ViewImpl {
 
 	/**
 	 * Fixar problem med ändra storlek på vyn.
-	 * 
-	 * Tar emot ett Dimension objekt "dimension"
-	 * @param dimension
+	 *
+	 * @param dimension, dimensionen
 	 */
 	@Override
 	public void setSize(Dimension dimension) {
@@ -156,7 +150,7 @@ public class ViewColor extends JPanel implements ViewImpl {
 	 * 
 	 * Tar emot "tick" som håller kolla på räkningen av knapptryck.
 	 * 
-	 * @param tick
+	 * @param tick, räkningen av tryck
 	 */
 	public void updateColor(int tick) {
 		switch (tick) {
@@ -294,16 +288,14 @@ public class ViewColor extends JPanel implements ViewImpl {
 	
 	/**
 	 *Sätter Controller till variabeln ctrl
-	 *tar emot ett controller objekt "ctrl"
-	 *@param ctrl
+	 *@param ctrl, Controller objekt
 	 */
 	public void setCtrl(Controller ctrl) {
 		this.ctrl = ctrl;
 	}
 	/**
 	 * Updaterar displayen
-	 * Tar emot en 7x7 array "matrix"
-	 * @param matrix
+	 * @param matrix, 7x7 array som ska updateras
 	 */
 	@Override
 	public void updateView(int[][] matrix) {
@@ -312,13 +304,15 @@ public class ViewColor extends JPanel implements ViewImpl {
 	}
 	/**
 	 * Retunerar antalet horisontella sidor
+	 * @return Retunerar antalet horisontella sidor
 	 */
 	@Override
 	public int getHorizontalPages() {
 		return colorDisplay.getHorizontalPages();
 	}
 	/**
-	 * Retunerar antalen vertikala sidor
+	 * Retunerar antalet vertikala sidor
+	 * @return Retunerar antalet vertikala sidor
 	 */
 	@Override
 	public int getVerticalPages() {
