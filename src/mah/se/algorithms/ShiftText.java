@@ -32,7 +32,7 @@ public class ShiftText {
 
 	/**
 	 * Tar ett steg i message och shiftar över det till messageView
-	 * @param dir
+	 * @param dir vilken riktning den ska shifta
 	 */
 	public void stepText(Controller.DIRECTION dir) {
 		Array7 next = new Array7(Color.BLACK);
@@ -103,7 +103,7 @@ public class ShiftText {
 
 	/**
 	 * Genererar messageViewn
-	 * @param size
+	 * @param size storleken av den nya MessageView
 	 */
 	public void setupMessageView(int size) {
 				this.messageView = new ArrayList<>();
@@ -140,7 +140,7 @@ public class ShiftText {
 
 	/**
 	 * Hämtar storleken på message
-	 * @return
+	 * @return storleken på message
 	 */
 	public int getMessageSize() {
 		return message.size();
@@ -177,7 +177,7 @@ public class ShiftText {
 
 	/**
 	 * Sätter max stegen
-	 * @param maxSteps
+	 * @param maxSteps max steps
 	 */
 	public void setMaxSteps(int maxSteps) {
 		this.doneStepping = maxSteps;

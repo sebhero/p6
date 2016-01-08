@@ -43,11 +43,10 @@ public class Alphabet {
 	}
 	
 	/**
-	 * 
 	 * @param letter
 	 * Bokstaven som man vill ha i 7x7 format
 	 * @return En 2d int array som är 7x7 och representerar en bokstav
-	 * @exception Om bokstaven inte accepteras
+	 * @exception om bokstaven inte accepteras
 	 */
 	public Array7x7 getLetter(char letter) {
 		int[][] array = new int[7][7];

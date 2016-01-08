@@ -39,7 +39,7 @@ public class Controller {
 
 	/**
 	 * ger controllern mainPanel för att kunna uppdatera framen.
-	 * @param mainPanel
+	 * @param mainPanel fönstret
 	 */
 	public void setMainPanel(App mainPanel) {
 		this.mainPanel = mainPanel;
@@ -131,6 +131,7 @@ public class Controller {
 	 * Knapp tryck från vyn
 	 * Shifta höger på modelen
 	 * @param newArray nya arrayen som ska skiftas in
+	 * @return överflödet
 	 */
 	public Array7 shift(Array7 newArray) {
 
@@ -275,6 +276,7 @@ public class Controller {
 	 * knapp tryck
 	 * Hamtar rad i modelen.
 	 * @param rowPos raden som ska läsas av
+	 * @return avläsna raden
 	 */
 	public int[] getRow(int rowPos) {
 		return model.getRow(rowPos).getAll();
@@ -284,6 +286,7 @@ public class Controller {
 	 * knapp tryck
 	 * Hamtar kolumn i modelen.
 	 * @param colPos kolumnen som ska läsas av
+	 * @return avläsna kolumnen
 	 */
 	public int[] getCol(int colPos) {
 		return model.getCol(colPos).getAll();
@@ -294,6 +297,7 @@ public class Controller {
 	 * Hamtar element i modelen.
 	 * @param rowPos Raden som ska läsas av
 	 * @param colPos kolmnen ska läsas av
+	 * @return avläsna elementet
 	 */
 	public int getElement(int rowPos, int colPos) {
 		return model.getElement(rowPos, colPos);
@@ -301,9 +305,8 @@ public class Controller {
 
 
 	/**
-	 * Knapptryck
-	 * shiftar
-	 * @param input
+	 * Shiftar colorViev
+	 * @param input vad som ska flyttas
 	 */
 	public void showShift(Array7 input) {
 		shift(input);

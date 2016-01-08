@@ -38,8 +38,6 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
         colorDisplay.setPreferredSize(new Dimension(newSizeW,newSizeH));
 	    this.revalidate();
 	    this.repaint();
-        System.out.println(getWidth());
-        System.out.println(getHeight());
 
     }
 
@@ -249,7 +247,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     /**
      * Sätter controllern
-     * @param ctrl
+     * @param ctrl controllern
      */
     @Override
     public void setCtrl(Controller ctrl) {

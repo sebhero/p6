@@ -13,7 +13,7 @@ public class Array7 {
 	/**
 	 * Konstrukterar en ny lista
 	 * 
-	 * @param array
+	 * @param array matrisen Array7 ska innehålla
 	 */
 	public Array7(int[] array) {
 		this.array = array;
@@ -30,7 +30,7 @@ public class Array7 {
 
 	/**
 	 * Fyller med inmatade nummer
-	 * @param number
+	 * @param number numret som matrisen ska fyllas med
      */
     public Array7(int number) {
         for (int i = 0; i < array.length; i++) {

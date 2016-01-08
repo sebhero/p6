@@ -115,7 +115,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	/**
 	 * Används ej i denna klassen
-	 * @return
+	 * @return 0
 	 * @deprecated
      */
 	@Override
@@ -126,7 +126,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	/**
 	 * Används ej i denna klassen
-	 * @return
+	 * @return 0
 	 * @deprecated
      */
 	@Override
@@ -137,8 +137,8 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	/**
 	 * Används ej i denna klassen
-	 * @param all
-	 * @param dir
+	 * @param all -
+	 * @param dir -
 	 * @deprecated
      */
 	@Override
@@ -170,7 +170,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	/**
 	 * Returnerar vad det står i den södra radeninputen
-	 *
+	 * @param old den gamla vektorn
 	 * @return lista med värdena på södra radinputen
 	 */
 	public int[] getTextRow(int[] old) {
@@ -189,7 +189,7 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 
 	/**
 	 * Retunerar en array med columb input till vänster
-	 *
+	 * @param old den gamla vektorn
 	 * @return lista med värdena på den västra inputen
 	 */
 	public int[] getTextCol(int[] old){
@@ -208,13 +208,15 @@ public class ViewNumbers extends JPanel implements ViewImpl {
 	/**
 	 * Sätter ett värde på en textfield, värdet får vi från
 	 * en matrisen
+	 * @param value värdet som ska sättas
 	 */
 	public void setElementText(int value){
 		txtElement.setText(String.valueOf(value));
 	}
 	/**
-	 *Returnerar elemnetet i textfieldet
-	 *
+	 * Returnerar elemnetet i textfieldet
+	 * @param old det gamla värdet
+	 * @return elementets värde
 	 */
 	public int getElement(int old){
 		int value = 0;
