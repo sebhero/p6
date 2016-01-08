@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -94,6 +95,8 @@ public class ViewShift extends JPanel implements ViewImpl {
 			westInput[i].setFont(font);
 			eastInput[i].setColumns(5);
 			westInput[i].setColumns(5);
+			eastInput[i].setBackground(Color.GREEN);
+			westInput[i].setBackground(Color.GREEN);
 			westPanel.add(westInput[i]);
 			eastPanel.add(eastInput[i]);
 
@@ -181,31 +184,6 @@ public class ViewShift extends JPanel implements ViewImpl {
 	}
 
 	/**
-	 * Hämtar allt från JLabel Array och lägger i ett array7x7 objekt 
-	 * @return arr array7x7 objekt
-	 */
-	public Array7x7 getText() {
-		Array7x7 arr = new Array7x7();
-		for (int i = 0; i < arrd2d.length; i++) {
-			for (int j = 0; j < arrd2d[i].length; j++) {
-				arr.setElement(i, j, Integer.parseInt(arrd2d[i][j].getText()));
-			}
-		}
-		return arr;
-	}
-	/**
-	 * Uppdaterar text I JLabel array med hjälp av ett Array7x7 objekt
-	 * @param arr array7x7 objekt som sedan skrivs ut på JLabel arrayen
-	 */
-	public void setText(Array7x7 arr) {
-		for (int i = 0; i < arrd2d.length; i++) {
-			for (int j = 0; j < arrd2d[i].length; j++) {
-				arrd2d[i][j].setText(String.valueOf(arr.getElement(i, j)));
-			}
-		}
-	}
-
-	/**
 	 * Set metod för JTextField i den separata kolumnen till vänster, tar emot ett array7 objekt som sedan skrivs ut
 	 * @param arr array7 objekt som skrivs ut i kolumnen
 	 */
@@ -222,8 +200,21 @@ public class ViewShift extends JPanel implements ViewImpl {
 	 */
 	public Array7 getWest() {
 		Array7 arr = new Array7();
+		boolean correctInput = false;
+		String error = "Fel på vänsterkolumn ruta: ";
 		for (int i = 0; i < arr.getLength(); i++) {
+			try{
+				
 			arr.setElement(i, Integer.parseInt(westInput[i].getText()));
+			
+			}catch(Exception e) {
+				error += (i+1) + " ";
+				correctInput = true;
+			}
+		}
+		if(correctInput) {
+			JOptionPane.showMessageDialog(null, error);
+			return null;
 		}
 		return arr;
 	}
@@ -247,8 +238,22 @@ public class ViewShift extends JPanel implements ViewImpl {
 
 	public Array7 getEast() {
 		Array7 arr = new Array7();
+		String error = "Fel på rad högerkolumn ruta ";
+		boolean correctInput = false;
 		for (int i = 0; i < arr.getLength(); i++) {
+			try{
+				
 			arr.setElement(i, Integer.parseInt(eastInput[i].getText()));
+			
+			}catch(Exception e) {
+				error += (i+1) + " ";
+				correctInput = true;
+			}
+		}
+		if(correctInput){
+			JOptionPane.showMessageDialog(null, error);
+			return null;
+			
 		}
 		return arr;
 	}
@@ -260,19 +265,23 @@ public class ViewShift extends JPanel implements ViewImpl {
 	public void shiftLeft() {
 		ctrl.setDirection(DIRECTION.LEFT);
 		Array7 returnarr = new Array7();
+		if(getEast() != null) {
 		returnarr = ctrl.shift(getEast());
 		setWest(returnarr);
 		setEast(new Array7());
 		ctrl.updateView();
+		}
 	}
 
 	public void shiftRight() {
 		ctrl.setDirection(DIRECTION.RIGHT);
 		Array7 returnarr = new Array7();
+		if(getWest() != null) {
 		returnarr = ctrl.shift(getWest());
 		setEast(returnarr);
 		setWest(new Array7());
 		ctrl.updateView();
+		}
 	}
 
 	/**
