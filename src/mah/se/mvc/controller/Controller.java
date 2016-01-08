@@ -130,6 +130,7 @@ public class Controller {
 	/**
 	 * Knapp tryck från vyn
 	 * Shifta höger på modelen
+	 * @param newArray nya arrayen som ska skiftas in
 	 */
 	public Array7 shift(Array7 newArray) {
 
@@ -223,6 +224,7 @@ public class Controller {
 
 	/**
 	 * Visa en färg i på hela Array7x7 i vyn
+	 * @param color färg som ska fylla displayen
 	 */
 	public void showSameColor(int color) {
 		filler = getFiller(FILLERTYPE.COLORS);
@@ -235,6 +237,8 @@ public class Controller {
 	/**
 	 * Knapp tryck
 	 * Satter en ny rad i modelen.
+	 * @param rowPos vilken rad som ska ändras
+	 * @param newRow nya raden som ska in
 	 */
 	public void setRow(int rowPos, int[] newRow) {
 		model.setRow(rowPos, new Array7(newRow));
@@ -244,6 +248,8 @@ public class Controller {
 	/**
 	 * Knapp tryck
 	 * Satter en ny kolumn i modelen.
+	 * @param colPos vilken kolumn som ska ändras
+	 * @param newCol nya kolumnen som ska in
 	 */
 	public void setCol(int colPos, int[] newCol) {
 		model.setCol(colPos, new Array7(newCol));
@@ -254,6 +260,9 @@ public class Controller {
 	/**
 	 * knapp tryck
 	 * Satter ett nytt element i modelen.
+	 * @param rowPos den valda raden
+	 * @param colPos den valda kolumnen
+	 * @param value värdet som ska sättas i rad/kolumn kombinationen
 	 */
 	public void setElement(int rowPos, int colPos, int value) {
 		model = modelMap.get(view.getClass().getName());
@@ -265,6 +274,7 @@ public class Controller {
 	/**
 	 * knapp tryck
 	 * Hamtar rad i modelen.
+	 * @param rowPos raden som ska läsas av
 	 */
 	public int[] getRow(int rowPos) {
 		return model.getRow(rowPos).getAll();
@@ -273,6 +283,7 @@ public class Controller {
 	/**
 	 * knapp tryck
 	 * Hamtar kolumn i modelen.
+	 * @param colPos kolumnen som ska läsas av
 	 */
 	public int[] getCol(int colPos) {
 		return model.getCol(colPos).getAll();
@@ -281,6 +292,8 @@ public class Controller {
 	/**
 	 * knapp tryck från ViewColor
 	 * Hamtar element i modelen.
+	 * @param rowPos Raden som ska läsas av
+	 * @param colPos kolmnen ska läsas av
 	 */
 	public int getElement(int rowPos, int colPos) {
 		return model.getElement(rowPos, colPos);
