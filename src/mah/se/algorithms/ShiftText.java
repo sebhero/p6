@@ -191,7 +191,7 @@ public class ShiftText {
 	}
 
 
-	public void setSteps(int steps) { this.steps = steps; }
+	public void setSteps(int steps) {  this.steps = steps; }
 
 	public void clearMessageView() {
 		int size = messageView.size();

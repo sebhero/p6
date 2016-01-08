@@ -26,7 +26,7 @@ public class App extends JPanel implements ComponentListener {
 
     /**
      * Uppdatera size på currentview. så att colorDisplay blir uppdaterad.
-     * @param e
+     * @param e ComponentEvent
      */
     @Override
     public void componentResized(ComponentEvent e) {
@@ -52,14 +52,11 @@ public class App extends JPanel implements ComponentListener {
 
     /**
      * Main vyn som hanterar byta vyer
-     * @param frame
+     * @param frame fönstret som det ska visas i
      */
     public App(JFrame frame) {
         this.frame = frame;
         Array7x7 model = new Array7x7();
-
-//		new Controller(model, view);
-
 
         JTabbedPane jtbMain = new JTabbedPane();
 
@@ -82,23 +79,16 @@ public class App extends JPanel implements ComponentListener {
         // Add the tabbed pane to this panel.
         setLayout(new GridLayout(1, 1));
 
-        jtbMain.addChangeListener(new ChangeListener() {
-            /**
-             * Bytar vy. och fixar så att framen storlek passar med panelens storlek.
-             * @param e
-             */
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (jtbMain.getSelectedComponent() == mrBigPanel)
-                    ((MrBigViewWindowsWithFlowText) mrBigPanel).init();
-                ctrl.setView((ViewImpl) jtbMain.getSelectedComponent());
-                currentView = (JPanel) jtbMain.getSelectedComponent();
+        jtbMain.addChangeListener(e -> {
+            if (jtbMain.getSelectedComponent() == mrBigPanel)
+                ((MrBigViewWindowsWithFlowText) mrBigPanel).init();
+            ctrl.setView((ViewImpl) jtbMain.getSelectedComponent());
+            currentView = (JPanel) jtbMain.getSelectedComponent();
 
-                //handeling the resizing between views
-                Dimension dim = jtbMain.getSelectedComponent().getPreferredSize();
-                frame.setSize(dim);
+            //handeling the resizing between views
+            Dimension dim = jtbMain.getSelectedComponent().getPreferredSize();
+            frame.setSize(dim);
 
-            }
         });
 
         add(jtbMain);
@@ -108,13 +98,10 @@ public class App extends JPanel implements ComponentListener {
 
     /**
      * Main för att starta Appen.
-     * @param args
+     * @param args arguments
      */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Kirbys Hjältar");
-
-
-
         frame.addWindowListener(new WindowAdapter() {
 
             public void windowClosing(WindowEvent e) {
@@ -131,7 +118,9 @@ public class App extends JPanel implements ComponentListener {
 
     }
 
-
+    /**
+     * Uppdaterar fönstrets storlek
+     */
     public void refreshFrame() {
         frame.revalidate();
         frame.pack();

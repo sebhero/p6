@@ -38,7 +38,7 @@ public class FillCharacter implements FillAlgorithm {
 
     /**
      * Fyller Array7x7 med en typ av nummer/färg/tecken
-     * @param type tar ett nummer värde av nummer/färg/tecken
+     * @param charValue tar ett nummer värde av nummer/färg/tecken
      * @return en fylld Array7x7
      */
     @Override

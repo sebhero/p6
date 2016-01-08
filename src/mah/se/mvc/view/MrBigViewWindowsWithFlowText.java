@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Gustaf on 18/12/2015.
- * Contains A ColorDisplay object, and buttons to control it
+ * Innehåller en ColorDisplay och en meny för att kontrollera den
  */
 public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
@@ -249,7 +249,7 @@ public class MrBigViewWindowsWithFlowText extends JPanel implements ViewImpl {
 
     /**
      * Sätter controllern
-     * @Param ctrl
+     * @param ctrl
      */
     @Override
     public void setCtrl(Controller ctrl) {
