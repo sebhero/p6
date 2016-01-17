@@ -18,19 +18,20 @@ import java.util.TimerTask;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
+ * test
  */
-
 /**
  * Kontroller styr kommunikationen mellan Vyn och modelen.
  */
 public class Controller {
 
 
-	private final HashMap<String,Array7x7>  modelMap;
+	private final HashMap<String, Array7x7> modelMap;
 	private App mainPanel;
 
 	/**
 	 * Hämtar vilken riktning som gäller just nu
+	 *
 	 * @return nuvarande riktningen
 	 */
 	public DIRECTION getDirection() {
@@ -39,6 +40,7 @@ public class Controller {
 
 	/**
 	 * ger controllern mainPanel för att kunna uppdatera framen.
+	 *
 	 * @param mainPanel fönstret
 	 */
 	public void setMainPanel(App mainPanel) {
@@ -60,7 +62,7 @@ public class Controller {
 		if (this.timer != null) {
 			this.pause();
 			//TODO removes timer need to be check if still works with rest
-			this.timer =null;
+			this.timer = null;
 		}
 		this.shiftText.resetMessage();
 		this.shiftText.clearMessageView();
@@ -101,16 +103,17 @@ public class Controller {
 
 	/**
 	 * En kontroller som hanterar all kommunikation med Array7x7 modelerna och olika algoritmer för ändringar av 7x7.
+	 *
 	 * @param model the Array7x7 model
 	 * @param view  the view we are displaying the matrix on
 	 */
 	public Controller(Array7x7 model, ViewImpl view) {
 
 		modelMap = new HashMap();
-		modelMap.put("mah.se.mvc.view.ViewColor",new Array7x7());
-		modelMap.put("mah.se.mvc.view.ViewNumbers",new Array7x7());
-		modelMap.put("mah.se.mvc.view.MrBigViewWindowsWithFlowText",new Array7x7());
-		modelMap.put("mah.se.mvc.view.ViewShiftTest",new Array7x7());
+		modelMap.put("mah.se.mvc.view.ViewColor", new Array7x7());
+		modelMap.put("mah.se.mvc.view.ViewNumbers", new Array7x7());
+		modelMap.put("mah.se.mvc.view.MrBigViewWindowsWithFlowText", new Array7x7());
+		modelMap.put("mah.se.mvc.view.ViewShiftTest", new Array7x7());
 
 		this.view = view;
 		this.view.setCtrl(this);
@@ -130,6 +133,7 @@ public class Controller {
 	/**
 	 * Knapp tryck från vyn
 	 * Shifta höger på modelen
+	 *
 	 * @param newArray nya arrayen som ska skiftas in
 	 * @return överflödet
 	 */
@@ -216,7 +220,7 @@ public class Controller {
 		filler = getFiller(FILLERTYPE.COLORS);
 
 		model = filler.fillWithRandom();
-		modelMap.replace(view.getClass().getName(),model);
+		modelMap.replace(view.getClass().getName(), model);
 
 		updateView();
 	}
@@ -224,18 +228,20 @@ public class Controller {
 
 	/**
 	 * Visa en färg i på hela Array7x7 i vyn
+	 *
 	 * @param color färg som ska fylla displayen
 	 */
 	public void showSameColor(int color) {
 		filler = getFiller(FILLERTYPE.COLORS);
 		model = filler.fillWithOneType(color);
-		modelMap.replace(view.getClass().getName(),model);
+		modelMap.replace(view.getClass().getName(), model);
 		updateView();
 	}
 
 	/**
 	 * Knapp tryck
 	 * Satter en ny rad i modelen.
+	 *
 	 * @param rowPos vilken rad som ska ändras
 	 * @param newRow nya raden som ska in
 	 */
@@ -247,6 +253,7 @@ public class Controller {
 	/**
 	 * Knapp tryck
 	 * Satter en ny kolumn i modelen.
+	 *
 	 * @param colPos vilken kolumn som ska ändras
 	 * @param newCol nya kolumnen som ska in
 	 */
@@ -259,9 +266,10 @@ public class Controller {
 	/**
 	 * knapp tryck
 	 * Satter ett nytt element i modelen.
+	 *
 	 * @param rowPos den valda raden
 	 * @param colPos den valda kolumnen
-	 * @param value värdet som ska sättas i rad/kolumn kombinationen
+	 * @param value  värdet som ska sättas i rad/kolumn kombinationen
 	 */
 	public void setElement(int rowPos, int colPos, int value) {
 		model = modelMap.get(view.getClass().getName());
@@ -272,6 +280,7 @@ public class Controller {
 	/**
 	 * knapp tryck
 	 * Hamtar rad i modelen.
+	 *
 	 * @param rowPos raden som ska läsas av
 	 * @return avläsna raden
 	 */
@@ -282,6 +291,7 @@ public class Controller {
 	/**
 	 * knapp tryck
 	 * Hamtar kolumn i modelen.
+	 *
 	 * @param colPos kolumnen som ska läsas av
 	 * @return avläsna kolumnen
 	 */
@@ -292,6 +302,7 @@ public class Controller {
 	/**
 	 * knapp tryck från ViewColor
 	 * Hamtar element i modelen.
+	 *
 	 * @param rowPos Raden som ska läsas av
 	 * @param colPos kolmnen ska läsas av
 	 * @return avläsna elementet
@@ -303,6 +314,7 @@ public class Controller {
 
 	/**
 	 * Shiftar colorViev
+	 *
 	 * @param input vad som ska flyttas
 	 */
 	public void showShift(Array7 input) {
@@ -323,7 +335,7 @@ public class Controller {
 			currentDir = DIRECTION.LEFT;
 		else if (this.dir == DIRECTION.RIGHT)
 			currentDir = DIRECTION.RIGHT;
-		else if(this.dir == DIRECTION.UP)
+		else if (this.dir == DIRECTION.UP)
 			currentDir = DIRECTION.UP;
 		else
 			currentDir = DIRECTION.DOWN;
@@ -362,10 +374,10 @@ public class Controller {
 				shiftText.setupMessageView(view.getHorizontalPages());
 				//setup max steps how many Columns/rows
 				if (view.getHorizontalPages() > shiftText.getMessageSize()) {
-					shiftText.setMaxSteps(7+view.getHorizontalPages() * 7);
+					shiftText.setMaxSteps(7 + view.getHorizontalPages() * 7);
 
 				} else {
-					shiftText.setMaxSteps(7+shiftText.getMessageSize() * 7);
+					shiftText.setMaxSteps(7 + shiftText.getMessageSize() * 7);
 				}
 				break;
 			case UP:
@@ -397,6 +409,7 @@ public class Controller {
 	 * Rullande text av strängen vi har laddat in
 	 */
 	public void flowText() {
+
 		//start timer
 		timer = new Timer();
 		timer.schedule(new shiftTextTimer(), speed, speed);
@@ -432,7 +445,7 @@ public class Controller {
 	 * shiftar klart MessageView
 	 */
 	public void shiftOutAll() {
-		while(shiftText.checkIfDoneStepping()) {
+		while (shiftText.checkIfDoneStepping()) {
 			shiftText.stepText(dir);
 			shiftText.increaseSteps();
 		}
@@ -457,6 +470,7 @@ public class Controller {
 	/**
 	 * Sätter vilken view som vi använder just nu. Används för att byta view
 	 * och sätter view till den vyn och ger den våran kontroller samt ställer in rätt model.
+	 *
 	 * @param view nuvarnde view
 	 */
 	public void setView(ViewImpl view) {
@@ -468,6 +482,7 @@ public class Controller {
 
 	/**
 	 * Tar reda på vilken model vi använder för just den viewn
+	 *
 	 * @param view vilken view vi använder
 	 * @return modelen för just den viewn
 	 */
