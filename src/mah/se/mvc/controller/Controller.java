@@ -18,7 +18,6 @@ import java.util.TimerTask;
 
 /**
  * Created by Sebastian Börebäck on 2015-12-13.
- * test
  */
 /**
  * Kontroller styr kommunikationen mellan Vyn och modelen.
